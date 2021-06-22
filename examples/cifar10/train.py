@@ -50,7 +50,9 @@ def predict(test_dataloader, cifar_stoke: Stoke):
             _, preds = torch.max(outputs, dim=1)
             total_y += y.size(0)
             total_correct += torch.sum(preds == y).item()
-    cifar_stoke.print_on_devices(msg=f'Current Test Accuracy: {((total_correct/total_y) * 100):.3f}')
+    cifar_stoke.print_on_devices(
+        msg=f"Current Test Accuracy: {((total_correct/total_y) * 100):.3f}"
+    )
 
 
 def main():
