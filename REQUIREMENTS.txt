@@ -3,7 +3,6 @@ attrs
 #deepspeed
 git+https://github.com/ncilfone/DeepSpeed.git@master#egg=deepspeed
 fairscale>=0.3.7
-horovod[pytorch]
+horovod>=0.21.2
 mypy_extensions; python_version < '3.8'
-mpi4py
 torch>=1.8.1

@@ -11,32 +11,50 @@ import setuptools
 
 import versioneer
 
-# Loosely based on https://stackoverflow.com/a/57500829
-# Grab all the reqs to process in case any are git+ssh or git+https
-with open("REQUIREMENTS.txt", "r") as fid:
-    pre_reqs = fid.read().splitlines()
 
-EGG_MARK = '#egg='
-for idx, line in enumerate(pre_reqs):
-    # Catch anything that is git+
-    if line.startswith('git+'):
-        if EGG_MARK in line:
-            egg_idx = line.rindex(EGG_MARK)
-            name = line[(egg_idx + len(EGG_MARK)):]
-            repo = line[:egg_idx]
-            pre_reqs[idx] = f'{name} @ {repo}'
-        else:
-            raise SyntaxError('Dependency should have the format: \n'
-                              'git+https://github.com/xxxx/xxxx#egg=package_name\n'
-                              '-or-\n'
-                              'git+ssh://git@github.com/xxxx/xxxx#egg=package_name')
-# Swap the pre_reqs to the install_reqs
-install_reqs = pre_reqs
+def _handle_reqs(req_path):
+    """Handles any non standard refs to installs (git+ notation)
+
+    Loosely based on https://stackoverflow.com/a/57500829
+
+    Parameters
+    ----------
+    req_path: str
+        path to a requirements file
+
+    Returns
+    -------
+    list
+        processed list of requirements
+
+    """
+    with open(req_path, "r") as fid:
+        pre_reqs = fid.read().splitlines()
+    EGG_MARK = '#egg='
+    for idx, line in enumerate(pre_reqs):
+        # Catch anything that is git+
+        if line.startswith('git+'):
+            if EGG_MARK in line:
+                egg_idx = line.rindex(EGG_MARK)
+                name = line[(egg_idx + len(EGG_MARK)):]
+                repo = line[:egg_idx]
+                pre_reqs[idx] = f'{name} @ {repo}'
+            else:
+                raise SyntaxError('Dependency should have the format: \n'
+                                  'git+https://github.com/xxxx/xxxx#egg=package_name\n'
+                                  '-or-\n'
+                                  'git+ssh://git@github.com/xxxx/xxxx#egg=package_name')
+    return pre_reqs
+
+
+# Process all the different reqs
+install_reqs = _handle_reqs('REQUIREMENTS.txt')
+mpi_reqs = _handle_reqs('./requirements/MPI.txt')
 
 # Export some env variables
 # Make sure horovod with pytorch get installed
 os.environ["HOROVOD_WITH_PYTORCH"] = "1"
-# Make sure fairscle fused ADAM cuda kernels get included
+# Make sure fairscale fused ADAM cuda kernels get included
 os.environ["BUILD_CUDA_EXTENSIONS"] = "1"
 
 with open("README.md", "r") as fid:
@@ -54,7 +72,8 @@ setuptools.setup(
     author="FMR LLC",
     url="https://github.com/fidelity/stoke",
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        # "Development Status :: 3 - Alpha",
+        "Development Status :: 4 - Beta",
         # "Development Status :: 5 - Production/Stable",
         "Environment :: GPU :: NVIDIA CUDA",
         "Intended Audience :: Developers",
@@ -87,6 +106,7 @@ setuptools.setup(
         "fairscale",
         "distributed",
         "fp16",
+        "mixed-precision",
         "apex",
         "amp",
     ],
@@ -95,4 +115,5 @@ setuptools.setup(
     ),
     python_requires=">=3.6",
     install_requires=install_reqs,
+    extras_require={'mpi': mpi_reqs}
 )

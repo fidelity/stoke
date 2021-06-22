@@ -4,6 +4,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-9cf)](https://opensource.org/licenses/Apache-2.0)
 [![Python](https://img.shields.io/badge/python-3.6+-informational.svg)]()
 [![Style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+![Docs](https://github.com/fidelity/stoke/workflows/docs/badge.svg)
 ---
 
 ## About
@@ -35,6 +36,29 @@ context switching to `stoke`.
 - Extra(s) - Custom torch.utils.data.distributed.Sampler: BucketedDistributedSampler which buckets data by 
   a sorted idx and then randomly samples from specific bucket(s) to prevent situations like grossly mismatched sequence 
   length leading to wasted computational overhead (ie excess padding)
+
+## Installation
+
+### (Required) Install NVIDIA Apex
+
+Follow the instructions [here](https://github.com/NVIDIA/apex#quick-start).
+
+### (Optional) OpenMPI Support
+
+Follow the instructions [here](https://www.open-mpi.org/faq/?category=building) or 
+[here](https://edu.itp.phys.ethz.ch/hs12/programming_techniques/openmpi.pdf)
+
+Also, refer to the Dockerfile [here](https://github.com/fidelity/stoke/blob/master/docker/stoke-gpu-mpi.Dockerfile) 
+
+### via PyPi
+```bash
+pip install stoke
+```
+
+### via PyPi w/ Optional MPI Support
+```bash
+pip install stoke[mpi]
+```
 
 ## Documentation and Examples
 

@@ -4,7 +4,7 @@
 // ------------------------------------------------------------------
 
 Stoke
-Copyright [2021] FMR LLC
+Copyright FMR LLC
 
 This product includes software developed at
 FMR LLC (https://www.fidelity.com/).
@@ -15,5 +15,5 @@ This product relies on the following works (and the dependencies thereof), insta
 - fairscale | https://github.com/facebookresearch/fairscale | BSD License
 - horovod | https://github.com/horovod/horovod | Apache-2.0 License
 - mypy_extensions | https://github.com/python/mypy_extensions | MIT License
-- mpi4py | https://github.com/mpi4py/mpi4py | BSD License
+- (Optional) mpi4py | https://github.com/mpi4py/mpi4py | BSD License
 - torch | https://github.com/pytorch/pytorch | BSD License
