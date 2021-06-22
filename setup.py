@@ -30,26 +30,28 @@ def _handle_reqs(req_path):
     """
     with open(req_path, "r") as fid:
         pre_reqs = fid.read().splitlines()
-    EGG_MARK = '#egg='
+    EGG_MARK = "#egg="
     for idx, line in enumerate(pre_reqs):
         # Catch anything that is git+
-        if line.startswith('git+'):
+        if line.startswith("git+"):
             if EGG_MARK in line:
                 egg_idx = line.rindex(EGG_MARK)
-                name = line[(egg_idx + len(EGG_MARK)):]
+                name = line[(egg_idx + len(EGG_MARK)) :]
                 repo = line[:egg_idx]
-                pre_reqs[idx] = f'{name} @ {repo}'
+                pre_reqs[idx] = f"{name} @ {repo}"
             else:
-                raise SyntaxError('Dependency should have the format: \n'
-                                  'git+https://github.com/xxxx/xxxx#egg=package_name\n'
-                                  '-or-\n'
-                                  'git+ssh://git@github.com/xxxx/xxxx#egg=package_name')
+                raise SyntaxError(
+                    "Dependency should have the format: \n"
+                    "git+https://github.com/xxxx/xxxx#egg=package_name\n"
+                    "-or-\n"
+                    "git+ssh://git@github.com/xxxx/xxxx#egg=package_name"
+                )
     return pre_reqs
 
 
 # Process all the different reqs
-install_reqs = _handle_reqs('REQUIREMENTS.txt')
-mpi_reqs = _handle_reqs('./requirements/MPI.txt')
+install_reqs = _handle_reqs("REQUIREMENTS.txt")
+mpi_reqs = _handle_reqs("./requirements/MPI.txt")
 
 # Export some env variables
 # Make sure horovod with pytorch get installed
@@ -115,5 +117,5 @@ setuptools.setup(
     ),
     python_requires=">=3.6",
     install_requires=install_reqs,
-    extras_require={'mpi': mpi_reqs}
+    extras_require={"mpi": mpi_reqs},
 )
