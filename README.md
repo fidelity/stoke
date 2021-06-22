@@ -10,21 +10,25 @@
 ## About
 
 `stoke` is a lightweight wrapper for PyTorch that provides a simple declarative API for context switching between 
-devices (CPU, GPU), distributed modes ([DDP](https://pytorch.org/docs/stable/generated/torch.nn.parallel.DistributedDataParallel.html#torch.nn.parallel.DistributedDataParallel), 
-[Horovod](https://horovod.readthedocs.io/en/stable/index.html)), 
-mixed-precision ([AMP](https://pytorch.org/docs/stable/amp.html), [Apex](https://github.com/NVIDIA/apex)), 
-and extensions ([fairscale](https://github.com/facebookresearch/fairscale), 
-[deepspeed](https://github.com/microsoft/DeepSpeed)). This allows you to switch from local full-precision CPU to 
-mixed-precision distributed multi-GPU with extensions (like optimizer state sharding) by simply changing a few 
-declarative flags. Additionally, `stoke` exposes configuration settings for every underlying backend for those 
-that want configurability and raw access to the underlying libraries.
+devices (e.g. CPU, GPU), distributed modes, mixed-precision, and PyTorch extensions. This allows you to switch from 
+local full-precision CPU to mixed-precision distributed multi-GPU with extensions (like optimizer state sharding) 
+by simply changing a few declarative flags. Additionally, `stoke` exposes configuration settings for every 
+underlying backend for those that want configurability and raw access to the underlying libraries.
 
 In short, `stoke` is the best of 
 [PyTorch Lightning Accelerators](https://pytorch-lightning.readthedocs.io/en/latest/extensions/accelerators.html) 
 disconnected from the rest of PyTorch Lightning. Write whatever PyTorch code you want, but leave device and backend 
 context switching to `stoke`.
 
+## Supports
+
+ * Devices: CPU, GPU, multi-GPU
+ * Distributed: [DDP](https://pytorch.org/docs/stable/generated/torch.nn.parallel.DistributedDataParallel.html#torch.nn.parallel.DistributedDataParallel), [Horovod](https://horovod.readthedocs.io/en/stable/index.html), [deepspeed](https://github.com/microsoft/DeepSpeed) (via DDP)
+ * Mixed-Precision: [AMP](https://pytorch.org/docs/stable/amp.html), [Nvidia Apex](https://github.com/NVIDIA/apex), [deepspeed](https://github.com/microsoft/DeepSpeed) (custom APEX like backend)
+ * Extensions: [fairscale](https://github.com/facebookresearch/fairscale) (Optimizer State Sharding and Sharded DDP), [deepspeed](https://github.com/microsoft/DeepSpeed) (ZeRO Stage 0-3, etc.)
+
 ## Benefits/Capabilities
+
 - Declarative style API -- allows you to declare or specify the desired state and let `stoke` handle the rest
 - Mirrors base PyTorch style `forward`, `loss`, `backward`, and `step` calls
 - Automatic device placement of model(s) and data
