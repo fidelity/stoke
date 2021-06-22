@@ -46,3 +46,7 @@ Installation = "docs/Installation.md"
 
 [[tool.portray.mkdocs.nav]]
 Contributing = "CONTRIBUTING.md"
+
+
+[tool.isort]
+profile = "black"
