@@ -1,7 +1,0 @@
-attrs
-#deepspeed
-# Use the fork for now
-git+https://github.com/ncilfone/DeepSpeed.git@master
-git+https://github.com/facebookresearch/fairscale.git@master
-mpi4py
-spock-config
