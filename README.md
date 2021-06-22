@@ -1,4 +1,4 @@
-Image Header
+[![Stoke](https://raw.githubusercontent.com/fidelity/stoke/master/resources/images/logo_and_text.png)](https://fidelity.github.io/stoke/)
 > Add a little accelerant to your torch
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-9cf)](https://opensource.org/licenses/Apache-2.0)
