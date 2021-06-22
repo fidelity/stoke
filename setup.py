@@ -8,9 +8,30 @@
 import os
 
 import setuptools
-from pkg_resources import parse_requirements
 
 import versioneer
+
+# Loosely based on https://stackoverflow.com/a/57500829
+# Grab all the reqs to process in case any are git+ssh or git+https
+with open("REQUIREMENTS.txt", "r") as fid:
+    pre_reqs = fid.read().splitlines()
+
+EGG_MARK = '#egg='
+for idx, line in enumerate(pre_reqs):
+    # Catch anything that is git+
+    if line.startswith('git+'):
+        if EGG_MARK in line:
+            egg_idx = line.rindex(EGG_MARK)
+            name = line[(egg_idx + len(EGG_MARK)):]
+            repo = line[:egg_idx]
+            pre_reqs[idx] = f'{name} @ {repo}'
+        else:
+            raise SyntaxError('Dependency should have the format: \n'
+                              'git+https://github.com/xxxx/xxxx#egg=package_name\n'
+                              '-or-\n'
+                              'git+ssh://git@github.com/xxxx/xxxx#egg=package_name')
+# Swap the pre_reqs to the install_reqs
+install_reqs = pre_reqs
 
 # Export some env variables
 # Make sure horovod with pytorch get installed
@@ -20,9 +41,6 @@ os.environ["BUILD_CUDA_EXTENSIONS"] = "1"
 
 with open("README.md", "r") as fid:
     long_description = fid.read()
-
-with open("REQUIREMENTS.txt", "r") as fid:
-    install_reqs = [str(req) for req in parse_requirements(fid)]
 
 setuptools.setup(
     name="stoke",
