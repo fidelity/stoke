@@ -1,0 +1,9 @@
+attrs
+#deepspeed
+# Use the fork for now
+git+https://github.com/ncilfone/DeepSpeed.git@master
+git+https://github.com/facebookresearch/fairscale.git@master
+horovod[pytorch]
+mypy_extensions; python_version < '3.8'
+mpi4py
+torch>=1.8.1

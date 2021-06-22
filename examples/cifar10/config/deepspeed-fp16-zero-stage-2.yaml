@@ -1,0 +1,13 @@
+# Single GPU configuration
+config: [base.yaml]
+
+RunConfig:
+  distributed: deepspeed
+  fp16: deepspeed
+  gpu: True
+  zero: 2
+  contiguous_gradients: True
+  overlap_comm: True
+
+DataConfig:
+  n_workers: 2

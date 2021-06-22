@@ -1,0 +1,19 @@
+# Base set of CIFAR10 training parameters
+DataConfig:
+  batch_size: 96
+  crop_size: 32
+  crop_pad: 4
+  normalize_mean: [0.5, 0.5, 0.5]
+  normalize_std: [0.5, 0.5, 0.5]
+  root_dir: '/mnt/home/data/cifar10/'
+#  root_dir: '/tmp/stoke/examples/cifar10/data/'
+
+RunConfig:
+  checkpoint_path: '/tmp/stoke/examples/cifar10/model'
+  checkpoint_name: 'cifar10-example'
+  num_epoch: 4
+
+SGDConfig:
+  lr: 0.1
+  momentum: 0.9
+  weight_decay: 1E-4

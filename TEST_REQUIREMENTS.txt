@@ -1,0 +1,9 @@
+-r REQUIREMENTS.txt
+black
+coveralls
+coverage
+isort
+portray
+pytest
+pytest-cov
+pylint

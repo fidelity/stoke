@@ -1,0 +1,5 @@
+[run]
+source = stoke
+omit =
+    stoke/__init__.py
+    stoke/_version.py

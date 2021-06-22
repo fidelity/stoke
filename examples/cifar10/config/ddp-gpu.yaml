@@ -1,0 +1,6 @@
+# Single GPU configuration
+config: [base.yaml]
+
+RunConfig:
+  distributed: ddp
+  gpu: True

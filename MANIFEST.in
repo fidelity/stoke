@@ -1,0 +1,2 @@
+include versioneer.py
+include stoke/_version.py

@@ -1,0 +1,5 @@
+# Single GPU configuration
+config: [base.yaml]
+
+RunConfig:
+  gpu: True
