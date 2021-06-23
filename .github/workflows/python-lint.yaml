@@ -10,7 +10,7 @@ on:
     branches: [master]
 
 jobs:
-  deploy:
+  run_lint:
 
     runs-on: ubuntu-latest
 

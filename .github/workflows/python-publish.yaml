@@ -9,7 +9,7 @@ on:
    types: [released]
 
 jobs:
-  deploy:
+  publish_pypi:
 
     runs-on: ubuntu-latest
 
