@@ -1,7 +1,7 @@
-attrs
-# Deepspeed PR still pending -- use the maintained fork for now
-#deepspeed
-git+https://github.com/ncilfone/DeepSpeed.git@master#egg=deepspeed
+attrs==20.3.0
+deepspeed>=0.4.0
+# Deepspeed PR still pending -- use the maintained fork for now -- this breaks twine so rolling back and allowing fail
+#git+https://github.com/ncilfone/DeepSpeed.git@master#egg=deepspeed
 fairscale>=0.3.7
 horovod>=0.21.2
 mypy_extensions; python_version < '3.8'
