@@ -47,15 +47,14 @@ class AMPConfig:
 
     Attributes
     ----------
-    backoff_factor: float, default: 0.5
+    backoff_factor : float, default: 0.5
         Factor by which the scale is multiplied during update if inf/NaN gradients occur in an iteration
-    growth_factor: float, default: 2.0
-        Factor by which the scale is multiplied during update if no inf/NaN gradients occur for growth_interval
-        consecutive iterations.
-    growth_interval: int, default: 2000
+    growth_factor : float, default: 2.0
+        Factor by which the scale is multiplied during update if no inf/NaN gradients occur for growth_interval consecutive iterations.
+    growth_interval : int, default: 2000
         Number of consecutive iterations without inf/NaN gradients that must occur for the scale to be multiplied by
         growth_factor
-    init_scale: float, default: 2.**16
+    init_scale : float, default: 2.**16
         Initial scale factor
 
     """
