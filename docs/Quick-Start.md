@@ -59,8 +59,8 @@ opt = StokeOptimizer(
 
 #### Create Stoke Object
 
-Now create the base `stoke` object. Pass in the model, and loss(es), and `StokeOptimizer` from above, 
-flags/choices to set different backends/functionality/extensions, and any necessary configurations. As an example, 
+Now create the base `stoke` object. Pass in the model, loss(es), and `StokeOptimizer` from above as well as any
+flags/choices to set different backends/functionality/extensions and any necessary configurations. As an example, 
 we set the device type to GPU, use the PyTorch DDP backend for distributed multi-GPU training, toggle native PyTorch 
 AMP mixed precision, add Fairscale optimizer-state-sharding (OSS), and turn on automatic gradient accumulation and 
 clipping (4 steps and clip-by-norm). In addition, let's customize PyTorch DDP,  PyTorch AMP and Fairscale OSS with 
@@ -125,7 +125,7 @@ Next we need to create a `torch.utils.data.DataLoader` object. Similar to the op
 a little differently with `stoke` for it to correctly handle each of the different backends. `stoke` provides a mirrored
 wrapper to the native `torch.utils.data.DataLoader` class (as the `DataLoader` method) that will return a correctly 
 configured `torch.utils.data.DataLoader` object. Since we are using a distributed backend (DDP) we need to provide a 
-DistributedSampler or similar class to the DataLoader. Note that the `Stoke` object that we just created has the 
+`DistributedSampler` or similar class to the `DataLoader`. Note that the `Stoke` object that we just created has the 
 properties `.rank` and `.world_size` which provide common interfaces to this information regardless of the backend!
 
 ```python
@@ -158,7 +158,7 @@ to GPUs). The following simple training loop should look fairly standard, except
 internally maintains the model, loss, and optimizer and all necessary code for all 
 backends/functionality/extensions). In addition, we use one of many helper functions built into `stoke` to print the 
 synced and gradient accumulated loss across all devices (an all-reduce across all devices with ReduceOp.SUM and divided
-by world_size -- printed only on rank 0 by default)
+by world_size -- that is print only on rank 0 by default)
 
 ```python
 epoch = 0
