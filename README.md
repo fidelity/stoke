@@ -43,7 +43,11 @@ context switching to `stoke`.
 
 ## Installation
 
-### (Required) Install NVIDIA Apex
+### (Required for FP16 Support) Install NVIDIA Apex
+
+If you are planning on using mixed-precision (aka FP16), please install Apex so that `stoke` supports all FP16 methods. 
+If you are not planning on using mixed precision, this step can actually be skipped (as all imports are in a try/except 
+and are only conditionally imported).
 
 Follow the instructions [here](https://github.com/NVIDIA/apex#quick-start).
 
