@@ -4,12 +4,16 @@
 
 * Python: 3.6+
 * Pip Dependencies: attrs, deepspeed, fairscale, horovod, mypy_extensions (python_version < '3.8'),
-  torch>=1.8.1
+  torch
 * Optional Pip Dependencies: mpi4py
 * Build Dependencies: apex (NVIDIA)
 * Tested OS: Unix (Ubuntu 16.04, Ubuntu 18.04), OSX (10.14.6)
 
-### (Required) Install NVIDIA Apex
+### (Required for FP16 Support) Install NVIDIA Apex
+
+If you are planning on using mixed-precision (aka FP16), please install Apex so that `stoke` supports all FP16 methods. 
+If you are not planning on using mixed precision, this step can actually be skipped (as all imports are in a try/except 
+and are only conditionally imported).
 
 Follow the instructions [here](https://github.com/NVIDIA/apex#quick-start).
 
