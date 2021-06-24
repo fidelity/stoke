@@ -1,7 +1,7 @@
 # Quick Start
 
-This is a quick and dirty guide to getting up and running with `stoke`. Read the 
-documentation [here](https://fidelity.github.io/stoke/) for full details and refer to the 
+This is a quick and dirty guide to getting up and running with `stoke`. Read additional
+documentation for full details and/or refer to the 
 examples [here](https://github.com/fidelity/stoke/blob/master/examples).
 
 #### Basic Definitions

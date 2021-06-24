@@ -4,6 +4,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-9cf)](https://opensource.org/licenses/Apache-2.0)
 [![Python](https://img.shields.io/badge/python-3.6+-informational.svg)]()
 [![Style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+![Lint](https://github.com/fidelity/stoke/workflows/lint/badge.svg?branch=master)
 ![Docs](https://github.com/fidelity/stoke/workflows/docs/badge.svg)
 ---
 
@@ -266,6 +267,10 @@ extras = stoke_obj.load(
     tag=tag
 )
 ```
+
+### Launchers
+
+See the documentation [here](https://fidelity.github.io/stoke/docs/Launchers/)
 
 ## Compatibility Matrix
 
