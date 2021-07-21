@@ -110,4 +110,4 @@ WORKDIR /usr/src/code/apex
 RUN pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" ./
 
 # Install stoke w/ MPI support
-RUN pip install --no-cache-dir --trusted-host pypi.python.org stoke[mpi]
+RUN pip install --no-cache-dir --trusted-host pypi.python.org stoke
