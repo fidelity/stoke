@@ -162,7 +162,9 @@ class StokeStatus:
             "grad_clip": grad_clip,
             "gpu": gpu,
             "distributed": distributed,
-            "zero": self._configs.get("DeepspeedConfig").zero_optimization.stage,
+            "zero": self._configs.get("DeepspeedConfig").zero_optimization.stage
+            if self._configs.get("DeepspeedConfig")
+            else None,
             "oss": fairscale_oss,
             "sharded": fairscale_sddp,
             "world_size": -1,
