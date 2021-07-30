@@ -1086,6 +1086,16 @@ class Stoke:
             optimizer=self._optimizer, apex=self.is_apex, horovod=self.is_horovod
         )
 
+    def reset(self):
+        """Public method for resetting the underlying stoke state
+
+        Returns
+        -------
+        None
+
+        """
+        self._reset()
+
     def dump_model_parameter_info(self):
         """Dumps all parameter information for named parameters (shape, device, dtype)
 
