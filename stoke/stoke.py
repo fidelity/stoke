@@ -1096,6 +1096,22 @@ class Stoke:
         """
         self._reset()
 
+    def reset_tracking(self):
+        """Public method for resetting all underlying stoke tracked variables
+
+        Returns
+        -------
+        None
+
+        """
+        # Create some tracking vars
+        self._grad_accum_counter = 0
+        self._optimizer_steps = 0
+        self._backward_steps = 0
+        self._agg_loss = self._set_loss_to_zero()
+        self._rolling_mean_loss = self._set_loss_to_zero()
+        self._rolling_loss_steps = 0
+
     def dump_model_parameter_info(self):
         """Dumps all parameter information for named parameters (shape, device, dtype)
 
