@@ -359,8 +359,7 @@ class Stoke:
         """
         if isinstance(self._agg_loss, (list, tuple)):
             scale_vals = [
-                val / self.grad_accum
-                for idx, val in enumerate(self._agg_loss)
+                val / self.grad_accum for idx, val in enumerate(self._agg_loss)
             ]
         else:
             scale_vals = self._agg_loss / self.grad_accum
