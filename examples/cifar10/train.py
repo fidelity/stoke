@@ -123,14 +123,14 @@ def main():
     training_dataset = tv_datasets.CIFAR10(
         root=configs.DataConfig.root_dir,
         train=True,
-        download=False,
+        download=True,
         transform=transform_train,
     )
     # Get CIFAR10 test data from torchvision
     test_dataset = tv_datasets.CIFAR10(
         root=configs.DataConfig.root_dir,
         train=False,
-        download=False,
+        download=True,
         transform=transform_test,
     )
     # If distributed then roll a sampler else None

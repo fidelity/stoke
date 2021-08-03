@@ -1153,6 +1153,10 @@ class Stoke:
                 mp_state_dict_fn = self.scaler.load_state_dict
         return mp_state_dict_fn
 
+    def barrier(self):
+        """Calls the underlying distributed barrier if available"""
+        self._runner.barrier()
+
     @property
     def model_access(self):
         """Interface for model access due to the different types between the DP, DDP, and SDDP implementations"""

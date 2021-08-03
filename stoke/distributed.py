@@ -265,6 +265,10 @@ class BaseDistributed(ABC):
         else:
             pass
 
+    def barrier(self):
+        """Calls the underlying distributed barrier if available"""
+        pass
+
     @property
     def device_id(self):
         """Returns the current device id"""
@@ -623,6 +627,10 @@ class DistributedDDP(BaseDistributed):
         if self._verbose:
             self._print_device("DDP Using no sync context")
         return model.no_sync()
+
+    def barrier(self):
+        """Calls the underlying distributed barrier if available"""
+        torch.distributed.barrier()
 
     @property
     def rank(self):
@@ -1170,6 +1178,10 @@ class DistributedDeepspeed(BaseDistributed):
             # Detach and divide by the world size to get the mean on each device
             return loss_tensor.item() / self.world_size
 
+    def barrier(self):
+        """Calls the underlying distributed barrier if available"""
+        torch.distributed.barrier()
+
     @property
     def rank(self):
         """Returns current distributed rank"""
@@ -1457,6 +1469,12 @@ class DistributedHorovod(BaseDistributed):
                 "Horovod skipping synchronize as it was triggered pre grad-clip"
             )
         return optimizer.skip_synchronize()
+
+    def barrier(self):
+        """Calls the underlying distributed barrier if available"""
+        # Horovod doesn't have a native barrier so lean on join to take care of it
+        # https://horovod.readthedocs.io/en/stable/api.html#horovod.torch.join
+        hvd.join()
 
     @property
     def rank(self):
