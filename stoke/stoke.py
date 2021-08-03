@@ -1172,8 +1172,8 @@ class Stoke:
 
     @property
     def step_loss(self):
-        """Gets the step loss"""
-        return self._scale_agg_loss()
+        """Gets the step loss -- rescaled"""
+        return self._scale_agg_loss() * self.grad_accum
 
     @property
     def model_access(self):
