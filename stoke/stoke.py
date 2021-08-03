@@ -93,6 +93,8 @@ class Stoke:
         counter for grad accumulation steps
     _loss: Union[Callable, List[Callable], Tuple[Callable]]
         callable function that calculates a loss from the model outputs
+    _last_step_loss: list, tuple, or float
+        last loss step calculation aggregated over device(s)
     _model: torch.nn.Module
         instance of torch.nn.Module for Stoke to handle
     _optimizer: StokeOptimizer
@@ -235,6 +237,7 @@ class Stoke:
         self._grad_accum_counter = 0
         self._optimizer_steps = 0
         self._backward_steps = 0
+        self._last_step_loss = self._set_loss_to_zero()
         self._agg_loss = self._set_loss_to_zero()
         self._rolling_mean_loss = self._set_loss_to_zero()
         self._rolling_loss_steps = 0
@@ -799,6 +802,9 @@ class Stoke:
             if isinstance(self._loss, (list, tuple)):
                 loss = type(self._loss)(val(*args, **kwargs) for val in self._loss)
                 sync_loss = [self.detach_and_sync_loss(val) for val in loss]
+                self._last_step_loss = type(self._loss)(
+                    val for idx, val in enumerate(sync_loss)
+                )
                 self._agg_loss = type(self._loss)(
                     self._agg_loss[idx] + val for idx, val in enumerate(sync_loss)
                 )
@@ -808,6 +814,7 @@ class Stoke:
             else:
                 loss = self._loss(*args, **kwargs)
                 sync_loss = self.detach_and_sync_loss(loss)
+                self._last_step_loss = sync_loss
                 self._agg_loss += sync_loss
                 self._handle_ema_loss(loss=sync_loss)
                 # Handle grad accumulation by dividing by the accumulation steps
@@ -1121,6 +1128,7 @@ class Stoke:
         self._grad_accum_counter = 0
         self._optimizer_steps = 0
         self._backward_steps = 0
+        self._last_step_loss = self._set_loss_to_zero()
         self._agg_loss = self._set_loss_to_zero()
         self._rolling_mean_loss = self._set_loss_to_zero()
         self._rolling_loss_steps = 0
@@ -1172,8 +1180,8 @@ class Stoke:
 
     @property
     def step_loss(self):
-        """Gets the step loss -- rescaled for grad accum"""
-        return (self._scale_agg_loss() * self.grad_accum) / self._grad_accum_counter
+        """Gets the last step loss synced across device(s) (unscaled)"""
+        return self._last_step_loss
 
     @property
     def model_access(self):
