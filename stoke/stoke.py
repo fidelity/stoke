@@ -344,13 +344,27 @@ class Stoke:
         check_fn = self._check_pre_accum if pre_backwards else self._check_accum
         if check_fn():
             if isinstance(self._agg_loss, (list, tuple)):
-                print_vals = [
-                    f"{prepend_msg} {idx}: {val / self.grad_accum:.3f}"
-                    for idx, val in enumerate(self._agg_loss)
-                ]
+                print_vals = self._scale_agg_loss()
                 self.print(print_vals, single_line=single_line)
             else:
-                self.print(f"{prepend_msg}: {self._agg_loss / self.grad_accum:.3f}")
+                self.print(f"{prepend_msg}: {self._scale_agg_loss():.3f}")
+
+    def _scale_agg_loss(self):
+        """Scales the mean aggregated loss by  grad accum
+
+        Returns
+        -------
+        scale_vals: list or float of mean aggregated loss
+
+        """
+        if isinstance(self._agg_loss, (list, tuple)):
+            scale_vals = [
+                val / self.grad_accum
+                for idx, val in enumerate(self._agg_loss)
+            ]
+        else:
+            scale_vals = self._agg_loss / self.grad_accum
+        return scale_vals
 
     def print_synced_loss(
         self,
@@ -359,7 +373,7 @@ class Stoke:
         device=None,
         single_line: bool = False,
     ):
-        """Prints the device synced loss at a single step
+        """Prints a device synced loss at a single step
 
         Handles single or multiple losses. Prints only on devices specified by self._info_rank
 
@@ -1156,6 +1170,11 @@ class Stoke:
     def barrier(self):
         """Calls the underlying distributed barrier if available"""
         self._runner.barrier()
+
+    @property
+    def step_loss(self):
+        """Gets the step loss"""
+        return self._scale_agg_loss()
 
     @property
     def model_access(self):
