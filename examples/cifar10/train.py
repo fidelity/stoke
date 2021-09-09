@@ -96,6 +96,7 @@ def main():
         fairscale_oss=configs.RunConfig.oss,
         fairscale_sddp=configs.RunConfig.sddp,
         configs=extra_configs,
+        grad_accum_steps=configs.RunConfig.grad_accum,
         verbose=True,
     )
     # Set up a transform pipeline for CIFAR10 training data -- do some simple augmentation for illustration
