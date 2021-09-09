@@ -93,6 +93,8 @@ class Stoke:
         counter for grad accumulation steps
     _loss: Union[Callable, List[Callable], Tuple[Callable]]
         callable function that calculates a loss from the model outputs
+    _last_step_loss: list, tuple, or float
+        last loss step calculation aggregated over device(s)
     _model: torch.nn.Module
         instance of torch.nn.Module for Stoke to handle
     _optimizer: StokeOptimizer
@@ -235,6 +237,7 @@ class Stoke:
         self._grad_accum_counter = 0
         self._optimizer_steps = 0
         self._backward_steps = 0
+        self._last_step_loss = self._set_loss_to_zero()
         self._agg_loss = self._set_loss_to_zero()
         self._rolling_mean_loss = self._set_loss_to_zero()
         self._rolling_loss_steps = 0
@@ -344,13 +347,26 @@ class Stoke:
         check_fn = self._check_pre_accum if pre_backwards else self._check_accum
         if check_fn():
             if isinstance(self._agg_loss, (list, tuple)):
-                print_vals = [
-                    f"{prepend_msg} {idx}: {val / self.grad_accum:.3f}"
-                    for idx, val in enumerate(self._agg_loss)
-                ]
+                print_vals = self._scale_agg_loss()
                 self.print(print_vals, single_line=single_line)
             else:
-                self.print(f"{prepend_msg}: {self._agg_loss / self.grad_accum:.3f}")
+                self.print(f"{prepend_msg}: {self._scale_agg_loss():.3f}")
+
+    def _scale_agg_loss(self):
+        """Scales the mean aggregated loss by  grad accum
+
+        Returns
+        -------
+        scale_vals: list or float of mean aggregated loss
+
+        """
+        if isinstance(self._agg_loss, (list, tuple)):
+            scale_vals = [
+                val / self.grad_accum for idx, val in enumerate(self._agg_loss)
+            ]
+        else:
+            scale_vals = self._agg_loss / self.grad_accum
+        return scale_vals
 
     def print_synced_loss(
         self,
@@ -359,7 +375,7 @@ class Stoke:
         device=None,
         single_line: bool = False,
     ):
-        """Prints the device synced loss at a single step
+        """Prints a device synced loss at a single step
 
         Handles single or multiple losses. Prints only on devices specified by self._info_rank
 
@@ -786,6 +802,9 @@ class Stoke:
             if isinstance(self._loss, (list, tuple)):
                 loss = type(self._loss)(val(*args, **kwargs) for val in self._loss)
                 sync_loss = [self.detach_and_sync_loss(val) for val in loss]
+                self._last_step_loss = type(self._loss)(
+                    val for idx, val in enumerate(sync_loss)
+                )
                 self._agg_loss = type(self._loss)(
                     self._agg_loss[idx] + val for idx, val in enumerate(sync_loss)
                 )
@@ -795,6 +814,7 @@ class Stoke:
             else:
                 loss = self._loss(*args, **kwargs)
                 sync_loss = self.detach_and_sync_loss(loss)
+                self._last_step_loss = sync_loss
                 self._agg_loss += sync_loss
                 self._handle_ema_loss(loss=sync_loss)
                 # Handle grad accumulation by dividing by the accumulation steps
@@ -1108,6 +1128,7 @@ class Stoke:
         self._grad_accum_counter = 0
         self._optimizer_steps = 0
         self._backward_steps = 0
+        self._last_step_loss = self._set_loss_to_zero()
         self._agg_loss = self._set_loss_to_zero()
         self._rolling_mean_loss = self._set_loss_to_zero()
         self._rolling_loss_steps = 0
@@ -1152,6 +1173,15 @@ class Stoke:
             else:
                 mp_state_dict_fn = self.scaler.load_state_dict
         return mp_state_dict_fn
+
+    def barrier(self):
+        """Calls the underlying distributed barrier if available"""
+        self._runner.barrier()
+
+    @property
+    def step_loss(self):
+        """Gets the last step loss synced across device(s) (unscaled)"""
+        return self._last_step_loss
 
     @property
     def model_access(self):

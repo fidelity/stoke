@@ -96,7 +96,8 @@ def main():
         fairscale_oss=configs.RunConfig.oss,
         fairscale_sddp=configs.RunConfig.sddp,
         configs=extra_configs,
-        verbose=False,
+        grad_accum_steps=configs.RunConfig.grad_accum,
+        verbose=True,
     )
     # Set up a transform pipeline for CIFAR10 training data -- do some simple augmentation for illustration
     transform_train = tv_transforms.Compose(
@@ -123,14 +124,14 @@ def main():
     training_dataset = tv_datasets.CIFAR10(
         root=configs.DataConfig.root_dir,
         train=True,
-        download=False,
+        download=True,
         transform=transform_train,
     )
     # Get CIFAR10 test data from torchvision
     test_dataset = tv_datasets.CIFAR10(
         root=configs.DataConfig.root_dir,
         train=False,
-        download=False,
+        download=True,
         transform=transform_test,
     )
     # If distributed then roll a sampler else None
