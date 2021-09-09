@@ -1,0 +1,14 @@
+# Dependabot config
+version: 2
+updates:
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    assignees:
+      - "ncilfone"
+    reviewers:
+      - "ncilfone"
+    commit-message:
+      prefix: "pip"
+      include: "scope"

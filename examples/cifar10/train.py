@@ -96,7 +96,7 @@ def main():
         fairscale_oss=configs.RunConfig.oss,
         fairscale_sddp=configs.RunConfig.sddp,
         configs=extra_configs,
-        verbose=False,
+        verbose=True,
     )
     # Set up a transform pipeline for CIFAR10 training data -- do some simple augmentation for illustration
     transform_train = tv_transforms.Compose(

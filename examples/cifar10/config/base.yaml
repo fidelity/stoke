@@ -5,8 +5,8 @@ DataConfig:
   crop_pad: 4
   normalize_mean: [0.5, 0.5, 0.5]
   normalize_std: [0.5, 0.5, 0.5]
-  root_dir: '/mnt/home/data/cifar10/'
-#  root_dir: '/tmp/stoke/examples/cifar10/data/'
+#  root_dir: '/mnt/home/data/cifar10/'
+  root_dir: '/tmp/stoke/examples/cifar10/data/'
 
 RunConfig:
   checkpoint_path: '/tmp/stoke/examples/cifar10/model'

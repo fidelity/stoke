@@ -1,8 +1,8 @@
-black
-coveralls
-coverage
-isort
-portray
-pytest
-pytest-cov
-pylint
+black==21.7b0
+coveralls==3.2.0
+coverage==5.5
+isort==5.9.3
+portray==1.7.0
+pytest==6.2.4
+pytest-cov==2.12.1
+pylint==2.10.2
