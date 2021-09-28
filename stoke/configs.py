@@ -566,7 +566,7 @@ class FairscaleOSSConfig:
 
 @attr.s(auto_attribs=True)
 class FairscaleSDDPConfig:
-    """Fairscale sharded data parallel configuration class
+    """Fairscale sharded data parallel (SDDP) configuration class
 
     Attributes
     ----------
@@ -596,6 +596,38 @@ class FairscaleSDDPConfig:
     reduce_buffer_size: int = 2 ** 23
     reduce_fp16: bool = False
     sync_models_at_startup: bool = True
+
+
+@attr.s(auto_attribs=True)
+class FairscaleFSDPConfig:
+    """Fairscale Fully Sharded Data Parallel configuration class
+
+    Attributes
+    ----------
+    reshard_after_forward: bool, default: True
+        reshard parameters after the forward pass. This saves memory but slows training. This is only relevant
+        when resharding individual layers (see https://fairscale.readthedocs.io/en/latest/api/nn/fsdp.html)
+    mixed_precision: bool, default: False:
+        activations and gradients will be kept in FP16, computation and communication will occur in FP16, and a
+        (sharded) master copy of the model weights will be maintained in FP32. This value will automatically be set
+        from the Stoke FP16 selected option
+
+    """
+    reshard_after_forward: bool = True
+    mixed_precision: bool = False
+    fp32_reduce_scatter: bool = False
+    flatten_parameters: bool = True
+    move_params_to_cpu: bool = False
+    compute_dtype: Optional[torch.dtype] = None
+    buffer_dtype: Optional[torch.dtype] = None
+    move_grads_to_cpu: Optional[bool] = None
+    bucket_cap_mb: int = 25
+    compute_device: Optional[torch.device] = None
+    no_broadcast_optim_state: Optional[bool] = False
+    state_dict_device: Optional[torch.device] = None
+    clear_autocast_cache: bool = False
+    force_input_to_fp32: bool = False
+    cpu_offload: bool = False
 
 
 @attr.s(auto_attribs=True)

@@ -25,6 +25,7 @@ from stoke.configs import (
     DeepspeedConfig,
     FairscaleOSSConfig,
     FairscaleSDDPConfig,
+    FairscaleFSDPConfig,
     HorovodConfig,
     StokeOptimizer,
 )
@@ -129,6 +130,7 @@ class Stoke:
         distributed: Optional[DistributedOptions] = None,
         fairscale_oss: bool = False,
         fairscale_sddp: bool = False,
+        fairscale_fsdp: bool = False,
         configs: Optional[
             List[
                 Union[
@@ -138,6 +140,7 @@ class Stoke:
                     DeepspeedConfig,
                     FairscaleOSSConfig,
                     FairscaleSDDPConfig,
+                    FairscaleFSDPConfig,
                     HorovodConfig,
                 ]
             ]
@@ -172,7 +175,9 @@ class Stoke:
             Flag to activate optimizer state sharding using Fairscale
         fairscale_sddp: bool, default: False
             Flag to activate sharded DDP using Fairscale
-        configs: Optional[List[Union[AMPConfig, ApexConfig, DDPConfig, DeepspeedConfig, FairscaleOSSConfig, FairscaleSDDPConfig, HorovodConfig]], default: None
+        fairscale_fsdp: bool, default: False
+            Flag to activate fully sharded DDP using Fairscale
+        configs: Optional[List[Union[AMPConfig, ApexConfig, DDPConfig, DeepspeedConfig, FairscaleOSSConfig, FairscaleSDDPConfig, FairscaleFSDPConfig, HorovodConfig]], default: None
             Configuration objects for runtimes
         info_rank: Optional[Union[int, List[int]]], default = 0
             Constrain prints to specific devices
@@ -198,7 +203,8 @@ class Stoke:
             distributed=distributed,
             fairscale_oss=fairscale_oss,
             fairscale_sddp=fairscale_sddp,
-            configs=configs,
+            fairscale_fsdp=fairscale_fsdp,
+            configs=configs
         )
         # Run some checks
         self._model = self._check_model(model)

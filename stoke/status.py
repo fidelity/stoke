@@ -22,6 +22,7 @@ from stoke.configs import (
     DeepspeedFP16Config,
     FairscaleOSSConfig,
     FairscaleSDDPConfig,
+    FairscaleFSDPConfig,
     HorovodConfig,
 )
 
@@ -104,6 +105,7 @@ class StokeStatus:
         distributed: Optional[DistributedOptions],
         fairscale_oss: bool,
         fairscale_sddp: bool,
+        fairscale_fsdp: bool,
         configs: Optional[
             List[
                 Union[
@@ -113,6 +115,7 @@ class StokeStatus:
                     DeepspeedConfig,
                     FairscaleOSSConfig,
                     FairscaleSDDPConfig,
+                    FairscaleFSDPConfig,
                     HorovodConfig,
                 ]
             ]
@@ -138,6 +141,8 @@ class StokeStatus:
             Flag to activate optimizer state sharding using Fairscale
         fairscale_sddp: bool, default: False
             Flag to activate sharded DDP using Fairscale
+        fairscale_fsdp: bool, default: False
+            Flag to activate fully sharded DDP using Fairscale
         configs: Optional[List[Union[AMPConfig, ApexConfig, DDPConfig, DeepspeedConfig, FairscaleOSSConfig, FairscaleSDDPConfig, HorovodConfig]], default: None
             Configuration objects for runtimes
         """
@@ -149,6 +154,7 @@ class StokeStatus:
             "DeepspeedConfig",
             "FairscaleOSSConfig",
             "FairscaleSDDPConfig",
+            "FairscaleFSDPConfig"
             "HorovodConfig",
         ]
         # Set the configs first which allows for checking of some config vars later
@@ -167,6 +173,7 @@ class StokeStatus:
             else None,
             "oss": fairscale_oss,
             "sharded": fairscale_sddp,
+            "fully_sharded": fairscale_fsdp,
             "world_size": -1,
         }
         # Check fp16 since it might need APEX imports and update state dict
@@ -220,6 +227,17 @@ class StokeStatus:
                 f"requires CUDA (currently: {self.cuda}), "
                 f"GPU (currently: {self.gpu}), "
                 f"DDP (currently: {self.is_distributed_ddp}) and NCCL (currently: {self.nccl})"
+            )
+        # No SDDP w/o OSS
+        if self.sharded and not self.oss:
+            raise ValueError(
+                f"Stoke -- Fairscale SDDP requires OSS (currently: oss: {self.oss}, sddp: {self.sharded})"
+            )
+        # FSDP stands alone
+        if (self.sharded or self.oss) and self.fully_sharded:
+            raise ValueError(
+                f"Stoke -- Fairscale FSDP does not require SDDP or OSS "
+                f"(currently: oss: {self.oss}, sddp: {self.sharded}. fsdp: {self.fully_sharded})"
             )
         # No fairscale with APEX
         if self.is_fairscale and self.is_fp16_apex:
@@ -397,6 +415,11 @@ class StokeStatus:
         return self._status.get("sharded")
 
     @property
+    def fully_sharded(self):
+        """Returns if Fairscale fully sharded DDP status"""
+        return self._status.get('fully_sharded')
+
+    @property
     def world_size(self):
         """Returns the current world size"""
         return self._status.get("world_size")
@@ -408,8 +431,8 @@ class StokeStatus:
 
     @property
     def is_fairscale(self):
-        """Returns if either part of Fairscale is activated"""
-        return self.oss or self.sharded
+        """Returns if any part of Fairscale is activated"""
+        return self.oss or self.sharded or self.fully_sharded
 
     @property
     def distributed(self):
@@ -586,6 +609,7 @@ class StokeStatus:
             f"    DISTRIBUTED BACKEND: {self.distributed}\n"
             f"    FAIRSCALE OSS: {self.oss}\n"
             f"    FAIRSCALE SDDP: {self.sharded}\n"
+            f"    FAIRSCALE FSDP: {self.fully_sharded}"
             f'    DEEPSPEED ZeRO: {f"Stage {self.zero}" if self.is_distributed_deepspeed else f"False"}\n'
             f"    WORLD SIZE: {self.world_size}\n"
             f"    GRAD ACCUMULATION STEPS: {self.grad_accum}\n"

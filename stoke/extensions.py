@@ -11,9 +11,10 @@ from typing import Dict, Optional, Tuple, Type, Union
 
 import torch
 from fairscale.nn.data_parallel import ShardedDataParallel
+from fairscale.nn.data_parallel import FullyShardedDataParallel
 from fairscale.optim.oss import OSS
 
-from stoke.configs import DDPConfig, FairscaleOSSConfig, FairscaleSDDPConfig
+from stoke.configs import DDPConfig, FairscaleOSSConfig, FairscaleSDDPConfig, FairscaleFSDPConfig
 
 
 class BaseOptimizer(ABC):
@@ -206,7 +207,7 @@ class BaseDDP:
 
 
 class FairscaleSDDPExtension:
-    """Base class for using the DDP backend
+    """Class for using the Fairscale SDDP backend
 
     Attributes
     ----------
@@ -225,7 +226,7 @@ class FairscaleSDDPExtension:
         Parameters
         ----------
         sddp_config: FairscaleSDDPConfig
-            Base Fairscale ShardedDataParallel configuration obje
+            Base Fairscale ShardedDataParallel configuration objet
         verbose: bool, default: True
             flag for Stoke print verbosity
         **kwargs: dict, optional
@@ -275,8 +276,53 @@ class FairscaleSDDPExtension:
         return model, optimizer
 
 
+class FairscaleFSDPExtension:
+    """Class for using the Fairscale FSDP backend
+
+    Attributes
+    ----------
+    _fsdp_config: FairscaleFSDPConfig
+        Base Fairscale Fully Sharded Data Parallel configuration object
+    _verbose: bool, default: True
+        flag for Stoke print verbosity
+
+    """
+
+    def __init__(
+        self, fsdp_config: FairscaleFSDPConfig, verbose: bool = True, **kwargs
+    ):
+        """Init for FairscaleSDDPExtension
+
+        Parameters
+        ----------
+        _fsdp_config: FairscaleFSDPConfig
+            Base Fairscale Fully Sharded Data Parallel configuration object
+        verbose: bool, default: True
+            flag for Stoke print verbosity
+        **kwargs: dict, optional
+            Extra arguments passed to the __init__ call
+
+        """
+        self._verbose = verbose
+        self._fsdpp_config = fsdp_config
+
+    def handle_ddp(
+            self,
+            model: torch.nn.Module,
+            optimizer: Union[torch.optim.Optimizer, OSS],
+            grad_accum: Optional[int],
+            rank: int,
+    ) -> Tuple[torch.nn.Module, Union[torch.optim.Optimizer, OSS]]:
+        model = FullyShardedDataParallel(
+            module=model,
+
+        )
+        return model, optimizer
+
+
 class DistributedHandlerEnum(Enum):
     """Enum for DDP use"""
 
     sddp = FairscaleSDDPExtension
+    fsdp = FairscaleFSDPExtension
     base = BaseDDP

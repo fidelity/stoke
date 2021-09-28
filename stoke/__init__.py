@@ -24,6 +24,7 @@ __all__ = [
     "ClipGradConfig",
     "FairscaleOSSConfig",
     "FairscaleSDDPConfig",
+    "FairscaleFSDPConfig",
     "HorovodConfig",
     "ApexConfig",
     "DeepspeedConfig",
