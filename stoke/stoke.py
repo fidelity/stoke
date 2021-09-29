@@ -1284,7 +1284,7 @@ class Stoke:
     @property
     def is_amp(self):
         """Returns if AMP is activated"""
-        return self.fp16 == "amp"
+        return self._status.is_fp16_amp
 
     @property
     def distributed(self):
@@ -1315,6 +1315,11 @@ class Stoke:
     def sharded(self):
         """Returns if Fairscale sharded DDP status"""
         return self._status.sharded
+
+    @property
+    def fully_sharded(self):
+        """Returns if Fairscale fully sharded DDP status"""
+        return self._status.fully_sharded
 
     @property
     def world_size(self):
@@ -1353,8 +1358,13 @@ class Stoke:
 
     @property
     def sddp_config(self):
-        """Returns sddp config or None based on asddp state"""
+        """Returns sddp config or None based on sddp state"""
         return self._status.sddp_config if self.sharded else None
+
+    @property
+    def fsdp_config(self):
+        """Returns fsdp config or None based on fsdp state"""
+        return self._status.fsdp_config if self.fully_sharded else None
 
     @property
     def horovod_config(self):

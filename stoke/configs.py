@@ -604,30 +604,69 @@ class FairscaleFSDPConfig:
 
     Attributes
     ----------
+    bucket_cap_mb: int, default: 25
+        FSDP will bucket parameters so that gradient reduction can be more efficient for small parameters.
+        bucket_cap_mb controls the bucket size in MegaBytes (MB). Buckets are sub-divided based on world_size, so the
+        max shard size is roughly bucket_cap_mb / world_size. There is one bucketer (with potentially multiple
+        bucket_cap_mb sized buffers shared by all FSDP instances. Large gradient tensors are directly reduced without
+        using the buffers. The buffers are there to reduce communication overhead for small tensors. Overlapping with
+        computation happens due to use of a different CUDA stream than the computation CUDA stream. The total memory
+        overhead per buffer is around bucket_cap_mb / world_size * (world_size + 1). The buffers are allocated during
+        the backward pass and freed at the end of the backward pass to save more memory for other phases of the
+        training process. Note, the memory vs. speed tradeoff of bucket size is very different from that of the DDP
+        engine. In DDP, the buffer size 1MB + n*cap_mb, until n is big enough to cover the entire model size. The
+        order of which buffer is ready there is more rigid and DDP requires all gradients to be computed in the
+        backward. In FSDP, the buffer size does not change with model size (it changes based on number of
+        <dtype, device, process_group> tuples) and gradient ready order matters little since FSDP has a final flush
+        call that ensures everything is reduced and not all gradients need to be upfront known. Overlapping with
+        compute is done differently too. Values <= 0 disable bucketing
+    buffer_dtype: Optional[torch.dtype], default: None
+        dtype for buffers for computation. defaults to value of compute_dtype
+    clear_autocast_cache: bool, default: False
+        When using mixed precision training with FP16 AMP, if the model weights are in FP32, autocast
+        maintains a cache for downcasted weights. The cache can cause GPU OOM during the forward pass. Setting this
+        flag to true will help clearing this cache as inner FSDP instances finish part of the forward pass to save
+        GPU memory
+    compute_dtype: Optional[torch.dtype], default: None
+        dtype for full parameters for computation. This defaults to torch.float32 unless FP 16 AMP is set,
+        in which case it defaults to torch.float16.
+    flatten_parameters: bool, default: True
+        flatten parameters into a single contiguous tensor, which improves training speed
+    force_input_to_fp32: bool, default: False:
+        force input floating point tensors to be FP32 (if they are FP16) when the FSDP instance is in full precision
+        mode. This helps avoid issues of running SyncBatchNorm with AMP and checkpoint_wrapper.
+    fp32_reduce_scatter: bool, default: False
+        reduce-scatter gradients in FP32. This is only relevant when FP16 AMP is used
+    move_grads_to_cpu: Optional[bool], default: None
+        move gradient shard to CPU after reduction. This is only relevant when FP16 AMP is used
+    move_params_to_cpu: bool, default: False
+        offload FP32 params to CPU. This is only relevant when FP16 AMP is used
+    no_broadcast_optim_state: Optional[bool], default: False
+        do not broadcast this modules optimizer state when gather_full_optim_state_dict is called. If you set this
+        true, you are expected to overwrite the relevant state entries of the returned optimizer state dict with the
+        proper state at each rank. This is useful for situations, like Mixture Of Experts, where all but a few
+        parameters can fit on one node
     reshard_after_forward: bool, default: True
         reshard parameters after the forward pass. This saves memory but slows training. This is only relevant
         when resharding individual layers (see https://fairscale.readthedocs.io/en/latest/api/nn/fsdp.html)
+
+    Notes
+    -----
     mixed_precision: bool, default: False:
-        activations and gradients will be kept in FP16, computation and communication will occur in FP16, and a
-        (sharded) master copy of the model weights will be maintained in FP32. This value will automatically be set
-        from the Stoke FP16 selected option
+        This value will automatically be set from the Stoke FP16 selected option (AMP only)
 
     """
-    reshard_after_forward: bool = True
-    mixed_precision: bool = False
-    fp32_reduce_scatter: bool = False
-    flatten_parameters: bool = True
-    move_params_to_cpu: bool = False
-    compute_dtype: Optional[torch.dtype] = None
-    buffer_dtype: Optional[torch.dtype] = None
-    move_grads_to_cpu: Optional[bool] = None
     bucket_cap_mb: int = 25
-    compute_device: Optional[torch.device] = None
-    no_broadcast_optim_state: Optional[bool] = False
-    state_dict_device: Optional[torch.device] = None
+    buffer_dtype: Optional[torch.dtype] = None
     clear_autocast_cache: bool = False
+    compute_dtype: Optional[torch.dtype] = None
+    flatten_parameters: bool = True
     force_input_to_fp32: bool = False
-    cpu_offload: bool = False
+    fp32_reduce_scatter: bool = False
+    move_grads_to_cpu: Optional[bool] = None
+    move_params_to_cpu: bool = False
+    no_broadcast_optim_state: Optional[bool] = False
+    reshard_after_forward: bool = True
 
 
 @attr.s(auto_attribs=True)

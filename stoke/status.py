@@ -25,6 +25,7 @@ from stoke.configs import (
     FairscaleFSDPConfig,
     HorovodConfig,
 )
+from stoke.extensions import _FairscaleFSDPConfig
 
 
 class DistributedOptions(Enum):
@@ -236,7 +237,7 @@ class StokeStatus:
         # FSDP stands alone
         if (self.sharded or self.oss) and self.fully_sharded:
             raise ValueError(
-                f"Stoke -- Fairscale FSDP does not require SDDP or OSS "
+                f"Stoke -- Fairscale FSDP does not require SDDP or OSS as it manages OSS itself"
                 f"(currently: oss: {self.oss}, sddp: {self.sharded}. fsdp: {self.fully_sharded})"
             )
         # No fairscale with APEX
@@ -398,6 +399,11 @@ class StokeStatus:
     def is_fp16_apex(self):
         """Returns if APEX is activated"""
         return self.fp16 == "apex_O1" or self.fp16 == "apex_O2"
+
+    @property
+    def is_fp16_amp(self):
+        """Returns if AMP is activated"""
+        return self.fp16 == "amp"
 
     @property
     def is_fp16_deepspeed(self):
@@ -577,6 +583,28 @@ class StokeStatus:
         """
         config = self._configs.get("FairscaleSDDPConfig")
         return config if config is not None else FairscaleSDDPConfig()
+
+    @property
+    def fsdp_config(self):
+        """Checks for user defined FairscaleFSDPConfig and/or sets a default config object
+
+        Mutates the default attr class to contain the mixed_precision attribute that is derived from FP16 settings
+
+        Returns
+        -------
+        FairscaleFSDPConfig mutated with mixed-precision state
+
+        """
+        config = self._configs.get('FairscaleFSDPConfig')
+        # Swap in a default config if none
+        if config is None:
+            config = FairscaleFSDPConfig()
+        # Handle FP16 settings if set via constructor -- these need to be morphed at runtime to a new attr class
+        config_dict = attr.asdict(config)
+        config_dict.update({
+            'mixed_precision': self.is_fp16_amp
+        })
+        return _FairscaleFSDPConfig(**config_dict)
 
     @property
     def horovod_config(self):
