@@ -656,6 +656,7 @@ class FairscaleFSDPConfig:
         This value will automatically be set from the Stoke FP16 selected option (AMP only)
 
     """
+
     bucket_cap_mb: int = 25
     buffer_dtype: Optional[torch.dtype] = None
     clear_autocast_cache: bool = False

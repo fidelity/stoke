@@ -37,7 +37,7 @@ class ParamNormalize(Enum):
 def zero_optimizer_grads(
     optimizer: Union[torch.optim.Optimizer, OSS],
     apex: bool = False,
-    horovod: bool = False
+    horovod: bool = False,
 ):
     """Zeros grads depending on if it is a base Torch optimizer or a Fused version from APEX
 

@@ -17,7 +17,11 @@ import torch
 from fairscale.optim.oss import OSS
 
 from stoke.configs import ClipGradConfig, ClipGradNormConfig
-from stoke.extensions import DistributedHandlerEnum, FairscaleSDDPExtension, FairscaleFSDPExtension
+from stoke.extensions import (
+    DistributedHandlerEnum,
+    FairscaleFSDPExtension,
+    FairscaleSDDPExtension,
+)
 from stoke.utils import unrolled_print
 
 
@@ -102,7 +106,7 @@ class BaseDistributed(ABC):
         self,
         model: torch.nn.Module,
         grad_accum: Optional[int],
-        optimizer: Optional[Union[torch.optim.Optimizer, OSS]] = None
+        optimizer: Optional[Union[torch.optim.Optimizer, OSS]] = None,
     ) -> Tuple[torch.nn.Module, Union[torch.optim.Optimizer, OSS]]:
         """Base wrapper for distributed backends
 
@@ -513,7 +517,7 @@ class DistributedDDP(BaseDistributed):
         self,
         model: torch.nn.Module,
         grad_accum: Optional[int],
-        optimizer: Optional[Union[torch.optim.Optimizer, OSS]] = None
+        optimizer: Optional[Union[torch.optim.Optimizer, OSS]] = None,
     ) -> Tuple[torch.nn.Module, Union[torch.optim.Optimizer, OSS]]:
         """Overrides base implementation for wrapping with either DDP, Fairscale SDDP or Fairscale FSDP
 
@@ -549,8 +553,12 @@ class DistributedDDP(BaseDistributed):
                 f"Converting all BatchNorm*D layers to torch.nn.SyncBatchNorm layers..."
             )
             torch.nn.SyncBatchNorm.convert_sync_batchnorm(module=model)
-        if self._verbose and isinstance(self._ddp_handler, (FairscaleSDDPExtension, FairscaleFSDPExtension)):
-            self._print_device(f"Wrapped PyTorch DDP with {type(self._ddp_handler).__name__}")
+        if self._verbose and isinstance(
+            self._ddp_handler, (FairscaleSDDPExtension, FairscaleFSDPExtension)
+        ):
+            self._print_device(
+                f"Wrapped PyTorch DDP with {type(self._ddp_handler).__name__}"
+            )
         # Pass through to the handler for DDP wrappers
         model, optimizer = self._ddp_handler.handle_ddp(
             model=model, optimizer=optimizer, grad_accum=grad_accum, rank=self.rank
@@ -750,7 +758,7 @@ class DistributedDeepspeed(BaseDistributed):
         self,
         model: torch.nn.Module,
         grad_accum: Optional[int],
-        optimizer: Optional[Union[torch.optim.Optimizer, OSS]] = None
+        optimizer: Optional[Union[torch.optim.Optimizer, OSS]] = None,
     ) -> Tuple[torch.nn.Module, Union[torch.optim.Optimizer, OSS]]:
         """Overrides base implementation for wrapping with Deepspeed
 
@@ -1348,7 +1356,7 @@ class DistributedHorovod(BaseDistributed):
         self,
         model: torch.nn.Module,
         grad_accum: Optional[int],
-        optimizer: Optional[Union[torch.optim.Optimizer, OSS]] = None
+        optimizer: Optional[Union[torch.optim.Optimizer, OSS]] = None,
     ) -> Tuple[torch.nn.Module, Union[torch.optim.Optimizer, OSS]]:
         """Overrides base implementation for wrapping with Horovod
 

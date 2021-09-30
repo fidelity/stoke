@@ -20,9 +20,9 @@ from stoke.configs import (
     DDPConfig,
     DeepspeedConfig,
     DeepspeedFP16Config,
+    FairscaleFSDPConfig,
     FairscaleOSSConfig,
     FairscaleSDDPConfig,
-    FairscaleFSDPConfig,
     HorovodConfig,
 )
 from stoke.extensions import _FairscaleFSDPConfig
@@ -155,8 +155,7 @@ class StokeStatus:
             "DeepspeedConfig",
             "FairscaleOSSConfig",
             "FairscaleSDDPConfig",
-            "FairscaleFSDPConfig"
-            "HorovodConfig",
+            "FairscaleFSDPConfig" "HorovodConfig",
         ]
         # Set the configs first which allows for checking of some config vars later
         self._configs = self._set_configs(configs=configs)
@@ -247,7 +246,9 @@ class StokeStatus:
                 f"for mixed precision"
             )
         # No fairscale oss with grad clip by value
-        if (self.oss or self.fully_sharded) and isinstance(self.grad_clip, ClipGradConfig):
+        if (self.oss or self.fully_sharded) and isinstance(
+            self.grad_clip, ClipGradConfig
+        ):
             raise ValueError(
                 f"Stoke -- Fairscale OSS and FSDP do not currently support torch.nn.utils.clip_grad_value_ "
                 f"(currently: {type(self.grad_clip).__name__})"
@@ -423,7 +424,7 @@ class StokeStatus:
     @property
     def fully_sharded(self):
         """Returns if Fairscale fully sharded DDP status"""
-        return self._status.get('fully_sharded')
+        return self._status.get("fully_sharded")
 
     @property
     def world_size(self):
@@ -595,15 +596,13 @@ class StokeStatus:
         FairscaleFSDPConfig mutated with mixed-precision state
 
         """
-        config = self._configs.get('FairscaleFSDPConfig')
+        config = self._configs.get("FairscaleFSDPConfig")
         # Swap in a default config if none
         if config is None:
             config = FairscaleFSDPConfig()
         # Handle FP16 settings if set via constructor -- these need to be morphed at runtime to a new attr class
         config_dict = attr.asdict(config)
-        config_dict.update({
-            'mixed_precision': self.is_fp16_amp
-        })
+        config_dict.update({"mixed_precision": self.is_fp16_amp})
         return _FairscaleFSDPConfig(**config_dict)
 
     @property

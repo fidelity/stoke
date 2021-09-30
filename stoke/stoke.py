@@ -23,9 +23,9 @@ from stoke.configs import (
     ClipGradNormConfig,
     DDPConfig,
     DeepspeedConfig,
+    FairscaleFSDPConfig,
     FairscaleOSSConfig,
     FairscaleSDDPConfig,
-    FairscaleFSDPConfig,
     HorovodConfig,
     StokeOptimizer,
 )
@@ -204,7 +204,7 @@ class Stoke:
             fairscale_oss=fairscale_oss,
             fairscale_sddp=fairscale_sddp,
             fairscale_fsdp=fairscale_fsdp,
-            configs=configs
+            configs=configs,
         )
         # Run some checks
         self._model = self._check_model(model)
@@ -269,9 +269,7 @@ class Stoke:
         self._runner.wrap_fp16(model=self._model, optimizer=self._optimizer)
         # Wrap with distributed backend -- in this case the optimizer is passed through
         self._model, self._optimizer = self._runner.wrap_distributed(
-            model=self._model,
-            grad_accum=self.grad_accum,
-            optimizer=self._optimizer
+            model=self._model, grad_accum=self.grad_accum, optimizer=self._optimizer
         )
 
     def _wrap_model_then_optimizer(self, optimizer: StokeOptimizer):
@@ -290,9 +288,7 @@ class Stoke:
         # Wrap with distributed backend -- in this case the optimizer is passed as None since it doesn't exist yet
         # don't use the return for the optimizer in this case
         self._model, _ = self._runner.wrap_distributed(
-            model=self._model,
-            grad_accum=self.grad_accum,
-            optimizer=None
+            model=self._model, grad_accum=self.grad_accum, optimizer=None
         )
         # Setup/Initialize FP16 backend -- in this case the optimizer is passed as None since it doesn't exist yet
         self._runner.wrap_fp16(model=self._model, optimizer=None)
@@ -631,7 +627,7 @@ class Stoke:
             "horovod_config": self.horovod_config,
             "oss_config": self.oss_config,
             "sharded_config": self.sddp_config,
-            "fully_sharded_config": self.fsdp_config
+            "fully_sharded_config": self.fsdp_config,
         }
         # Generate the runner class from the mixins based on the StokeStatus
         runner_class = type(

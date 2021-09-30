@@ -6,16 +6,20 @@
 """Handles extension wrapper related classes -- mixin style"""
 
 from abc import ABC
-import attr
 from enum import Enum
 from typing import Dict, Optional, Tuple, Type, Union
 
+import attr
 import torch
-from fairscale.nn.data_parallel import ShardedDataParallel
-from fairscale.nn.data_parallel import FullyShardedDataParallel
+from fairscale.nn.data_parallel import FullyShardedDataParallel, ShardedDataParallel
 from fairscale.optim.oss import OSS
 
-from stoke.configs import DDPConfig, FairscaleOSSConfig, FairscaleSDDPConfig, FairscaleFSDPConfig
+from stoke.configs import (
+    DDPConfig,
+    FairscaleFSDPConfig,
+    FairscaleOSSConfig,
+    FairscaleSDDPConfig,
+)
 
 
 @attr.s(auto_attribs=True)
@@ -313,11 +317,11 @@ class FairscaleFSDPExtension:
         self._fsdpp_config = fsdp_config
 
     def handle_ddp(
-            self,
-            model: torch.nn.Module,
-            optimizer: Union[torch.optim.Optimizer, OSS],
-            grad_accum: Optional[int],
-            rank: int,
+        self,
+        model: torch.nn.Module,
+        optimizer: Union[torch.optim.Optimizer, OSS],
+        grad_accum: Optional[int],
+        rank: int,
     ) -> Tuple[torch.nn.Module, Union[torch.optim.Optimizer, OSS]]:
         """Wraps the model in the FullyShardedDataParallel call
 
