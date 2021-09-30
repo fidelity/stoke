@@ -247,9 +247,9 @@ class StokeStatus:
                 f"for mixed precision"
             )
         # No fairscale oss with grad clip by value
-        if self.oss and isinstance(self.grad_clip, ClipGradConfig):
+        if (self.oss or self.fully_sharded) and isinstance(self.grad_clip, ClipGradConfig):
             raise ValueError(
-                f"Stoke -- Fairscale OSS does not currently support torch.nn.utils.clip_grad_value_ "
+                f"Stoke -- Fairscale OSS and FSDP do not currently support torch.nn.utils.clip_grad_value_ "
                 f"(currently: {type(self.grad_clip).__name__})"
             )
         # No deepspeed FP16 without deepspeed distributed

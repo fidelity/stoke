@@ -6,7 +6,7 @@
 """API interface to Stoke that handles any necessary config, context, setup etc."""
 
 from contextlib import nullcontext
-from typing import Callable, List, Optional, Sequence, Tuple, Union
+from typing import Callable, Dict, List, Optional, Sequence, Tuple, Type, Union
 from uuid import uuid4
 
 import torch
@@ -227,18 +227,8 @@ class Stoke:
             self.print(class_info)
         # Possibly place model on GPU depending on StokeStatus -- before wrap calls
         self._place_model_on_gpu()
-        # Build the optimizer
-        self._optimizer = self._runner.build_optimizer(
-            optimizer=optimizer["optimizer"],
-            optimizer_kwargs=optimizer["optimizer_kwargs"],
-            model=self._model,
-        )
-        # Setup/Initialize FP16 backend
-        self._runner.wrap_fp16(self._model, self._optimizer)
-        # Wrap with distributed backend
-        self._model, self._optimizer = self._runner.wrap_distributed(
-            self._model, self._optimizer, self.grad_accum
-        )
+        # Handle the wrap ops in the correct order
+        self._handle_ordered_wrap_ops(optimizer=optimizer)
         # Create some tracking vars
         self._grad_accum_counter = 0
         self._optimizer_steps = 0
@@ -252,6 +242,86 @@ class Stoke:
         # Print the final configuration
         if self._verbose:
             self.print(msg=self._status)
+
+    def _wrap_optimizer_then_model(self, optimizer: StokeOptimizer):
+        """Handles wrapping of optimizer then the model
+
+        This holds only for SDDP, Horovod, and APEX as these need to use an instantiated optimizer before wrapped
+        methods are called
+
+        Parameters
+        ----------
+        optimizer: StokeOptimizer
+            Optimizer configuration
+
+        Returns
+        -------
+        None
+
+        """
+        # Build the optimizer
+        self._optimizer = self._runner.build_optimizer(
+            optimizer=optimizer["optimizer"],
+            optimizer_kwargs=optimizer["optimizer_kwargs"],
+            model=self._model,
+        )
+        # Setup/Initialize FP16 backend -- in this case the optimizer is passed through
+        self._runner.wrap_fp16(model=self._model, optimizer=self._optimizer)
+        # Wrap with distributed backend -- in this case the optimizer is passed through
+        self._model, self._optimizer = self._runner.wrap_distributed(
+            model=self._model,
+            grad_accum=self.grad_accum,
+            optimizer=self._optimizer
+        )
+
+    def _wrap_model_then_optimizer(self, optimizer: StokeOptimizer):
+        """Handles wrapping of model then optimizer
+
+        Parameters
+        ----------
+        optimizer: StokeOptimizer
+            Optimizer configuration
+
+        Returns
+        -------
+        None
+
+        """
+        # Wrap with distributed backend -- in this case the optimizer is passed as None since it doesn't exist yet
+        # don't use the return for the optimizer in this case
+        self._model, _ = self._runner.wrap_distributed(
+            model=self._model,
+            grad_accum=self.grad_accum,
+            optimizer=None
+        )
+        # Setup/Initialize FP16 backend -- in this case the optimizer is passed as None since it doesn't exist yet
+        self._runner.wrap_fp16(model=self._model, optimizer=None)
+        # Build the optimizer
+        self._optimizer = self._runner.build_optimizer(
+            optimizer=optimizer["optimizer"],
+            optimizer_kwargs=optimizer["optimizer_kwargs"],
+            model=self._model,
+        )
+
+    def _handle_ordered_wrap_ops(self, optimizer: StokeOptimizer):
+        """Handles wrapping model, using FP16, and wrapping optimizer in the correct order depending on Stoke Status
+
+        Parameters
+        ----------
+        optimizer: StokeOptimizer
+            Optimizer configuration
+
+        Returns
+        -------
+        None
+
+        """
+        # if SDDP + OSS, Horovod, and APEX then we need to make sure that the optimizer gets wrapped before the model
+        # gets wrapped, all other models follow standard DDP paradigm (or their own DeepSpeed)
+        if (self.sharded and self.oss) or self.is_apex or self.is_horovod:
+            self._wrap_optimizer_then_model(optimizer=optimizer)
+        else:
+            self._wrap_model_then_optimizer(optimizer=optimizer)
 
     def _check_accum(self):
         """Checks if the current step is the last accumulation step
@@ -561,6 +631,7 @@ class Stoke:
             "horovod_config": self.horovod_config,
             "oss_config": self.oss_config,
             "sharded_config": self.sddp_config,
+            "fully_sharded_config": self.fsdp_config
         }
         # Generate the runner class from the mixins based on the StokeStatus
         runner_class = type(

@@ -8,7 +8,7 @@
 from abc import ABC
 from contextlib import nullcontext
 from enum import Enum
-from typing import List, Tuple, Union
+from typing import List, Tuple, Union, Optional
 
 import torch
 from fairscale.optim.grad_scaler import ShardedGradScaler
@@ -57,7 +57,7 @@ class BaseFP16(ABC):
             )
 
     def wrap_fp16(
-        self, model: torch.nn.Module, optimizer: Union[torch.optim.Optimizer, OSS]
+        self, model: torch.nn.Module, optimizer: Optional[Union[torch.optim.Optimizer, OSS]] = None
     ) -> Tuple[torch.nn.Module, Union[torch.optim.Optimizer, OSS]]:
         """Wraps model and optimizer with specific mixed-precision related backend wrappers
 
@@ -578,7 +578,7 @@ class ApexO2AmpFP16(ApexBaseFP16):
         super(ApexO2AmpFP16, self).__init__(verbose=verbose, **kwargs)
 
     def wrap_fp16(
-        self, model: torch.nn.Module, optimizer: Union[torch.optim.Optimizer, OSS]
+        self, model: torch.nn.Module, optimizer: Optional[Union[torch.optim.Optimizer, OSS]] = None
     ) -> Tuple[torch.nn.Module, Union[torch.optim.Optimizer, OSS]]:
         """Wraps model and optimizer with Apex O2 mixed-precision related backend wrappers
 
@@ -632,7 +632,7 @@ class ApexO1AmpFP16(ApexBaseFP16):
         super(ApexO1AmpFP16, self).__init__(verbose=verbose, **kwargs)
 
     def wrap_fp16(
-        self, model: torch.nn.Module, optimizer: Union[torch.optim.Optimizer, OSS]
+        self, model: torch.nn.Module, optimizer: Optional[Union[torch.optim.Optimizer, OSS]] = None
     ) -> Tuple[torch.nn.Module, Union[torch.optim.Optimizer, OSS]]:
         """Wraps model and optimizer with Apex O1 mixed-precision related backend wrappers
 
@@ -708,7 +708,7 @@ class NativeAmpFP16(BaseFP16):
         # Switch the scaler obj ref depending on fairscale sharding
         scaler = (
             ShardedGradScaler
-            if kwargs["sharded_config"] is not None
+            if (kwargs["sharded_config"] is not None) or (kwargs["fully_sharded_config"] is not None)
             else torch.cuda.amp.GradScaler
         )
         super(NativeAmpFP16, self).__init__(
