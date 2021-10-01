@@ -325,6 +325,9 @@ class FairscaleFSDPExtension:
     ) -> Tuple[torch.nn.Module, Union[torch.optim.Optimizer, OSS]]:
         """Wraps the model in the FullyShardedDataParallel call
 
+        Also sets grad divide factors
+        https://fairscale.readthedocs.io/en/latest/_modules/fairscale/nn/data_parallel/fully_sharded_data_parallel.html#FullyShardedDataParallel.set_gradient_divide_factors
+
         Parameters
         ----------
         model: torch.nn.Module
@@ -358,6 +361,17 @@ class FairscaleFSDPExtension:
             no_broadcast_optim_state=self._fsdpp_config.no_broadcast_optim_state,
             clear_autocast_cache=self._fsdpp_config.clear_autocast_cache,
             force_input_to_fp32=self._fsdpp_config.force_input_to_fp32,
+            verbose=self._fsdpp_config.verbose,
+        )
+        # Trigger the set of pre-divide or post-divide factors if set in the config
+        model.set_gradient_divide_factors(
+            pre=self._fsdpp_config.gradient_predivide_factor
+            if self._fsdpp_config.gradient_predivide_factor is not None
+            else model.gradient_predivide_factor,
+            post=self._fsdpp_config.gradient_postdivide_factor
+            if self._fsdpp_config.gradient_postdivide_factor is not None
+            else model.gradient_postdivide_factor,
+            recursive=True,
         )
         return model, optimizer
 

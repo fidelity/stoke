@@ -624,6 +624,10 @@ class DistributedDDP(BaseDistributed):
     def grad_accum_context(self, model: torch.nn.Module):
         """Return the context to wrap the gradient accumulation steps
 
+        DDP: https://pytorch.org/tutorials/recipes/recipes/tuning_guide.html (Skip unnecessary all-reduce(s))
+        SDDP: https://fairscale.readthedocs.io/en/latest/api/nn/sharded_ddp.html
+        FSDP: https://fairscale.readthedocs.io/en/latest/api/nn/fsdp.html
+
         Parameters
         ----------
         model: torch.nn.Module
@@ -631,13 +635,14 @@ class DistributedDDP(BaseDistributed):
 
         Returns
         -------
-        no_sync() context to prevent un-needed communication overhead when using gradient accumulation
+        no_sync() context if no_sync flag in config to prevent un-needed communication overhead when using gradient
+        accumulation else nullcontext
 
         """
-        # https://pytorch.org/tutorials/recipes/recipes/tuning_guide.html (Skip unnecessary all-reduce)
-        if self._verbose:
+        if self._verbose and self._ddp_config.no_sync:
             self._print_device("DDP Using no sync context")
-        return model.no_sync()
+        context = model.no_sync() if self._ddp_config.no_sync else nullcontext()
+        return context
 
     def barrier(self):
         """Calls the underlying distributed barrier if available"""
@@ -1461,7 +1466,7 @@ class DistributedHorovod(BaseDistributed):
             return sum_tensor.item() / self.world_size
 
     def step_context(self, optimizer: Union[torch.optim.Optimizer, OSS]):
-        """Return the context to wrap the gradient accumulation steps
+        """Return the context to wrap the step call
 
         Parameters
         ----------

@@ -160,6 +160,10 @@ class DDPConfig:
         referring to the zero_grad() function in torch/optim/optimizer.py as a solution.
     init_method: str, default: 'env://'
         URL specifying how to initialize the process group
+    no_sync: bool, default: True
+        for any DDP based method (including SDDP and FSDP wrappers -- if activated gradients will be accumulated on
+        module variables, which will later be synchronized in the first forward-backward pass after exiting the
+        context. no sync might lead to higher memory usage but lower communication overhead
 
     """
 
@@ -171,6 +175,7 @@ class DDPConfig:
     find_unused_parameters: bool = False
     gradient_as_bucket_view: bool = False
     init_method: str = "env://"
+    no_sync: bool = True
 
 
 @attr.s(auto_attribs=True)
@@ -637,6 +642,10 @@ class FairscaleFSDPConfig:
         mode. This helps avoid issues of running SyncBatchNorm with AMP and checkpoint_wrapper.
     fp32_reduce_scatter: bool, default: False
         reduce-scatter gradients in FP32. This is only relevant when FP16 AMP is used
+    gradient_predivide_factor: Optional[float], default: None
+        divide factor before the reduction
+    gradient_postdivide_factor: Optional[float], default: None
+        divide factor after the reduction
     move_grads_to_cpu: Optional[bool], default: None
         move gradient shard to CPU after reduction. This is only relevant when FP16 AMP is used
     move_params_to_cpu: bool, default: False
@@ -649,11 +658,17 @@ class FairscaleFSDPConfig:
     reshard_after_forward: bool, default: True
         reshard parameters after the forward pass. This saves memory but slows training. This is only relevant
         when resharding individual layers (see https://fairscale.readthedocs.io/en/latest/api/nn/fsdp.html)
+    verbose: bool, default: True
+        turn on verbose output for model’s string representation
 
     Notes
     -----
-    mixed_precision: bool, default: False:
+    mixed_precision: bool
         This value will automatically be set from the Stoke FP16 selected option (AMP only)
+    state_dict_device: torch.device
+        this is not exposed as it should be managed internally from the DDP backend setup
+    compute_device: torch.device
+        this is not exposed as it should be managed internally from the DDP backend setup
 
     """
 
@@ -664,10 +679,13 @@ class FairscaleFSDPConfig:
     flatten_parameters: bool = True
     force_input_to_fp32: bool = False
     fp32_reduce_scatter: bool = False
+    gradient_predivide_factor: Optional[float] = None
+    gradient_postdivide_factor: Optional[float] = None
     move_grads_to_cpu: Optional[bool] = None
     move_params_to_cpu: bool = False
     no_broadcast_optim_state: Optional[bool] = False
     reshard_after_forward: bool = True
+    verbose: bool = False
 
 
 @attr.s(auto_attribs=True)
