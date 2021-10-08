@@ -10,6 +10,7 @@ from typing import Callable, Dict, List, Optional, Sequence, Tuple, Type, Union
 from uuid import uuid4
 
 import torch
+from fairscale.nn.data_parallel import FullyShardedDataParallel as FSDP
 from fairscale.nn.data_parallel import ShardedDataParallel as SDDP
 from torch.nn.parallel import DataParallel as DP
 from torch.nn.parallel import DistributedDataParallel as DDP
@@ -64,6 +65,8 @@ class Stoke:
     effective_batch_size
     ema_loss
     fp16
+    fsdp_config
+    fully_sharded
     gpu
     grad_accum
     grad_clip
@@ -851,7 +854,8 @@ class Stoke:
 
         """
         with self._runner.model_context:
-            return self.model_access(*args, **kwargs)
+            return self._model(*args, **kwargs)
+            # return self.model_access(*args, **kwargs)
 
     def loss(self, *args, **kwargs):
         """Wrapped callable loss function call
@@ -989,11 +993,12 @@ class Stoke:
             if self.grad_clip is not None:
                 self._runner.clip_grad(
                     self.grad_clip,
-                    self.model_access,
+                    self._model if self.fully_sharded else self.model_access,
                     self._optimizer,
                     oss=self.oss,
                     horovod=self.is_horovod,
                     deepspeed=self.is_deepspeed,
+                    fsdp=self.fully_sharded
                 )
             # Handle the optimizer step
             step_cm = (
@@ -1072,7 +1077,7 @@ class Stoke:
 
         """
         out_path, tag = self._runner.save(
-            model=self.model_access,
+            model=self._model if self.fully_sharded else self.model_access,
             optimizer=self.optimizer,
             path=path,
             backward_step=self._backward_steps,
@@ -1108,7 +1113,7 @@ class Stoke:
         """
         # TODO: How to deal with mapping between backends? e.g. FP16 model back to FP32? Or multi-gpu to CPU?
         backward_step, grad_accum_step, optimizer_step, extras = self._runner.load(
-            model=self.model_access,
+            model=self._model if self.fully_sharded else self.model_access,
             optimizer=self.optimizer,
             gpu=self.gpu,
             path=path,
@@ -1259,7 +1264,7 @@ class Stoke:
     @property
     def model_access(self):
         """Interface for model access due to the different types between the DP, DDP, and SDDP implementations"""
-        if isinstance(self._model, (DDP, DP, SDDP)):
+        if isinstance(self._model, (DDP, DP, SDDP, FSDP)):
             return self._model.module
         else:
             return self._model

@@ -56,6 +56,8 @@ mpi_reqs = _handle_reqs("./requirements/MPI.txt")
 # Export some env variables
 # Make sure horovod with pytorch get installed
 os.environ["HOROVOD_WITH_PYTORCH"] = "1"
+# Make sure horovod is using NCCL for ops
+os.environ["HOROVOD_GPU_OPERATIONS"] = "NCCL"
 # Make sure fairscale fused ADAM cuda kernels get included
 os.environ["BUILD_CUDA_EXTENSIONS"] = "1"
 

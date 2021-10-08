@@ -69,6 +69,8 @@ class StokeStatus:
     distributed
     effective_batch_size
     fp16
+    fsdp_config
+    fully_sharded
     gpu
     grad_accum
     grad_clip
@@ -636,7 +638,7 @@ class StokeStatus:
             f"    DISTRIBUTED BACKEND: {self.distributed}\n"
             f"    FAIRSCALE OSS: {self.oss}\n"
             f"    FAIRSCALE SDDP: {self.sharded}\n"
-            f"    FAIRSCALE FSDP: {self.fully_sharded}"
+            f"    FAIRSCALE FSDP: {self.fully_sharded}\n"
             f'    DEEPSPEED ZeRO: {f"Stage {self.zero}" if self.is_distributed_deepspeed else f"False"}\n'
             f"    WORLD SIZE: {self.world_size}\n"
             f"    GRAD ACCUMULATION STEPS: {self.grad_accum}\n"
