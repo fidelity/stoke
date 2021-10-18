@@ -998,7 +998,7 @@ class Stoke:
                     oss=self.oss,
                     horovod=self.is_horovod,
                     deepspeed=self.is_deepspeed,
-                    fsdp=self.fully_sharded
+                    fsdp=self.fully_sharded,
                 )
             # Handle the optimizer step
             step_cm = (
