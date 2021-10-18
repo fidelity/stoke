@@ -26,12 +26,12 @@ context switching to `stoke`.
  * Devices: CPU, GPU, multi-GPU
  * Distributed: [DDP](https://pytorch.org/docs/stable/generated/torch.nn.parallel.DistributedDataParallel.html#torch.nn.parallel.DistributedDataParallel), [Horovod](https://horovod.readthedocs.io/en/stable/index.html), [deepspeed](https://github.com/microsoft/DeepSpeed) (via DDP)
  * Mixed-Precision: [AMP](https://pytorch.org/docs/stable/amp.html), [Nvidia Apex](https://github.com/NVIDIA/apex), [deepspeed](https://github.com/microsoft/DeepSpeed) (custom APEX like backend)
- * Extensions: [fairscale](https://github.com/facebookresearch/fairscale) (Optimizer State Sharding and Sharded DDP), [deepspeed](https://github.com/microsoft/DeepSpeed) (ZeRO Stage 0-3, etc.)
+ * Extensions: [fairscale](https://github.com/facebookresearch/fairscale) (Optimizer State Sharding, Sharded DDP, Fully Sharded DDP), [deepspeed](https://github.com/microsoft/DeepSpeed) (ZeRO Stage 0-3, etc.)
 
 ## Benefits/Capabilities
 
 - Declarative style API -- allows you to declare or specify the desired state and let `stoke` handle the rest
-- Mirrors base PyTorch style `forward`, `loss`, `backward`, and `step` calls
+- Mirrors base PyTorch style `model`, `loss`, `backward`, and `step` calls
 - Automatic device placement of model(s) and data
 - Universal interface for saving and loading regardless of backend(s) or device
 - Automatic handling of gradient accumulation and clipping
