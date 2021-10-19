@@ -140,10 +140,10 @@ sampler = DistributedSampler(
 )
 
 # Call the DataLoader method on the stoke_obj to correctly create a DataLoader instance
+# The DataLoader object already known the batch size from the Stoke object creation
 data_loader = stoke_obj.DataLoader(
     dataset=dataset,
     collate_fn=lambda batch: dataset.collate_fn(batch),
-    batch_size=32,
     sampler=sampler,
     num_workers=4
 )

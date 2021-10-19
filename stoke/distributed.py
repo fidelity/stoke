@@ -12,6 +12,7 @@ from enum import Enum
 from typing import List, Optional, Tuple, Union
 
 import deepspeed as ds
+from deepspeed.utils.distributed import mpi_discovery
 import horovod.torch as hvd
 import torch
 from fairscale.optim.oss import OSS
@@ -490,11 +491,22 @@ class DistributedDDP(BaseDistributed):
     def _call_init(self):
         """Does any backend initialization work related to DDP setup
 
+        Borrows code from DeepSpeed to setup DDP via openMPI
+        https://github.com/microsoft/DeepSpeed/blob/master/deepspeed/utils/distributed.py
+
         Returns
         -------
         None
 
         """
+        # Borrowing a bit of code from deepspeed
+        required_env = ["RANK", "WORLD_SIZE", "MASTER_ADDR", "MASTER_PORT", "LOCAL_RANK"]
+        if self._ddp_config.auto_mpi_discovery and not all(map(lambda v: v in os.environ, required_env)):
+            try:
+                from mpi4py import MPI
+                mpi_discovery(verbose=True)
+            except ImportError as e:
+                print(e, ": mpi4py cannot be imported -- please install Stoke with the MPI option (pip install stoke[mpi])")
         # Initialize call for DDP
         torch.distributed.init_process_group(
             backend=self._ddp_config.backend, init_method=self._ddp_config.init_method

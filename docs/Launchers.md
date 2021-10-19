@@ -44,9 +44,31 @@ mpirun -np 16 \
 ```
 
 ### Deepspeed w/ OpenMPI
-Prefer the OpenMPI version [
-here](https://www.deepspeed.ai/getting-started/#multi-node-environment-variables) over the native 
-launcher. Deepspeed will automatically discover devices, etc. via mpi4py.
+Prefer the OpenMPI version [here](https://www.deepspeed.ai/getting-started/#multi-node-environment-variables) over the 
+native launcher. Deepspeed will automatically discover devices, etc. via mpi4py. Can also be used
+with k8s via the [MPI Operator](https://github.com/kubeflow/mpi-operator)
+
+```shell
+mpirun -np 4 \
+    --allow-run-as-root -bind-to none -map-by slot \
+    -x NCCL_DEBUG=INFO -x LD_LIBRARY_PATH -x PATH \
+    -mca pml ob1 -mca btl ^openib \
+    python train.py
+```
+or
+```shell
+mpirun -np 16 \
+    -H server1:4,server2:4,server3:4,server4:4 \
+    -bind-to none -map-by slot \
+    -x NCCL_DEBUG=INFO -x LD_LIBRARY_PATH -x PATH \
+    -mca pml ob1 -mca btl ^openib \
+    python train.py
+```
+
+
+### PyTorch DDP w/ OpenMPI
+Leverage Deepspeed functionality to automatically discover devices, etc. via mpi4py. Can also be used
+with k8s via the [MPI Operator](https://github.com/kubeflow/mpi-operator)
 
 ```shell
 mpirun -np 4 \
