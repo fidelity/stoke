@@ -8,7 +8,7 @@
 from abc import ABC
 from contextlib import nullcontext
 from enum import Enum
-from typing import List, Tuple, Union
+from typing import List, Optional, Tuple, Union
 
 import torch
 from fairscale.optim.grad_scaler import ShardedGradScaler
@@ -57,7 +57,9 @@ class BaseFP16(ABC):
             )
 
     def wrap_fp16(
-        self, model: torch.nn.Module, optimizer: Union[torch.optim.Optimizer, OSS]
+        self,
+        model: torch.nn.Module,
+        optimizer: Optional[Union[torch.optim.Optimizer, OSS]] = None,
     ) -> Tuple[torch.nn.Module, Union[torch.optim.Optimizer, OSS]]:
         """Wraps model and optimizer with specific mixed-precision related backend wrappers
 
@@ -87,6 +89,7 @@ class BaseFP16(ABC):
         oss: bool,
         horovod: bool,
         deepspeed: bool,
+        fsdp: bool,
     ):
         """Base handle clipping the current gradients
 
@@ -106,6 +109,8 @@ class BaseFP16(ABC):
             horovod flag
         deepspeed: bool
             deepspeed flag
+        fsdp: bool
+            fully sharded data parallel flag for Fairscale
 
         Returns
         -------
@@ -143,6 +148,7 @@ class BaseFP16(ABC):
                     max_norm=grad_clip.max_norm,
                     norm_type=grad_clip.norm_type,
                     oss=oss,
+                    fsdp=fsdp,
                 )
             else:
                 raise ValueError(
@@ -184,8 +190,14 @@ class BaseFP16(ABC):
         max_norm: Union[float, int],
         norm_type: Union[float, int],
         oss: bool = False,
+        fsdp: bool = False,
     ):
         """Base handle clip gradients by the norm
+
+        Depending on some extension flags switch between the correct clip_grad_norm calls
+
+        OSS: https://fairscale.readthedocs.io/en/latest/api/optim/oss.html
+        FSDP: https://fairscale.readthedocs.io/en/latest/api/nn/fsdp.html
 
         Parameters
         ----------
@@ -199,6 +211,8 @@ class BaseFP16(ABC):
             type of the used p-norm
         oss: bool, default: False
             optimizer state sharding flag
+        fsdp: bool, default: False
+            fully sharded data parallel flag for Fairscale
 
         Returns
         -------
@@ -209,9 +223,12 @@ class BaseFP16(ABC):
             if self._verbose:
                 self._print_device(f"Automatically unscaling gradients...")
             self._scaler.unscale_(optimizer)
-        # need to fallback to the Fairscale implementation for norm as the shards need to sync for the norm
+        # need to fallback to the OSS Fairscale implementation for norm as the shards need to sync for the norm
         if oss:
             optimizer.clip_grad_norm(max_norm=max_norm, norm_type=norm_type)
+        # need to fallback to the Fairscale FSDP implementation for norm as the shards need to sync for the norm
+        elif fsdp:
+            model.clip_grad_norm_(max_norm=max_norm, norm_type=norm_type)
         else:
             torch.nn.utils.clip_grad_norm_(
                 model.parameters(), max_norm=max_norm, norm_type=norm_type
@@ -491,6 +508,7 @@ class ApexBaseFP16(BaseFP16):
         max_norm: Union[float, int],
         norm_type: Union[float, int],
         oss: bool = False,
+        fsdp: bool = False,
     ):
         """Override handle clip gradients by the norm for APEX
 
@@ -508,6 +526,8 @@ class ApexBaseFP16(BaseFP16):
             type of the used p-norm
         oss: bool, default: False
             optimizer state sharding flag
+        fsdp: bool, default: False
+            fully sharded data parallel flag for Fairscale
 
         Returns
         -------
@@ -578,7 +598,9 @@ class ApexO2AmpFP16(ApexBaseFP16):
         super(ApexO2AmpFP16, self).__init__(verbose=verbose, **kwargs)
 
     def wrap_fp16(
-        self, model: torch.nn.Module, optimizer: Union[torch.optim.Optimizer, OSS]
+        self,
+        model: torch.nn.Module,
+        optimizer: Optional[Union[torch.optim.Optimizer, OSS]] = None,
     ) -> Tuple[torch.nn.Module, Union[torch.optim.Optimizer, OSS]]:
         """Wraps model and optimizer with Apex O2 mixed-precision related backend wrappers
 
@@ -632,7 +654,9 @@ class ApexO1AmpFP16(ApexBaseFP16):
         super(ApexO1AmpFP16, self).__init__(verbose=verbose, **kwargs)
 
     def wrap_fp16(
-        self, model: torch.nn.Module, optimizer: Union[torch.optim.Optimizer, OSS]
+        self,
+        model: torch.nn.Module,
+        optimizer: Optional[Union[torch.optim.Optimizer, OSS]] = None,
     ) -> Tuple[torch.nn.Module, Union[torch.optim.Optimizer, OSS]]:
         """Wraps model and optimizer with Apex O1 mixed-precision related backend wrappers
 
@@ -708,7 +732,8 @@ class NativeAmpFP16(BaseFP16):
         # Switch the scaler obj ref depending on fairscale sharding
         scaler = (
             ShardedGradScaler
-            if kwargs["sharded_config"] is not None
+            if (kwargs["sharded_config"] is not None)
+            or (kwargs["fully_sharded_config"] is not None)
             else torch.cuda.amp.GradScaler
         )
         super(NativeAmpFP16, self).__init__(

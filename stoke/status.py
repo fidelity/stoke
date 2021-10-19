@@ -20,10 +20,12 @@ from stoke.configs import (
     DDPConfig,
     DeepspeedConfig,
     DeepspeedFP16Config,
+    FairscaleFSDPConfig,
     FairscaleOSSConfig,
     FairscaleSDDPConfig,
     HorovodConfig,
 )
+from stoke.extensions import _FairscaleFSDPConfig
 
 
 class DistributedOptions(Enum):
@@ -67,6 +69,8 @@ class StokeStatus:
     distributed
     effective_batch_size
     fp16
+    fsdp_config
+    fully_sharded
     gpu
     grad_accum
     grad_clip
@@ -104,6 +108,7 @@ class StokeStatus:
         distributed: Optional[DistributedOptions],
         fairscale_oss: bool,
         fairscale_sddp: bool,
+        fairscale_fsdp: bool,
         configs: Optional[
             List[
                 Union[
@@ -113,6 +118,7 @@ class StokeStatus:
                     DeepspeedConfig,
                     FairscaleOSSConfig,
                     FairscaleSDDPConfig,
+                    FairscaleFSDPConfig,
                     HorovodConfig,
                 ]
             ]
@@ -138,6 +144,8 @@ class StokeStatus:
             Flag to activate optimizer state sharding using Fairscale
         fairscale_sddp: bool, default: False
             Flag to activate sharded DDP using Fairscale
+        fairscale_fsdp: bool, default: False
+            Flag to activate fully sharded DDP using Fairscale
         configs: Optional[List[Union[AMPConfig, ApexConfig, DDPConfig, DeepspeedConfig, FairscaleOSSConfig, FairscaleSDDPConfig, HorovodConfig]], default: None
             Configuration objects for runtimes
         """
@@ -149,7 +157,7 @@ class StokeStatus:
             "DeepspeedConfig",
             "FairscaleOSSConfig",
             "FairscaleSDDPConfig",
-            "HorovodConfig",
+            "FairscaleFSDPConfig" "HorovodConfig",
         ]
         # Set the configs first which allows for checking of some config vars later
         self._configs = self._set_configs(configs=configs)
@@ -167,6 +175,7 @@ class StokeStatus:
             else None,
             "oss": fairscale_oss,
             "sharded": fairscale_sddp,
+            "fully_sharded": fairscale_fsdp,
             "world_size": -1,
         }
         # Check fp16 since it might need APEX imports and update state dict
@@ -221,6 +230,17 @@ class StokeStatus:
                 f"GPU (currently: {self.gpu}), "
                 f"DDP (currently: {self.is_distributed_ddp}) and NCCL (currently: {self.nccl})"
             )
+        # No SDDP w/o OSS
+        if self.sharded and not self.oss:
+            raise ValueError(
+                f"Stoke -- Fairscale SDDP requires OSS (currently: oss: {self.oss}, sddp: {self.sharded})"
+            )
+        # FSDP stands alone
+        if (self.sharded or self.oss) and self.fully_sharded:
+            raise ValueError(
+                f"Stoke -- Fairscale FSDP does not require SDDP or OSS as it manages OSS itself"
+                f"(currently: oss: {self.oss}, sddp: {self.sharded}. fsdp: {self.fully_sharded})"
+            )
         # No fairscale with APEX
         if self.is_fairscale and self.is_fp16_apex:
             raise ValueError(
@@ -228,9 +248,11 @@ class StokeStatus:
                 f"for mixed precision"
             )
         # No fairscale oss with grad clip by value
-        if self.oss and isinstance(self.grad_clip, ClipGradConfig):
+        if (self.oss or self.fully_sharded) and isinstance(
+            self.grad_clip, ClipGradConfig
+        ):
             raise ValueError(
-                f"Stoke -- Fairscale OSS does not currently support torch.nn.utils.clip_grad_value_ "
+                f"Stoke -- Fairscale OSS and FSDP do not currently support torch.nn.utils.clip_grad_value_ "
                 f"(currently: {type(self.grad_clip).__name__})"
             )
         # No deepspeed FP16 without deepspeed distributed
@@ -382,6 +404,11 @@ class StokeStatus:
         return self.fp16 == "apex_O1" or self.fp16 == "apex_O2"
 
     @property
+    def is_fp16_amp(self):
+        """Returns if AMP is activated"""
+        return self.fp16 == "amp"
+
+    @property
     def is_fp16_deepspeed(self):
         """Returns if Deepspeed FP16 is activated"""
         return self.fp16 == "deepspeed"
@@ -397,6 +424,11 @@ class StokeStatus:
         return self._status.get("sharded")
 
     @property
+    def fully_sharded(self):
+        """Returns if Fairscale fully sharded DDP status"""
+        return self._status.get("fully_sharded")
+
+    @property
     def world_size(self):
         """Returns the current world size"""
         return self._status.get("world_size")
@@ -408,8 +440,8 @@ class StokeStatus:
 
     @property
     def is_fairscale(self):
-        """Returns if either part of Fairscale is activated"""
-        return self.oss or self.sharded
+        """Returns if any part of Fairscale is activated"""
+        return self.oss or self.sharded or self.fully_sharded
 
     @property
     def distributed(self):
@@ -556,6 +588,26 @@ class StokeStatus:
         return config if config is not None else FairscaleSDDPConfig()
 
     @property
+    def fsdp_config(self):
+        """Checks for user defined FairscaleFSDPConfig and/or sets a default config object
+
+        Mutates the default attr class to contain the mixed_precision attribute that is derived from FP16 settings
+
+        Returns
+        -------
+        FairscaleFSDPConfig mutated with mixed-precision state
+
+        """
+        config = self._configs.get("FairscaleFSDPConfig")
+        # Swap in a default config if none
+        if config is None:
+            config = FairscaleFSDPConfig()
+        # Handle FP16 settings if set via constructor -- these need to be morphed at runtime to a new attr class
+        config_dict = attr.asdict(config)
+        config_dict.update({"mixed_precision": self.is_fp16_amp})
+        return _FairscaleFSDPConfig(**config_dict)
+
+    @property
     def horovod_config(self):
         """Checks for user defined HorovodConfig and/or sets a default config object
 
@@ -586,6 +638,7 @@ class StokeStatus:
             f"    DISTRIBUTED BACKEND: {self.distributed}\n"
             f"    FAIRSCALE OSS: {self.oss}\n"
             f"    FAIRSCALE SDDP: {self.sharded}\n"
+            f"    FAIRSCALE FSDP: {self.fully_sharded}\n"
             f'    DEEPSPEED ZeRO: {f"Stage {self.zero}" if self.is_distributed_deepspeed else f"False"}\n'
             f"    WORLD SIZE: {self.world_size}\n"
             f"    GRAD ACCUMULATION STEPS: {self.grad_accum}\n"

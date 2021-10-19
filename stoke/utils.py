@@ -45,11 +45,10 @@ def zero_optimizer_grads(
     ----------
     optimizer: torch.optim.Optimizer
         current optimizer object
-    apex: bool
+    apex: bool, default: False
         if apex is active
-    horovod: bool
+    horovod: bool, default: False
         if horovod is active
-
     Returns
     -------
     None

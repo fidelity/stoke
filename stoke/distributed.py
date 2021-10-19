@@ -17,7 +17,11 @@ import torch
 from fairscale.optim.oss import OSS
 
 from stoke.configs import ClipGradConfig, ClipGradNormConfig
-from stoke.extensions import DistributedHandlerEnum, FairscaleSDDPExtension
+from stoke.extensions import (
+    DistributedHandlerEnum,
+    FairscaleFSDPExtension,
+    FairscaleSDDPExtension,
+)
 from stoke.utils import unrolled_print
 
 
@@ -101,8 +105,8 @@ class BaseDistributed(ABC):
     def wrap_distributed(
         self,
         model: torch.nn.Module,
-        optimizer: Union[torch.optim.Optimizer, OSS],
         grad_accum: Optional[int],
+        optimizer: Optional[Union[torch.optim.Optimizer, OSS]] = None,
     ) -> Tuple[torch.nn.Module, Union[torch.optim.Optimizer, OSS]]:
         """Base wrapper for distributed backends
 
@@ -112,7 +116,7 @@ class BaseDistributed(ABC):
         ----------
         model: torch.nn.Module
             current model object
-        optimizer: Union[torch.optim.Optimizer, OSS]
+        optimizer: Optional[Union[torch.optim.Optimizer, OSS]], default: None
             current optimizer object
         grad_accum: int, default: None
             Number of gradient accumulation steps
@@ -443,7 +447,7 @@ class DistributedDDP(BaseDistributed):
         verbose: bool, default: True
             flag for Stoke print verbosity
         **kwargs: dict, optional
-            Extra arguments passed to the __init__ call -- here ddp_config or sharded_config might be passed in
+            Extra arguments passed to the __init__ call -- here ddp_config, sharded_config, or fully_sharded_config might be passed in
 
         """
         self._ddp_config = kwargs["ddp_config"]
@@ -458,12 +462,13 @@ class DistributedDDP(BaseDistributed):
         self._ddp_handler = self._create_ddp_handler(kwargs)(
             verbose=self._verbose,
             sddp_config=kwargs["sharded_config"],
+            fsdp_config=kwargs["fully_sharded_config"],
             ddp_config=self._ddp_config,
         )
 
     @staticmethod
     def _create_ddp_handler(kwargs: dict):
-        """Determines which DDP related class to use
+        """Determines which DDP related class to use based on the kwarg config passed through
 
         Parameters
         ----------
@@ -477,6 +482,8 @@ class DistributedDDP(BaseDistributed):
         """
         if kwargs["sharded_config"] is not None:
             return DistributedHandlerEnum.sddp.value
+        elif kwargs["fully_sharded_config"] is not None:
+            return DistributedHandlerEnum.fsdp.value
         else:
             return DistributedHandlerEnum.base.value
 
@@ -509,16 +516,16 @@ class DistributedDDP(BaseDistributed):
     def wrap_distributed(
         self,
         model: torch.nn.Module,
-        optimizer: Union[torch.optim.Optimizer, OSS],
         grad_accum: Optional[int],
+        optimizer: Optional[Union[torch.optim.Optimizer, OSS]] = None,
     ) -> Tuple[torch.nn.Module, Union[torch.optim.Optimizer, OSS]]:
-        """Overrides base implementation for wrapping with either DDP or Fairscale SDDP
+        """Overrides base implementation for wrapping with either DDP, Fairscale SDDP or Fairscale FSDP
 
         Parameters
         ----------
         model: torch.nn.Module
             current model object
-        optimizer: Union[torch.optim.Optimizer, OSS]
+        optimizer: Optional[Union[torch.optim.Optimizer, OSS]], default: None
             current optimizer object
         grad_accum: int, default: None
             Number of gradient accumulation steps
@@ -546,9 +553,13 @@ class DistributedDDP(BaseDistributed):
                 f"Converting all BatchNorm*D layers to torch.nn.SyncBatchNorm layers..."
             )
             torch.nn.SyncBatchNorm.convert_sync_batchnorm(module=model)
-        if self._verbose and isinstance(self._ddp_handler, FairscaleSDDPExtension):
-            self._print_device(f"Replaced PyTorch DDP with Fairscale Sharded DDP")
-        # Pass through to the handler
+        if self._verbose and isinstance(
+            self._ddp_handler, (FairscaleSDDPExtension, FairscaleFSDPExtension)
+        ):
+            self._print_device(
+                f"Wrapped PyTorch DDP with {type(self._ddp_handler).__name__}"
+            )
+        # Pass through to the handler for DDP wrappers
         model, optimizer = self._ddp_handler.handle_ddp(
             model=model, optimizer=optimizer, grad_accum=grad_accum, rank=self.rank
         )
@@ -613,6 +624,10 @@ class DistributedDDP(BaseDistributed):
     def grad_accum_context(self, model: torch.nn.Module):
         """Return the context to wrap the gradient accumulation steps
 
+        DDP: https://pytorch.org/tutorials/recipes/recipes/tuning_guide.html (Skip unnecessary all-reduce(s))
+        SDDP: https://fairscale.readthedocs.io/en/latest/api/nn/sharded_ddp.html
+        FSDP: https://fairscale.readthedocs.io/en/latest/api/nn/fsdp.html
+
         Parameters
         ----------
         model: torch.nn.Module
@@ -620,13 +635,14 @@ class DistributedDDP(BaseDistributed):
 
         Returns
         -------
-        no_sync() context to prevent un-needed communication overhead when using gradient accumulation
+        no_sync() context if no_sync flag in config to prevent un-needed communication overhead when using gradient
+        accumulation else nullcontext
 
         """
-        # https://pytorch.org/tutorials/recipes/recipes/tuning_guide.html (Skip unnecessary all-reduce)
-        if self._verbose:
+        if self._verbose and self._ddp_config.no_sync:
             self._print_device("DDP Using no sync context")
-        return model.no_sync()
+        context = model.no_sync() if self._ddp_config.no_sync else nullcontext()
+        return context
 
     def barrier(self):
         """Calls the underlying distributed barrier if available"""
@@ -746,8 +762,8 @@ class DistributedDeepspeed(BaseDistributed):
     def wrap_distributed(
         self,
         model: torch.nn.Module,
-        optimizer: Union[torch.optim.Optimizer, OSS],
         grad_accum: Optional[int],
+        optimizer: Optional[Union[torch.optim.Optimizer, OSS]] = None,
     ) -> Tuple[torch.nn.Module, Union[torch.optim.Optimizer, OSS]]:
         """Overrides base implementation for wrapping with Deepspeed
 
@@ -755,7 +771,7 @@ class DistributedDeepspeed(BaseDistributed):
         ----------
         model: torch.nn.Module
             current model object
-        optimizer: Union[torch.optim.Optimizer, OSS]
+        optimizer: Optional[Union[torch.optim.Optimizer, OSS]], default: None
             current optimizer object
         grad_accum: int, default: None
             Number of gradient accumulation steps
@@ -1344,8 +1360,8 @@ class DistributedHorovod(BaseDistributed):
     def wrap_distributed(
         self,
         model: torch.nn.Module,
-        optimizer: Union[torch.optim.Optimizer, OSS],
         grad_accum: Optional[int],
+        optimizer: Optional[Union[torch.optim.Optimizer, OSS]] = None,
     ) -> Tuple[torch.nn.Module, Union[torch.optim.Optimizer, OSS]]:
         """Overrides base implementation for wrapping with Horovod
 
@@ -1353,7 +1369,7 @@ class DistributedHorovod(BaseDistributed):
         ----------
         model: torch.nn.Module
             current model object
-        optimizer: Union[torch.optim.Optimizer, OSS]
+        optimizer: Optional[Union[torch.optim.Optimizer, OSS]], default: None
             current optimizer object
         grad_accum: int, default: None
             Number of gradient accumulation steps
@@ -1450,7 +1466,7 @@ class DistributedHorovod(BaseDistributed):
             return sum_tensor.item() / self.world_size
 
     def step_context(self, optimizer: Union[torch.optim.Optimizer, OSS]):
-        """Return the context to wrap the gradient accumulation steps
+        """Return the context to wrap the step call
 
         Parameters
         ----------

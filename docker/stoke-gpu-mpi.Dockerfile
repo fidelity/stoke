@@ -99,9 +99,9 @@ RUN pip install torch==1.8.1+cu111 torchvision==0.9.1+cu111 -f https://download.
 # OPEN-MPI
 ##########
 WORKDIR /usr/src/code/
-RUN wget https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.0.tar.gz && \
-    tar zxf openmpi-4.1.0.tar.gz
-WORKDIR /usr/src/code/openmpi-4.1.0
+RUN wget https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.1.tar.gz && \
+    tar zxf openmpi-4.1.1.tar.gz
+WORKDIR /usr/src/code/openmpi-4.1.1
 RUN ./configure --enable-orterun-prefix-by-default && make -j $(nproc) all
 RUN make install && ldconfig
 

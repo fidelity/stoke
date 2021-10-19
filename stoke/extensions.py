@@ -9,11 +9,22 @@ from abc import ABC
 from enum import Enum
 from typing import Dict, Optional, Tuple, Type, Union
 
+import attr
 import torch
-from fairscale.nn.data_parallel import ShardedDataParallel
+from fairscale.nn.data_parallel import FullyShardedDataParallel, ShardedDataParallel
 from fairscale.optim.oss import OSS
 
-from stoke.configs import DDPConfig, FairscaleOSSConfig, FairscaleSDDPConfig
+from stoke.configs import (
+    DDPConfig,
+    FairscaleFSDPConfig,
+    FairscaleOSSConfig,
+    FairscaleSDDPConfig,
+)
+
+
+@attr.s(auto_attribs=True)
+class _FairscaleFSDPConfig(FairscaleFSDPConfig):
+    mixed_precision: bool = False
 
 
 class BaseOptimizer(ABC):
@@ -206,7 +217,7 @@ class BaseDDP:
 
 
 class FairscaleSDDPExtension:
-    """Base class for using the DDP backend
+    """Class for using the Fairscale SDDP backend
 
     Attributes
     ----------
@@ -225,7 +236,7 @@ class FairscaleSDDPExtension:
         Parameters
         ----------
         sddp_config: FairscaleSDDPConfig
-            Base Fairscale ShardedDataParallel configuration obje
+            Base Fairscale ShardedDataParallel configuration objet
         verbose: bool, default: True
             flag for Stoke print verbosity
         **kwargs: dict, optional
@@ -275,8 +286,99 @@ class FairscaleSDDPExtension:
         return model, optimizer
 
 
+class FairscaleFSDPExtension:
+    """Class for using the Fairscale FSDP backend
+
+    Attributes
+    ----------
+    _fsdp_config: _FairscaleFSDPConfig
+        Base Fairscale Fully Sharded Data Parallel configuration object
+    _verbose: bool, default: True
+        flag for Stoke print verbosity
+
+    """
+
+    def __init__(
+        self, fsdp_config: _FairscaleFSDPConfig, verbose: bool = True, **kwargs
+    ):
+        """Init for FairscaleSDDPExtension
+
+        Parameters
+        ----------
+        _fsdp_config: _FairscaleFSDPConfig
+            Base Fairscale Fully Sharded Data Parallel configuration object
+        verbose: bool, default: True
+            flag for Stoke print verbosity
+        **kwargs: dict, optional
+            Extra arguments passed to the __init__ call
+
+        """
+        self._verbose = verbose
+        self._fsdpp_config = fsdp_config
+
+    def handle_ddp(
+        self,
+        model: torch.nn.Module,
+        optimizer: Union[torch.optim.Optimizer, OSS],
+        grad_accum: Optional[int],
+        rank: int,
+    ) -> Tuple[torch.nn.Module, Union[torch.optim.Optimizer, OSS]]:
+        """Wraps the model in the FullyShardedDataParallel call
+
+        Also sets grad divide factors
+        https://fairscale.readthedocs.io/en/latest/_modules/fairscale/nn/data_parallel/fully_sharded_data_parallel.html#FullyShardedDataParallel.set_gradient_divide_factors
+
+        Parameters
+        ----------
+        model: torch.nn.Module
+            Current model object
+        optimizer: Union[torch.optim.Optimizer, OSS]
+            Current optimizer object
+        grad_accum: int, default: None
+            Number of gradient accumulation steps
+        rank: int
+            Current CUDA device rank in the distributed setup
+
+        Returns
+        -------
+        model: torch.nn.Module
+            Wrapped model object
+        optimizer: Union[torch.optim.Optimizer, OSS]
+            current optimizer object
+
+        """
+        model = FullyShardedDataParallel(
+            module=model,
+            reshard_after_forward=self._fsdpp_config.reshard_after_forward,
+            mixed_precision=self._fsdpp_config.mixed_precision,
+            fp32_reduce_scatter=self._fsdpp_config.fp32_reduce_scatter,
+            flatten_parameters=self._fsdpp_config.flatten_parameters,
+            move_params_to_cpu=self._fsdpp_config.move_params_to_cpu,
+            compute_dtype=self._fsdpp_config.compute_dtype,
+            buffer_dtype=self._fsdpp_config.buffer_dtype,
+            move_grads_to_cpu=self._fsdpp_config.move_grads_to_cpu,
+            bucket_cap_mb=self._fsdpp_config.bucket_cap_mb,
+            no_broadcast_optim_state=self._fsdpp_config.no_broadcast_optim_state,
+            clear_autocast_cache=self._fsdpp_config.clear_autocast_cache,
+            force_input_to_fp32=self._fsdpp_config.force_input_to_fp32,
+            verbose=self._fsdpp_config.verbose,
+        )
+        # Trigger the set of pre-divide or post-divide factors if set in the config
+        model.set_gradient_divide_factors(
+            pre=self._fsdpp_config.gradient_predivide_factor
+            if self._fsdpp_config.gradient_predivide_factor is not None
+            else model.gradient_predivide_factor,
+            post=self._fsdpp_config.gradient_postdivide_factor
+            if self._fsdpp_config.gradient_postdivide_factor is not None
+            else model.gradient_postdivide_factor,
+            recursive=True,
+        )
+        return model, optimizer
+
+
 class DistributedHandlerEnum(Enum):
     """Enum for DDP use"""
 
     sddp = FairscaleSDDPExtension
+    fsdp = FairscaleFSDPExtension
     base = BaseDDP

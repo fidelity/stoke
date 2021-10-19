@@ -1,10 +1,10 @@
 # Multi- GPU configuration
 config: [base.yaml]
-
+# RunConfig
 RunConfig:
-  distributed: ddp
+  gpu: true
+  distributed: horovod
   fp16: apex_O1
-  gpu: True
 
 DataConfig:
   n_workers: 2

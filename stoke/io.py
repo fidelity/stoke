@@ -7,10 +7,11 @@
 
 from abc import ABC
 from enum import Enum
-from typing import Callable, Optional, Union
+from typing import Callable, Dict, Optional, Union
 
 import horovod.torch as hvd
 import torch
+from fairscale.nn.data_parallel import FullyShardedDataParallel
 from fairscale.optim.oss import OSS
 
 from stoke.utils import make_folder
@@ -141,8 +142,8 @@ class BaseStokeIO(ABC):
         """
         # Call private as no logic is needed for the base save call
         out_path, tag = self._save(
-            model=model,
-            optimizer=optimizer,
+            model_dict=model.state_dict(),
+            optimizer_dict=optimizer.state_dict(),
             path=path,
             backward_step=backward_step,
             optimizer_step=optimizer_step,
@@ -158,18 +159,18 @@ class BaseStokeIO(ABC):
 
     def _save(
         self,
-        model: torch.nn.Module,
-        optimizer: Union[torch.optim.Optimizer, OSS],
+        model_dict: Dict,
+        optimizer_dict: Dict,
         path: str,
         backward_step: int,
         grad_accum_step: int,
         optimizer_step: int,
         name: str,
-        status: dict,
-        scaler_dict: Optional[dict],
+        status: Dict,
+        scaler_dict: Optional[Dict],
         extension: str,
         create_directory: bool,
-        extras: Optional[dict],
+        extras: Optional[Dict],
     ):
         """Private base implementation for saving a PyTorch model checkpoint
 
@@ -177,11 +178,11 @@ class BaseStokeIO(ABC):
 
         Parameters
         ----------
-        model: torch.nn.Module
-            current model object
-        optimizer: Union[torch.optim.Optimizer, OSS]
-            current optimizer object
-        scaler_dict: Optional[dict]
+        model: Dict
+            current model object dictionary
+        optimizer: Dict
+            current optimizer object dictionary
+        scaler_dict: Optional[Dict]
             state_dict from native PyTorch AMP, Fairscale, or APEX
         path: str
             path to directory to save the model checkpoint (prefer absolute paths over relative paths)
@@ -193,13 +194,13 @@ class BaseStokeIO(ABC):
             current number of optimizer calls (for resuming training correctly)
         name: str
             name used to save checkpoint file
-        status: dict
+        status: Dict
             current stoke status dictionary
         extension: str
             extension used to save PyTorch model checkpoint
         create_directory: bool
             flag to create the directory path if it doesn't exist
-        extras: dict
+        extras: Dict
             a dictionary of any extra things to save
 
         Returns
@@ -226,8 +227,8 @@ class BaseStokeIO(ABC):
                     "grad_accum_step": grad_accum_step,
                     "optimizer_step": optimizer_step,
                     "stoke_status": status,
-                    "model_state_dict": model.state_dict(),
-                    "optimizer_state_dict": optimizer.state_dict(),
+                    "model_state_dict": model_dict,
+                    "optimizer_state_dict": optimizer_dict,
                     "scaler_state_dict": scaler_dict,
                     "extras": extras,
                 },
@@ -293,8 +294,20 @@ class BaseStokeIO(ABC):
             model.load_state_dict(
                 state_dict=load_dict["model_state_dict"], strict=strict
             )
-            # Load the optimizer state dict
-            optimizer.load_state_dict(state_dict=load_dict["optimizer_state_dict"])
+            # Handle the fully sharded data parallel case where the shard needs to be pulled from the full state dict
+            if isinstance(model, FullyShardedDataParallel):
+                self._print_device(
+                    "Handling loading of correct optimizer sharded state for Fairscale FSDP"
+                )
+                optimizer.load_state_dict(
+                    state_dict=model.get_shard_from_optim_state_dict(
+                        load_dict["optimizer_state_dict"]
+                    )
+                )
+            # Fallback to the default load form the fully state dict
+            else:
+                # Load the optimizer state dict
+                optimizer.load_state_dict(state_dict=load_dict["optimizer_state_dict"])
             # Load the scaler state if needed
             if scaler_dict_fn is not None:
                 scaler_dict_fn(load_dict["scaler_state_dict"])
@@ -552,29 +565,56 @@ class DDPIO(BaseStokeIO):
     ):
         # Use a barrier to make sure the save is done only when all devices are finished with prior calls
         torch.distributed.barrier()
-        # If OSS then make sure it's consolidated before saving as norm PyTorch checkpoint
-        if isinstance(optimizer, OSS):
+        # FSDP needs different syntax for saving
+        if isinstance(model, FullyShardedDataParallel):
             self._print_device(
-                f"Consolidating optimizer sharded states onto device {self._save_rank}"
+                "Handling consolidation of optimizer sharded states for Fairscale FSDP"
             )
-            optimizer.consolidate_state_dict(recipient_rank=self._save_rank)
-        # Use a logical barrier to only save on the 0 idx device
-        if self.rank == self._save_rank:
-            # Dispatch to private save method if logic is met
-            path, tag = self._save(
-                model=model,
-                optimizer=optimizer,
-                path=path,
-                backward_step=backward_step,
-                optimizer_step=optimizer_step,
-                name=name,
-                scaler_dict=scaler_dict,
-                extension=extension,
-                create_directory=create_directory,
-                extras=extras,
-                grad_accum_step=grad_accum_step,
-                status=status,
-            )
+            # Need to be called on all ranks
+            model_state = model.state_dict()
+            optimizer_state = model.gather_full_optim_state_dict(optimizer)
+            # Use a logical barrier to only save on the 0 idx device
+            if self.rank == self._save_rank:
+                # Dispatch to private save method if logic is met
+                path, tag = self._save(
+                    model_dict=model_state,
+                    optimizer_dict=optimizer_state,
+                    path=path,
+                    backward_step=backward_step,
+                    optimizer_step=optimizer_step,
+                    name=name,
+                    scaler_dict=scaler_dict,
+                    extension=extension,
+                    create_directory=create_directory,
+                    extras=extras,
+                    grad_accum_step=grad_accum_step,
+                    status=status,
+                )
+        else:
+            # If OSS then make sure it's consolidated before saving as norm PyTorch checkpoint
+            # This needs to be called on all ranks but can be given a recipient_rank
+            if isinstance(optimizer, OSS):
+                self._print_device(
+                    f"Consolidating optimizer sharded states onto device {self._save_rank}"
+                )
+                optimizer.consolidate_state_dict(recipient_rank=self._save_rank)
+            # Use a logical barrier to only save on the 0 idx device
+            if self.rank == self._save_rank:
+                # Dispatch to private save method if logic is met
+                path, tag = self._save(
+                    model_dict=model.state_dict(),
+                    optimizer_dict=optimizer.state_dict(),
+                    path=path,
+                    backward_step=backward_step,
+                    optimizer_step=optimizer_step,
+                    name=name,
+                    scaler_dict=scaler_dict,
+                    extension=extension,
+                    create_directory=create_directory,
+                    extras=extras,
+                    grad_accum_step=grad_accum_step,
+                    status=status,
+                )
         # Use a barrier to make sure no one exits until the save is complete
         torch.distributed.barrier()
         return (
@@ -640,8 +680,8 @@ class HorovodIO(BaseStokeIO):
         if self.rank == self._save_rank:
             # Dispatch to private save method if logic is met
             path, tag = self._save(
-                model=model,
-                optimizer=optimizer,
+                model_dict=model.state_dict(),
+                optimizer_dict=optimizer.state_dict(),
                 path=path,
                 backward_step=backward_step,
                 optimizer_step=optimizer_step,

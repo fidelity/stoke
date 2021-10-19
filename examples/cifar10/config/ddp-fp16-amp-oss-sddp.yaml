@@ -1,4 +1,4 @@
-# Single GPU configuration
+# Multi- GPU configuration
 config: [base.yaml]
 
 RunConfig:
