@@ -460,6 +460,7 @@ class ApexBaseFP16(BaseFP16):
         )
         try:
             from apex.parallel import convert_syncbn_model
+
             model = convert_syncbn_model(module=model)
         except ImportError as e:
             print(
