@@ -135,6 +135,9 @@ class DDPConfig:
     ----------
     local_rank: Optional[int]
         Current local rank of the device (provided here, as LOCAL_RANK env var, or parsed from --local_arg)
+    auto_mpi_discovery: bool, default: False
+        if distributed environment variables are not set, attempt to discover them from MPI (using underlying deepspeed
+        function call)
     convert_to_sync_batch_norm: bool, default: False
         Automatically convert all batch norm calls to torch.nn.SyncBatchNorm calls
         https://pytorch.org/docs/stable/generated/torch.nn.SyncBatchNorm.html
@@ -168,6 +171,7 @@ class DDPConfig:
     """
 
     local_rank: Optional[int]
+    auto_mpi_discovery: bool = False
     convert_to_sync_batch_norm: bool = False
     backend: BackendOptions = "nccl"
     broadcast_buffers: bool = True

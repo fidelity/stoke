@@ -147,7 +147,6 @@ def main():
     # Construct the DataLoader
     train_loader = cifar_stoke.DataLoader(
         dataset=training_dataset,
-        batch_size=configs.DataConfig.batch_size,
         sampler=train_sampler,
         num_workers=configs.DataConfig.n_workers
         if configs.DataConfig.n_workers is not None
@@ -165,7 +164,6 @@ def main():
     )
     test_loader = cifar_stoke.DataLoader(
         dataset=test_dataset,
-        batch_size=configs.DataConfig.batch_size,
         sampler=test_sampler,
         num_workers=configs.DataConfig.n_workers
         if configs.DataConfig.n_workers is not None

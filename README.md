@@ -51,7 +51,10 @@ and are only conditionally imported).
 
 Follow the instructions [here](https://github.com/NVIDIA/apex#quick-start).
 
-### (Optional) OpenMPI Support
+### (Optional) Underlying OpenMPI Support
+
+**Note: MPI support is necessary if you plan to run Stoke across multiple compute nodes (e.g. 2 nodes with 4 GPUs each) 
+with DDP, Horovod, or DeepSpeed backends**
 
 Follow the instructions [here](https://www.open-mpi.org/faq/?category=building) or 
 [here](https://edu.itp.phys.ethz.ch/hs12/programming_techniques/openmpi.pdf)
@@ -64,6 +67,10 @@ pip install stoke
 ```
 
 ### via PyPi w/ Optional MPI Support
+
+**Note: MPI support is necessary if you plan to run Stoke across multiple compute nodes (e.g. 2 nodes with 4 GPUs each) 
+with DDP, Horovod, or DeepSpeed backends**
+
 ```bash
 pip install stoke[mpi]
 ```
@@ -211,10 +218,10 @@ sampler = DistributedSampler(
 )
 
 # Call the DataLoader method on the stoke_obj to correctly create a DataLoader instance
+# The DataLoader object already known the batch size from the Stoke object creation
 data_loader = stoke_obj.DataLoader(
     dataset=dataset,
     collate_fn=lambda batch: dataset.collate_fn(batch),
-    batch_size=32,
     sampler=sampler,
     num_workers=4
 )

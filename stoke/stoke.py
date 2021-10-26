@@ -736,7 +736,6 @@ class Stoke:
     def DataLoader(
         self,
         dataset: Dataset[T_co],
-        batch_size: Optional[int] = 1,
         shuffle: bool = False,
         sampler: Optional[Sampler[int]] = None,
         batch_sampler: Optional[Sampler[Sequence[int]]] = None,
@@ -764,8 +763,6 @@ class Stoke:
         ----------
         dataset: Dataset
             dataset from which to load the data.
-        batch_size: int, default: 1
-            how many samples per batch to load .
         shuffle: bool, default: False
             set to ``True`` to have the data reshuffled at every epoch.
         sampler: Sampler or Iterable, default: None
@@ -817,12 +814,12 @@ class Stoke:
 
         if self._verbose and self.gpu:
             print(f"Automatically handling moving model input data to GPU(s)...")
-
+        # Forward the already known options from the Stoke status
         return StokeDataLoader(
             gpu=self.gpu,
             fp16=self.fp16,
+            batch_size=self.batch_size,
             dataset=dataset,
-            batch_size=batch_size,
             shuffle=shuffle,
             sampler=sampler,
             batch_sampler=batch_sampler,
