@@ -1,0 +1,6160 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../../resources/images/stoke_small.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.0">
+    
+    
+      
+        <title>Io - stoke</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.8b42a75e.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ffffff">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="white" data-md-color-accent="red">
+  
+    
+    <script>function __prefix(e){return new URL("../../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#module-stokeio" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="stoke" class="md-header__button md-logo" aria-label="stoke" data-md-component="logo">
+      
+  <img src="../../../resources/images/stoke_small.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            stoke
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Io
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/fidelity/stoke/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    stoke
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../docs/Home/" class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../docs/Installation/" class="md-tabs__link">
+      Installation
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../docs/Quick-Start/" class="md-tabs__link">
+      Quick Start
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../docs/Launchers/" class="md-tabs__link">
+      Launchers
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../docs/Examples/" class="md-tabs__link">
+      Examples
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../CONTRIBUTING/" class="md-tabs__link">
+      Contributing
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../configs/" class="md-tabs__link md-tabs__link--active">
+        Reference
+      </a>
+    </li>
+  
+
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="stoke" class="md-nav__button md-logo" aria-label="stoke" data-md-component="logo">
+      
+  <img src="../../../resources/images/stoke_small.png" alt="logo">
+
+    </a>
+    stoke
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/fidelity/stoke/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    stoke
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/Home/" class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/Installation/" class="md-nav__link">
+        Installation
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/Quick-Start/" class="md-nav__link">
+        Quick Start
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/Launchers/" class="md-nav__link">
+        Launchers
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/Examples/" class="md-nav__link">
+        Examples
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../CONTRIBUTING/" class="md-nav__link">
+        Contributing
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1" type="checkbox" id="__nav_7_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_1">
+          Stoke
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Stoke" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_1">
+          <span class="md-nav__icon md-icon"></span>
+          Stoke
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configs/" class="md-nav__link">
+        Configs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/" class="md-nav__link">
+        Data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../distributed/" class="md-nav__link">
+        Distributed
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../extensions/" class="md-nav__link">
+        Extensions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fp16/" class="md-nav__link">
+        Fp16
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        Index
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Io
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Io
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basestokeio" class="md-nav__link">
+    BaseStokeIO
+  </a>
+  
+    <nav class="md-nav" aria-label="BaseStokeIO">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attributes" class="md-nav__link">
+    Attributes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ancestors-in-mro" class="md-nav__link">
+    Ancestors (in MRO)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#descendants" class="md-nav__link">
+    Descendants
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load" class="md-nav__link">
+    load
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#save" class="md-nav__link">
+    save
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ddpio" class="md-nav__link">
+    DDPIO
+  </a>
+  
+    <nav class="md-nav" aria-label="DDPIO">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attributes_1" class="md-nav__link">
+    Attributes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ancestors-in-mro_1" class="md-nav__link">
+    Ancestors (in MRO)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods_1" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load_1" class="md-nav__link">
+    load
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#save_1" class="md-nav__link">
+    save
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deepspeedio" class="md-nav__link">
+    DeepspeedIO
+  </a>
+  
+    <nav class="md-nav" aria-label="DeepspeedIO">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attributes_2" class="md-nav__link">
+    Attributes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ancestors-in-mro_2" class="md-nav__link">
+    Ancestors (in MRO)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods_2" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load_2" class="md-nav__link">
+    load
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#save_2" class="md-nav__link">
+    save
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#horovodio" class="md-nav__link">
+    HorovodIO
+  </a>
+  
+    <nav class="md-nav" aria-label="HorovodIO">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attributes_3" class="md-nav__link">
+    Attributes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ancestors-in-mro_3" class="md-nav__link">
+    Ancestors (in MRO)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods_3" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load_3" class="md-nav__link">
+    load
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#save_3" class="md-nav__link">
+    save
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#runnerioenum" class="md-nav__link">
+    RunnerIOEnum
+  </a>
+  
+    <nav class="md-nav" aria-label="RunnerIOEnum">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ancestors-in-mro_4" class="md-nav__link">
+    Ancestors (in MRO)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-variables" class="md-nav__link">
+    Class variables
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../status/" class="md-nav__link">
+        Status
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stoke/" class="md-nav__link">
+        Stoke
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils/" class="md-nav__link">
+        Utils
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basestokeio" class="md-nav__link">
+    BaseStokeIO
+  </a>
+  
+    <nav class="md-nav" aria-label="BaseStokeIO">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attributes" class="md-nav__link">
+    Attributes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ancestors-in-mro" class="md-nav__link">
+    Ancestors (in MRO)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#descendants" class="md-nav__link">
+    Descendants
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load" class="md-nav__link">
+    load
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#save" class="md-nav__link">
+    save
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ddpio" class="md-nav__link">
+    DDPIO
+  </a>
+  
+    <nav class="md-nav" aria-label="DDPIO">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attributes_1" class="md-nav__link">
+    Attributes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ancestors-in-mro_1" class="md-nav__link">
+    Ancestors (in MRO)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods_1" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load_1" class="md-nav__link">
+    load
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#save_1" class="md-nav__link">
+    save
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deepspeedio" class="md-nav__link">
+    DeepspeedIO
+  </a>
+  
+    <nav class="md-nav" aria-label="DeepspeedIO">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attributes_2" class="md-nav__link">
+    Attributes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ancestors-in-mro_2" class="md-nav__link">
+    Ancestors (in MRO)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods_2" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load_2" class="md-nav__link">
+    load
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#save_2" class="md-nav__link">
+    save
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#horovodio" class="md-nav__link">
+    HorovodIO
+  </a>
+  
+    <nav class="md-nav" aria-label="HorovodIO">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attributes_3" class="md-nav__link">
+    Attributes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ancestors-in-mro_3" class="md-nav__link">
+    Ancestors (in MRO)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods_3" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load_3" class="md-nav__link">
+    load
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#save_3" class="md-nav__link">
+    save
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#runnerioenum" class="md-nav__link">
+    RunnerIOEnum
+  </a>
+  
+    <nav class="md-nav" aria-label="RunnerIOEnum">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ancestors-in-mro_4" class="md-nav__link">
+    Ancestors (in MRO)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-variables" class="md-nav__link">
+    Class variables
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/fidelity/stoke/edit/main/reference/stoke/io.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="module-stokeio">Module stoke.io</h1>
+<p>Handles i/o related functions -- mixin style</p>
+<p>None</p>
+<p>??? example "View Source"
+        # -<em>- coding: utf-8 -</em>-</p>
+<div class="highlight"><pre><span></span><code>    # Copyright FMR LLC &lt;opensource@fidelity.com&gt;
+
+    # SPDX-License-Identifier: Apache-2.0
+
+
+
+    &quot;&quot;&quot;Handles i/o related functions -- mixin style&quot;&quot;&quot;
+
+
+
+    from abc import ABC
+
+    from enum import Enum
+
+    from typing import Callable, Dict, Optional, Union
+
+
+
+    import horovod.torch as hvd
+
+    import torch
+
+    from fairscale.nn.data_parallel import FullyShardedDataParallel
+
+    from fairscale.optim.oss import OSS
+
+
+
+    from stoke.utils import make_folder
+
+
+
+
+
+    class BaseStokeIO(ABC):
+
+        &quot;&quot;&quot;Base class for handling IO for different backends
+
+
+
+        Attributes
+
+        ----------
+
+        _save_rank: int, default: 0
+
+            device to restrict calls to if necessary (e.g. horovod, ddp)
+
+        _prefix: str
+
+            prefix to append to all checkpoints
+
+        _verbose: bool, default: True
+
+            Flag for verbosity
+
+
+
+        &quot;&quot;&quot;
+
+
+
+        def __init__(self, save_rank: int = 0, verbose: bool = True, **kwargs):
+
+            &quot;&quot;&quot;Init for BaseStokeIO class
+
+
+
+            Parameters
+
+            ----------
+
+            save_rank: int, default: 0
+
+                device to restrict calls to if necessary (e.g. horovod, ddp)
+
+            verbose: bool, default: True
+
+                Flag for verbosity
+
+
+
+            &quot;&quot;&quot;
+
+            self._save_rank = save_rank
+
+            self._prefix = &quot;stoke&quot;
+
+            self._verbose = verbose
+
+
+
+        def _make_tag(self, name: str, backward_step: int):
+
+            &quot;&quot;&quot;Constructs the save tag
+
+
+
+            Parameters
+
+            ----------
+
+            name: str
+
+                name used to save checkpoint file
+
+            backward_step: int
+
+                current number of backward calls (for saving unique name/tag)
+
+
+
+            Returns
+
+            -------
+
+            str
+
+
+
+            &quot;&quot;&quot;
+
+            return f&quot;{self._prefix}-{name}-backward-step-{backward_step}&quot;
+
+
+
+        def _make_full_save_path(
+
+            self, path: str, name: str, backward_step: int, extension: str
+
+        ):
+
+            &quot;&quot;&quot;Constructs the full string path from each piece and appends a stoke prefix
+
+
+
+            Parameters
+
+            ----------
+
+            path: str
+
+                path to directory to save the model checkpoint (prefer absolute paths over relative paths)
+
+            name: str
+
+                name used to save checkpoint file
+
+            backward_step: int
+
+                current number of backward calls (for saving unique name/tag)
+
+            extension: str
+
+                extension used to save PyTorch model checkpoint
+
+
+
+            Returns
+
+            -------
+
+            str
+
+
+
+            &quot;&quot;&quot;
+
+            return f&quot;{path}/{self._make_tag(name=name, backward_step=backward_step)}.{extension}&quot;
+
+
+
+        def save(
+
+            self,
+
+            model: torch.nn.Module,
+
+            optimizer: Union[torch.optim.Optimizer, OSS],
+
+            path: str,
+
+            backward_step: int,
+
+            grad_accum_step: int,
+
+            optimizer_step: int,
+
+            name: str,
+
+            status: dict,
+
+            scaler_dict: Optional[dict] = None,
+
+            extension: str = &quot;pt&quot;,
+
+            create_directory: bool = True,
+
+            extras: Optional[dict] = None,
+
+        ):
+
+            &quot;&quot;&quot;Implementation(s) for saving a PyTorch model checkpoint
+
+
+
+            https://pytorch.org/tutorials/beginner/saving_loading_models.html#saving-loading-model-for-inference
+
+
+
+            Parameters
+
+            ----------
+
+            model: torch.nn.Module
+
+                current model object
+
+            optimizer: Union[torch.optim.Optimizer, OSS]
+
+                current optimizer object
+
+            path: str
+
+                path to directory to save the model checkpoint (prefer absolute paths over relative paths)
+
+            backward_step: int
+
+                current number of backward calls (for resuming training correctly)
+
+            grad_accum_step: int,
+
+                current step of gradient accumulation (for resuming training correctly)
+
+            optimizer_step: int
+
+                current number of optimizer calls (for resuming training correctly)
+
+            name: str
+
+                name used to save checkpoint file
+
+            status: dict
+
+                current stoke status dictionary
+
+            scaler_dict: dict, default: None
+
+                state_dict from native PyTorch AMP, Fairscale, or APEX
+
+            extension: str, default: &#39;.pt&#39;
+
+                extension used to save PyTorch model checkpoint
+
+            create_directory: bool, default: True
+
+                flag to create the directory path if it doesn&#39;t exist
+
+            extras: dict, default: None
+
+                a dictionary of any extra things to save
+
+
+
+            Returns
+
+            -------
+
+            out_path: str
+
+                path to directory that the model checkpoint was saved
+
+            tag: str
+
+                full tag name the model checkpoint was saved as
+
+
+
+            &quot;&quot;&quot;
+
+            # Call private as no logic is needed for the base save call
+
+            out_path, tag = self._save(
+
+                model_dict=model.state_dict(),
+
+                optimizer_dict=optimizer.state_dict(),
+
+                path=path,
+
+                backward_step=backward_step,
+
+                optimizer_step=optimizer_step,
+
+                name=name,
+
+                scaler_dict=scaler_dict,
+
+                extension=extension,
+
+                create_directory=create_directory,
+
+                extras=extras,
+
+                grad_accum_step=grad_accum_step,
+
+                status=status,
+
+            )
+
+            return out_path, tag
+
+
+
+        def _save(
+
+            self,
+
+            model_dict: Dict,
+
+            optimizer_dict: Dict,
+
+            path: str,
+
+            backward_step: int,
+
+            grad_accum_step: int,
+
+            optimizer_step: int,
+
+            name: str,
+
+            status: Dict,
+
+            scaler_dict: Optional[Dict],
+
+            extension: str,
+
+            create_directory: bool,
+
+            extras: Optional[Dict],
+
+        ):
+
+            &quot;&quot;&quot;Private base implementation for saving a PyTorch model checkpoint
+
+
+
+            https://pytorch.org/tutorials/beginner/saving_loading_models.html#saving-loading-model-for-inference
+
+
+
+            Parameters
+
+            ----------
+
+            model: Dict
+
+                current model object dictionary
+
+            optimizer: Dict
+
+                current optimizer object dictionary
+
+            scaler_dict: Optional[Dict]
+
+                state_dict from native PyTorch AMP, Fairscale, or APEX
+
+            path: str
+
+                path to directory to save the model checkpoint (prefer absolute paths over relative paths)
+
+            backward_step: int
+
+                current number of backward calls (for resuming training correctly)
+
+            grad_accum_step: int,
+
+                current step of gradient accumulation (for resuming training correctly)
+
+            optimizer_step: int
+
+                current number of optimizer calls (for resuming training correctly)
+
+            name: str
+
+                name used to save checkpoint file
+
+            status: Dict
+
+                current stoke status dictionary
+
+            extension: str
+
+                extension used to save PyTorch model checkpoint
+
+            create_directory: bool
+
+                flag to create the directory path if it doesn&#39;t exist
+
+            extras: Dict
+
+                a dictionary of any extra things to save
+
+
+
+            Returns
+
+            -------
+
+            path: str
+
+                path to directory that the model checkpoint was saved
+
+            tag: str
+
+                full tag name the model checkpoint was saved as
+
+
+
+            &quot;&quot;&quot;
+
+            # Construct the path
+
+            save_path = self._make_full_save_path(
+
+                path=path, name=name, backward_step=backward_step, extension=extension
+
+            )
+
+            if self._verbose:
+
+                self._print_device(f&quot;Attempting to save model checkpoint to {save_path}&quot;)
+
+            # Save the model with the constructed path
+
+            try:
+
+                if create_directory:
+
+                    make_folder(path)
+
+                torch.save(
+
+                    {
+
+                        &quot;backward_step&quot;: backward_step,
+
+                        &quot;grad_accum_step&quot;: grad_accum_step,
+
+                        &quot;optimizer_step&quot;: optimizer_step,
+
+                        &quot;stoke_status&quot;: status,
+
+                        &quot;model_state_dict&quot;: model_dict,
+
+                        &quot;optimizer_state_dict&quot;: optimizer_dict,
+
+                        &quot;scaler_state_dict&quot;: scaler_dict,
+
+                        &quot;extras&quot;: extras,
+
+                    },
+
+                    save_path,
+
+                )
+
+            except OSError as e:
+
+                self._print_device(f&quot;Unable to save model to given path: {save_path}&quot;)
+
+                raise e
+
+            return (
+
+                path,
+
+                f&quot;{self._make_tag(name=name, backward_step=backward_step)}.{extension}&quot;,
+
+            )
+
+
+
+        def _load(
+
+            self,
+
+            model: torch.nn.Module,
+
+            optimizer: Union[torch.optim.Optimizer, OSS],
+
+            map_loc: str,
+
+            path: str,
+
+            tag: str,
+
+            scaler_dict_fn: Optional[Callable] = None,
+
+            strict: bool = True,
+
+        ):
+
+            &quot;&quot;&quot;Private base implementation for loading a PyTorch model checkpoint
+
+
+
+            https://pytorch.org/tutorials/beginner/saving_loading_models.html#saving-loading-model-for-inference
+
+
+
+            Parameters
+
+            ----------
+
+            model: torch.nn.Module
+
+                current model object
+
+            optimizer: Union[torch.optim.Optimizer, OSS]
+
+                current optimizer object
+
+            map_loc: str
+
+                device map
+
+            gpu: bool
+
+                if using gpu device or not
+
+            path: str
+
+                path to directory that the model checkpoint was saved (prefer absolute paths over relative paths)
+
+            tag: str
+
+                full tag name the model checkpoint was saved as
+
+            scaler_dict_fn: Callable, default: None
+
+                callable function to load the scaler state dict
+
+            strict: bool
+
+                ignore non-matching keys
+
+
+
+            Returns
+
+            -------
+
+            backward_step: int
+
+                current number of backward calls (for resuming training correctly)
+
+            grad_accum_step: int,
+
+                current step of gradient accumulation (for resuming training correctly)
+
+            optimizer_step: int
+
+                current number of optimizer calls (for resuming training correctly)
+
+            extras: dict
+
+                a dictionary of any extra things that were saved
+
+
+
+            &quot;&quot;&quot;
+
+            # Load the dictionary
+
+            try:
+
+                load_dict = torch.load(f&quot;{path}/{tag}&quot;, map_location=map_loc)
+
+                # Load the model state dict
+
+                model.load_state_dict(
+
+                    state_dict=load_dict[&quot;model_state_dict&quot;], strict=strict
+
+                )
+
+                # Handle the fully sharded data parallel case where the shard needs to be pulled from the full state dict
+
+                if isinstance(model, FullyShardedDataParallel):
+
+                    self._print_device(
+
+                        &quot;Handling loading of correct optimizer sharded state for Fairscale FSDP&quot;
+
+                    )
+
+                    optimizer.load_state_dict(
+
+                        state_dict=model.get_shard_from_optim_state_dict(
+
+                            load_dict[&quot;optimizer_state_dict&quot;]
+
+                        )
+
+                    )
+
+                # Fallback to the default load form the fully state dict
+
+                else:
+
+                    # Load the optimizer state dict
+
+                    optimizer.load_state_dict(state_dict=load_dict[&quot;optimizer_state_dict&quot;])
+
+                # Load the scaler state if needed
+
+                if scaler_dict_fn is not None:
+
+                    scaler_dict_fn(load_dict[&quot;scaler_state_dict&quot;])
+
+            except OSError as e:
+
+                self._print_device(f&quot;Unable to load model from given path: {path}/{tag}&quot;)
+
+                raise e
+
+            return (
+
+                load_dict[&quot;backward_step&quot;],
+
+                load_dict[&quot;grad_accum_step&quot;],
+
+                load_dict[&quot;optimizer_step&quot;],
+
+                load_dict[&quot;extras&quot;],
+
+            )
+
+
+
+        def load(
+
+            self,
+
+            model: torch.nn.Module,
+
+            optimizer: Union[torch.optim.Optimizer, OSS],
+
+            gpu: bool,
+
+            path: str,
+
+            tag: str,
+
+            scaler_dict_fn: Optional[Callable] = None,
+
+            strict: bool = True,
+
+        ):
+
+            &quot;&quot;&quot;Implementation for loading a PyTorch model checkpoint
+
+
+
+            https://pytorch.org/tutorials/beginner/saving_loading_models.html#saving-loading-model-for-inference
+
+
+
+            Parameters
+
+            ----------
+
+            model: torch.nn.Module
+
+                current model object
+
+            optimizer: Union[torch.optim.Optimizer, OSS]
+
+                current optimizer object
+
+            gpu: bool
+
+                if using gpu device or not
+
+            path: str
+
+                path to directory that the model checkpoint was saved (prefer absolute paths over relative paths)
+
+            tag: str
+
+                full tag name the model checkpoint was saved as
+
+            scaler_dict_fn: Callable, default: None
+
+                callable function to load the scaler state dict
+
+            strict: bool
+
+                ignore non-matching keys
+
+
+
+            Returns
+
+            -------
+
+            backward_step: int
+
+                current number of backward calls (for resuming training correctly)
+
+            grad_accum_step: int,
+
+                current step of gradient accumulation (for resuming training correctly)
+
+            optimizer_step: int
+
+                current number of optimizer calls (for resuming training correctly)
+
+            extras: dict
+
+                a dictionary of any extra things that were saved
+
+
+
+            &quot;&quot;&quot;
+
+            # Load the dictionary
+
+            # map to cuda:device_id or cpu no matter what (covers CPU-&gt;GPU and GPU-&gt;GPU)
+
+            # this should be functional for cuda:0 since this will catch the single GPU case only
+
+            map_loc = f&quot;cuda:{self.device_id}&quot; if gpu else self.device_id
+
+            self._print_device(f&quot;Load is mapping to {map_loc}&quot;)
+
+            # Call the private load interface
+
+            backward_step, grad_accum_step, optimizer_step, extras = self._load(
+
+                model=model,
+
+                optimizer=optimizer,
+
+                map_loc=map_loc,
+
+                path=path,
+
+                tag=tag,
+
+                scaler_dict_fn=scaler_dict_fn,
+
+                strict=strict,
+
+            )
+
+            return backward_step, grad_accum_step, optimizer_step, extras
+
+
+
+
+
+    class DeepspeedIO(BaseStokeIO):
+
+        def __init__(self, save_rank: int = 0, **kwargs):
+
+            super(DeepspeedIO, self).__init__(save_rank=save_rank, **kwargs)
+
+
+
+        def save(
+
+            self,
+
+            model: torch.nn.Module,
+
+            optimizer: Union[torch.optim.Optimizer, OSS],
+
+            path: str,
+
+            backward_step: int,
+
+            grad_accum_step: int,
+
+            optimizer_step: int,
+
+            name: str,
+
+            status: dict,
+
+            scaler_dict: Optional[dict] = None,
+
+            extension: str = &quot;pt&quot;,
+
+            create_directory: bool = True,
+
+            extras: Optional[dict] = None,
+
+        ):
+
+            &quot;&quot;&quot;Deepspeed override implementation for saving a PyTorch model checkpoint
+
+
+
+            Deepspeed maintains it&#39;s own wrapper for saving so it needs to be called here. It looks like it will save
+
+            multiple pieces depending on sharding but I&#39;m not sure
+
+
+
+            https://www.deepspeed.ai/getting-started/#model-checkpointing
+
+            https://github.com/microsoft/DeepSpeed/blob/ed3de0c21b1fea330de9c1a78a23ca33f340ef20/deepspeed/runtime/engine.py#L1822
+
+
+
+            Parameters
+
+            ----------
+
+            model: torch.nn.Module
+
+                current model object
+
+            optimizer: Union[torch.optim.Optimizer, OSS]
+
+                current optimizer object
+
+            path: str
+
+                path to directory to save the model checkpoint (prefer absolute paths over relative paths)
+
+            backward_step: int
+
+                current number of backward calls (for resuming training correctly)
+
+            grad_accum_step: int,
+
+                current step of gradient accumulation
+
+            optimizer_step: int
+
+                current number of optimizer calls (for resuming training correctly)
+
+            name: str
+
+                name used to save checkpoint file
+
+            status: dict
+
+                current stoke status dictionary
+
+            scaler_dict: Callable
+
+                state_dict from native PyTorch AMP, Fairscale, or APEX
+
+            extension: str, default: &#39;.pt&#39;
+
+                extension used to save PyTorch model checkpoint (Note: Deepspeed will ignore this due to it&#39;s internal
+
+                implementation)
+
+            create_directory: bool, default: True
+
+                flag to create the directory path if it doesn&#39;t exist
+
+            extras: dict, default: None
+
+                a dictionary of any extra things to save
+
+
+
+            Returns
+
+            -------
+
+            path: str
+
+                path to directory that the model checkpoint was saved
+
+            tag: str
+
+                full tag name the model checkpoint was saved as
+
+
+
+            Notes
+
+            -----
+
+            From deepspeed save_checkpoint doc_string:
+
+            all processes must call this method and not just the process with rank 0. It is
+
+            because each process needs to save its master weights and scheduler+optimizer states. This
+
+            method will hang waiting to synchronize with other processes if it&#39;s called just for the
+
+            process with rank 0.
+
+
+
+            &quot;&quot;&quot;
+
+            # Construct the tag for deepspeed
+
+            tag = self._make_tag(name=name, backward_step=backward_step)
+
+            # Construct the path
+
+            save_path = self._make_full_save_path(
+
+                path=path, name=name, backward_step=backward_step, extension=extension
+
+            )
+
+            if self._verbose:
+
+                self._print_device(f&quot;Attempting to save model checkpoint to {save_path}&quot;)
+
+            # Use a barrier to make sure the save is done only when all devices are finished with prior calls
+
+            torch.distributed.barrier()
+
+            # Save the model with the constructed path
+
+            try:
+
+                client_sd = {
+
+                    &quot;backward_step&quot;: backward_step,
+
+                    &quot;grad_accum_step&quot;: grad_accum_step,
+
+                    &quot;optimizer_step&quot;: optimizer_step,
+
+                    &quot;stoke_status&quot;: status,
+
+                    &quot;extras&quot;: extras,
+
+                }
+
+                _ = model.save_checkpoint(
+
+                    path, tag, client_state=client_sd, save_latest=False
+
+                )
+
+            except OSError as e:
+
+                self._print_device(f&quot;Unable to save model to given path: {path}&quot;)
+
+                raise e
+
+            # Use a barrier to make sure no one exits until the save is complete
+
+            torch.distributed.barrier()
+
+            return path, tag
+
+
+
+        def load(
+
+            self,
+
+            model: torch.nn.Module,
+
+            optimizer: Union[torch.optim.Optimizer, OSS],
+
+            gpu: bool,
+
+            path: str,
+
+            tag: str,
+
+            scaler_dict_fn: Optional[Callable] = None,
+
+            strict: bool = True,
+
+        ):
+
+            &quot;&quot;&quot;Deepspeed override implementation for loading a PyTorch model checkpoint
+
+
+
+            https://www.deepspeed.ai/getting-started/#model-checkpointing
+
+
+
+            Parameters
+
+            ----------
+
+            model: torch.nn.Module
+
+                current model object
+
+            optimizer: Union[torch.optim.Optimizer, OSS]
+
+                current optimizer object
+
+            gpu: bool
+
+                if using gpu device or not
+
+            path: str
+
+                path to directory that the model checkpoint was saved (prefer absolute paths over relative paths)
+
+            tag: str
+
+                full tag name the model checkpoint was saved as
+
+            scaler_dict_fn: Callable, default: None
+
+                callable function to load the scaler state dict
+
+            strict: bool
+
+                ignore non-matching keys
+
+
+
+            Returns
+
+            -------
+
+            backward_step: int
+
+                current number of backward calls (for resuming training correctly)
+
+            grad_accum_step: int,
+
+                current step of gradient accumulation (for resuming training correctly)
+
+            optimizer_step: int
+
+                current number of optimizer calls (for resuming training correctly)
+
+            extras: dict
+
+                a dictionary of any extra things that were saved
+
+
+
+            &quot;&quot;&quot;
+
+            # Load the dictionary
+
+            # map to cuda:device_id (as this will prevent the save on device 0 from clashing with the current device id)
+
+            map_loc = f&quot;cuda:{self.device_id}&quot;
+
+            self._print_device(f&quot;Load is mapping to {map_loc}&quot;)
+
+            try:
+
+                _, client_sd = model.load_checkpoint(
+
+                    path, tag, load_module_strict=strict, load_optimizer_states=True
+
+                )
+
+            except OSError as e:
+
+                self._print_device(f&quot;Unable to load model from given path: {path}/{tag}&quot;)
+
+                raise e
+
+            return (
+
+                client_sd[&quot;backward_step&quot;],
+
+                client_sd[&quot;grad_accum_step&quot;],
+
+                client_sd[&quot;optimizer_step&quot;],
+
+                client_sd[&quot;extras&quot;],
+
+            )
+
+
+
+
+
+    class DDPIO(BaseStokeIO):
+
+        def __init__(self, save_rank: int = 0, **kwargs):
+
+            super(DDPIO, self).__init__(save_rank=save_rank, **kwargs)
+
+
+
+        def save(
+
+            self,
+
+            model: torch.nn.Module,
+
+            optimizer: Union[torch.optim.Optimizer, OSS],
+
+            path: str,
+
+            backward_step: int,
+
+            grad_accum_step: int,
+
+            optimizer_step: int,
+
+            name: str,
+
+            status: dict,
+
+            scaler_dict: Optional[dict] = None,
+
+            extension: str = &quot;pt&quot;,
+
+            create_directory: bool = True,
+
+            extras: Optional[dict] = None,
+
+        ):
+
+            # Use a barrier to make sure the save is done only when all devices are finished with prior calls
+
+            torch.distributed.barrier()
+
+            # FSDP needs different syntax for saving
+
+            if isinstance(model, FullyShardedDataParallel):
+
+                self._print_device(
+
+                    &quot;Handling consolidation of optimizer sharded states for Fairscale FSDP&quot;
+
+                )
+
+                # Need to be called on all ranks
+
+                model_state = model.state_dict()
+
+                optimizer_state = model.gather_full_optim_state_dict(optimizer)
+
+                # Use a logical barrier to only save on the 0 idx device
+
+                if self.rank == self._save_rank:
+
+                    # Dispatch to private save method if logic is met
+
+                    path, tag = self._save(
+
+                        model_dict=model_state,
+
+                        optimizer_dict=optimizer_state,
+
+                        path=path,
+
+                        backward_step=backward_step,
+
+                        optimizer_step=optimizer_step,
+
+                        name=name,
+
+                        scaler_dict=scaler_dict,
+
+                        extension=extension,
+
+                        create_directory=create_directory,
+
+                        extras=extras,
+
+                        grad_accum_step=grad_accum_step,
+
+                        status=status,
+
+                    )
+
+            else:
+
+                # If OSS then make sure it&#39;s consolidated before saving as norm PyTorch checkpoint
+
+                # This needs to be called on all ranks but can be given a recipient_rank
+
+                if isinstance(optimizer, OSS):
+
+                    self._print_device(
+
+                        f&quot;Consolidating optimizer sharded states onto device {self._save_rank}&quot;
+
+                    )
+
+                    optimizer.consolidate_state_dict(recipient_rank=self._save_rank)
+
+                # Use a logical barrier to only save on the 0 idx device
+
+                if self.rank == self._save_rank:
+
+                    # Dispatch to private save method if logic is met
+
+                    path, tag = self._save(
+
+                        model_dict=model.state_dict(),
+
+                        optimizer_dict=optimizer.state_dict(),
+
+                        path=path,
+
+                        backward_step=backward_step,
+
+                        optimizer_step=optimizer_step,
+
+                        name=name,
+
+                        scaler_dict=scaler_dict,
+
+                        extension=extension,
+
+                        create_directory=create_directory,
+
+                        extras=extras,
+
+                        grad_accum_step=grad_accum_step,
+
+                        status=status,
+
+                    )
+
+            # Use a barrier to make sure no one exits until the save is complete
+
+            torch.distributed.barrier()
+
+            return (
+
+                path,
+
+                f&quot;{self._make_tag(name=name, backward_step=backward_step)}.{extension}&quot;,
+
+            )
+
+
+
+        def load(
+
+            self,
+
+            model: torch.nn.Module,
+
+            optimizer: Union[torch.optim.Optimizer, OSS],
+
+            gpu: bool,
+
+            path: str,
+
+            tag: str,
+
+            scaler_dict_fn: Optional[Callable] = None,
+
+            strict: bool = True,
+
+        ):
+
+            # Use a barrier to make sure the load is done only when all devices are finished with prior calls
+
+            torch.distributed.barrier()
+
+            # Load the dictionary
+
+            # map to cuda:device_id (as this will prevent the save on device 0 from clashing with the current device id)
+
+            map_loc = f&quot;cuda:{self.device_id}&quot;
+
+            self._print_device(f&quot;Load is mapping to {map_loc}&quot;)
+
+            # Call the private load interface
+
+            backward_step, grad_accum_step, optimizer_step, extras = self._load(
+
+                model=model,
+
+                optimizer=optimizer,
+
+                map_loc=map_loc,
+
+                path=path,
+
+                tag=tag,
+
+                scaler_dict_fn=scaler_dict_fn,
+
+                strict=strict,
+
+            )
+
+            # Use a barrier to make sure no one exits until the load is complete across all devices
+
+            torch.distributed.barrier()
+
+            return backward_step, grad_accum_step, optimizer_step, extras
+
+
+
+
+
+    class HorovodIO(BaseStokeIO):
+
+        def __init__(self, save_rank: int = 0, **kwargs):
+
+            super(HorovodIO, self).__init__(save_rank=save_rank, **kwargs)
+
+
+
+        def save(
+
+            self,
+
+            model: torch.nn.Module,
+
+            optimizer: Union[torch.optim.Optimizer, OSS],
+
+            path: str,
+
+            backward_step: int,
+
+            grad_accum_step: int,
+
+            optimizer_step: int,
+
+            name: str,
+
+            status: dict,
+
+            scaler_dict: Optional[dict] = None,
+
+            extension: str = &quot;pt&quot;,
+
+            create_directory: bool = True,
+
+            extras: Optional[dict] = None,
+
+        ):
+
+            # Use a barrier to make sure the save is done only when all devices are finished with prior calls
+
+            # Horovod doesn&#39;t have a native barrier so lean on join to take care of it
+
+            # https://horovod.readthedocs.io/en/stable/api.html#horovod.torch.join
+
+            hvd.join()
+
+            # Use a logical barrier to only save on the 0 idx device
+
+            if self.rank == self._save_rank:
+
+                # Dispatch to private save method if logic is met
+
+                path, tag = self._save(
+
+                    model_dict=model.state_dict(),
+
+                    optimizer_dict=optimizer.state_dict(),
+
+                    path=path,
+
+                    backward_step=backward_step,
+
+                    optimizer_step=optimizer_step,
+
+                    name=name,
+
+                    scaler_dict=scaler_dict,
+
+                    extension=extension,
+
+                    create_directory=create_directory,
+
+                    extras=extras,
+
+                    grad_accum_step=grad_accum_step,
+
+                    status=status,
+
+                )
+
+            # Use a barrier to make sure no one exits until the save is complete
+
+            # Horovod doesn&#39;t have a native barrier so lean on join to take care of it
+
+            # https://horovod.readthedocs.io/en/stable/api.html#horovod.torch.join
+
+            hvd.join()
+
+            return (
+
+                path,
+
+                f&quot;{self._make_tag(name=name, backward_step=backward_step)}.{extension}&quot;,
+
+            )
+
+
+
+        def load(
+
+            self,
+
+            model: torch.nn.Module,
+
+            optimizer: Union[torch.optim.Optimizer, OSS],
+
+            gpu: bool,
+
+            path: str,
+
+            tag: str,
+
+            scaler_dict_fn: Optional[Callable] = None,
+
+            strict: bool = True,
+
+        ):
+
+            # Use a barrier to make sure the load is done only when all devices are finished with prior calls
+
+            # Horovod doesn&#39;t have a native barrier so lean on join to take care of it
+
+            # https://horovod.readthedocs.io/en/stable/api.html#horovod.torch.join
+
+            hvd.join()
+
+            # map to cuda:device_id -- horovod will only load on cuda:0 and then broadcast instead of loading on multiple
+
+            # devices? TODO: Check if this is necessary or could we just load like DDP and skip the broadcast?
+
+            # Terrible Horovod docs strike again -- load on dev 0 and sync -- but this doesn&#39;t deal with amp/apex
+
+            # https://github.com/horovod/horovod/blob/master/examples/pytorch/pytorch_imagenet_resnet50.py
+
+            # I think we can just ignore this and load on all devices
+
+            map_loc = f&quot;cuda:{self.device_id}&quot;
+
+            self._print_device(f&quot;Load is mapping to {map_loc}&quot;)
+
+            backward_step, grad_accum_step, optimizer_step, extras = self._load(
+
+                model=model,
+
+                optimizer=optimizer,
+
+                map_loc=map_loc,
+
+                path=path,
+
+                tag=tag,
+
+                scaler_dict_fn=scaler_dict_fn,
+
+                strict=strict,
+
+            )
+
+            # Use a barrier to make sure no one exits until the load is complete across all devices
+
+            # Horovod doesn&#39;t have a native barrier so lean on join to take care of it
+
+            # https://horovod.readthedocs.io/en/stable/api.html#horovod.torch.join
+
+            hvd.join()
+
+            return backward_step, grad_accum_step, optimizer_step, extras
+
+
+
+
+
+    class RunnerIOEnum(Enum):
+
+        base = BaseStokeIO
+
+        deepspeed = DeepspeedIO
+
+        ddp = DDPIO
+
+        horovod = HorovodIO
+</code></pre></div>
+<h2 id="classes">Classes</h2>
+<h3 id="basestokeio">BaseStokeIO</h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">BaseStokeIO</span><span class="p">(</span>
+    <span class="n">save_rank</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">)</span>
+</code></pre></div>
+<h4 id="attributes">Attributes</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>_save_rank</td>
+<td>int, default: 0</td>
+<td>device to restrict calls to if necessary (e.g. horovod, ddp)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>_prefix</td>
+<td>str</td>
+<td>prefix to append to all checkpoints</td>
+<td>None</td>
+</tr>
+<tr>
+<td>_verbose</td>
+<td>bool, default: True</td>
+<td>Flag for verbosity</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p>??? example "View Source"
+        class BaseStokeIO(ABC):</p>
+<div class="highlight"><pre><span></span><code>        &quot;&quot;&quot;Base class for handling IO for different backends
+
+
+
+        Attributes
+
+        ----------
+
+        _save_rank: int, default: 0
+
+            device to restrict calls to if necessary (e.g. horovod, ddp)
+
+        _prefix: str
+
+            prefix to append to all checkpoints
+
+        _verbose: bool, default: True
+
+            Flag for verbosity
+
+
+
+        &quot;&quot;&quot;
+
+
+
+        def __init__(self, save_rank: int = 0, verbose: bool = True, **kwargs):
+
+            &quot;&quot;&quot;Init for BaseStokeIO class
+
+
+
+            Parameters
+
+            ----------
+
+            save_rank: int, default: 0
+
+                device to restrict calls to if necessary (e.g. horovod, ddp)
+
+            verbose: bool, default: True
+
+                Flag for verbosity
+
+
+
+            &quot;&quot;&quot;
+
+            self._save_rank = save_rank
+
+            self._prefix = &quot;stoke&quot;
+
+            self._verbose = verbose
+
+
+
+        def _make_tag(self, name: str, backward_step: int):
+
+            &quot;&quot;&quot;Constructs the save tag
+
+
+
+            Parameters
+
+            ----------
+
+            name: str
+
+                name used to save checkpoint file
+
+            backward_step: int
+
+                current number of backward calls (for saving unique name/tag)
+
+
+
+            Returns
+
+            -------
+
+            str
+
+
+
+            &quot;&quot;&quot;
+
+            return f&quot;{self._prefix}-{name}-backward-step-{backward_step}&quot;
+
+
+
+        def _make_full_save_path(
+
+            self, path: str, name: str, backward_step: int, extension: str
+
+        ):
+
+            &quot;&quot;&quot;Constructs the full string path from each piece and appends a stoke prefix
+
+
+
+            Parameters
+
+            ----------
+
+            path: str
+
+                path to directory to save the model checkpoint (prefer absolute paths over relative paths)
+
+            name: str
+
+                name used to save checkpoint file
+
+            backward_step: int
+
+                current number of backward calls (for saving unique name/tag)
+
+            extension: str
+
+                extension used to save PyTorch model checkpoint
+
+
+
+            Returns
+
+            -------
+
+            str
+
+
+
+            &quot;&quot;&quot;
+
+            return f&quot;{path}/{self._make_tag(name=name, backward_step=backward_step)}.{extension}&quot;
+
+
+
+        def save(
+
+            self,
+
+            model: torch.nn.Module,
+
+            optimizer: Union[torch.optim.Optimizer, OSS],
+
+            path: str,
+
+            backward_step: int,
+
+            grad_accum_step: int,
+
+            optimizer_step: int,
+
+            name: str,
+
+            status: dict,
+
+            scaler_dict: Optional[dict] = None,
+
+            extension: str = &quot;pt&quot;,
+
+            create_directory: bool = True,
+
+            extras: Optional[dict] = None,
+
+        ):
+
+            &quot;&quot;&quot;Implementation(s) for saving a PyTorch model checkpoint
+
+
+
+            https://pytorch.org/tutorials/beginner/saving_loading_models.html#saving-loading-model-for-inference
+
+
+
+            Parameters
+
+            ----------
+
+            model: torch.nn.Module
+
+                current model object
+
+            optimizer: Union[torch.optim.Optimizer, OSS]
+
+                current optimizer object
+
+            path: str
+
+                path to directory to save the model checkpoint (prefer absolute paths over relative paths)
+
+            backward_step: int
+
+                current number of backward calls (for resuming training correctly)
+
+            grad_accum_step: int,
+
+                current step of gradient accumulation (for resuming training correctly)
+
+            optimizer_step: int
+
+                current number of optimizer calls (for resuming training correctly)
+
+            name: str
+
+                name used to save checkpoint file
+
+            status: dict
+
+                current stoke status dictionary
+
+            scaler_dict: dict, default: None
+
+                state_dict from native PyTorch AMP, Fairscale, or APEX
+
+            extension: str, default: &#39;.pt&#39;
+
+                extension used to save PyTorch model checkpoint
+
+            create_directory: bool, default: True
+
+                flag to create the directory path if it doesn&#39;t exist
+
+            extras: dict, default: None
+
+                a dictionary of any extra things to save
+
+
+
+            Returns
+
+            -------
+
+            out_path: str
+
+                path to directory that the model checkpoint was saved
+
+            tag: str
+
+                full tag name the model checkpoint was saved as
+
+
+
+            &quot;&quot;&quot;
+
+            # Call private as no logic is needed for the base save call
+
+            out_path, tag = self._save(
+
+                model_dict=model.state_dict(),
+
+                optimizer_dict=optimizer.state_dict(),
+
+                path=path,
+
+                backward_step=backward_step,
+
+                optimizer_step=optimizer_step,
+
+                name=name,
+
+                scaler_dict=scaler_dict,
+
+                extension=extension,
+
+                create_directory=create_directory,
+
+                extras=extras,
+
+                grad_accum_step=grad_accum_step,
+
+                status=status,
+
+            )
+
+            return out_path, tag
+
+
+
+        def _save(
+
+            self,
+
+            model_dict: Dict,
+
+            optimizer_dict: Dict,
+
+            path: str,
+
+            backward_step: int,
+
+            grad_accum_step: int,
+
+            optimizer_step: int,
+
+            name: str,
+
+            status: Dict,
+
+            scaler_dict: Optional[Dict],
+
+            extension: str,
+
+            create_directory: bool,
+
+            extras: Optional[Dict],
+
+        ):
+
+            &quot;&quot;&quot;Private base implementation for saving a PyTorch model checkpoint
+
+
+
+            https://pytorch.org/tutorials/beginner/saving_loading_models.html#saving-loading-model-for-inference
+
+
+
+            Parameters
+
+            ----------
+
+            model: Dict
+
+                current model object dictionary
+
+            optimizer: Dict
+
+                current optimizer object dictionary
+
+            scaler_dict: Optional[Dict]
+
+                state_dict from native PyTorch AMP, Fairscale, or APEX
+
+            path: str
+
+                path to directory to save the model checkpoint (prefer absolute paths over relative paths)
+
+            backward_step: int
+
+                current number of backward calls (for resuming training correctly)
+
+            grad_accum_step: int,
+
+                current step of gradient accumulation (for resuming training correctly)
+
+            optimizer_step: int
+
+                current number of optimizer calls (for resuming training correctly)
+
+            name: str
+
+                name used to save checkpoint file
+
+            status: Dict
+
+                current stoke status dictionary
+
+            extension: str
+
+                extension used to save PyTorch model checkpoint
+
+            create_directory: bool
+
+                flag to create the directory path if it doesn&#39;t exist
+
+            extras: Dict
+
+                a dictionary of any extra things to save
+
+
+
+            Returns
+
+            -------
+
+            path: str
+
+                path to directory that the model checkpoint was saved
+
+            tag: str
+
+                full tag name the model checkpoint was saved as
+
+
+
+            &quot;&quot;&quot;
+
+            # Construct the path
+
+            save_path = self._make_full_save_path(
+
+                path=path, name=name, backward_step=backward_step, extension=extension
+
+            )
+
+            if self._verbose:
+
+                self._print_device(f&quot;Attempting to save model checkpoint to {save_path}&quot;)
+
+            # Save the model with the constructed path
+
+            try:
+
+                if create_directory:
+
+                    make_folder(path)
+
+                torch.save(
+
+                    {
+
+                        &quot;backward_step&quot;: backward_step,
+
+                        &quot;grad_accum_step&quot;: grad_accum_step,
+
+                        &quot;optimizer_step&quot;: optimizer_step,
+
+                        &quot;stoke_status&quot;: status,
+
+                        &quot;model_state_dict&quot;: model_dict,
+
+                        &quot;optimizer_state_dict&quot;: optimizer_dict,
+
+                        &quot;scaler_state_dict&quot;: scaler_dict,
+
+                        &quot;extras&quot;: extras,
+
+                    },
+
+                    save_path,
+
+                )
+
+            except OSError as e:
+
+                self._print_device(f&quot;Unable to save model to given path: {save_path}&quot;)
+
+                raise e
+
+            return (
+
+                path,
+
+                f&quot;{self._make_tag(name=name, backward_step=backward_step)}.{extension}&quot;,
+
+            )
+
+
+
+        def _load(
+
+            self,
+
+            model: torch.nn.Module,
+
+            optimizer: Union[torch.optim.Optimizer, OSS],
+
+            map_loc: str,
+
+            path: str,
+
+            tag: str,
+
+            scaler_dict_fn: Optional[Callable] = None,
+
+            strict: bool = True,
+
+        ):
+
+            &quot;&quot;&quot;Private base implementation for loading a PyTorch model checkpoint
+
+
+
+            https://pytorch.org/tutorials/beginner/saving_loading_models.html#saving-loading-model-for-inference
+
+
+
+            Parameters
+
+            ----------
+
+            model: torch.nn.Module
+
+                current model object
+
+            optimizer: Union[torch.optim.Optimizer, OSS]
+
+                current optimizer object
+
+            map_loc: str
+
+                device map
+
+            gpu: bool
+
+                if using gpu device or not
+
+            path: str
+
+                path to directory that the model checkpoint was saved (prefer absolute paths over relative paths)
+
+            tag: str
+
+                full tag name the model checkpoint was saved as
+
+            scaler_dict_fn: Callable, default: None
+
+                callable function to load the scaler state dict
+
+            strict: bool
+
+                ignore non-matching keys
+
+
+
+            Returns
+
+            -------
+
+            backward_step: int
+
+                current number of backward calls (for resuming training correctly)
+
+            grad_accum_step: int,
+
+                current step of gradient accumulation (for resuming training correctly)
+
+            optimizer_step: int
+
+                current number of optimizer calls (for resuming training correctly)
+
+            extras: dict
+
+                a dictionary of any extra things that were saved
+
+
+
+            &quot;&quot;&quot;
+
+            # Load the dictionary
+
+            try:
+
+                load_dict = torch.load(f&quot;{path}/{tag}&quot;, map_location=map_loc)
+
+                # Load the model state dict
+
+                model.load_state_dict(
+
+                    state_dict=load_dict[&quot;model_state_dict&quot;], strict=strict
+
+                )
+
+                # Handle the fully sharded data parallel case where the shard needs to be pulled from the full state dict
+
+                if isinstance(model, FullyShardedDataParallel):
+
+                    self._print_device(
+
+                        &quot;Handling loading of correct optimizer sharded state for Fairscale FSDP&quot;
+
+                    )
+
+                    optimizer.load_state_dict(
+
+                        state_dict=model.get_shard_from_optim_state_dict(
+
+                            load_dict[&quot;optimizer_state_dict&quot;]
+
+                        )
+
+                    )
+
+                # Fallback to the default load form the fully state dict
+
+                else:
+
+                    # Load the optimizer state dict
+
+                    optimizer.load_state_dict(state_dict=load_dict[&quot;optimizer_state_dict&quot;])
+
+                # Load the scaler state if needed
+
+                if scaler_dict_fn is not None:
+
+                    scaler_dict_fn(load_dict[&quot;scaler_state_dict&quot;])
+
+            except OSError as e:
+
+                self._print_device(f&quot;Unable to load model from given path: {path}/{tag}&quot;)
+
+                raise e
+
+            return (
+
+                load_dict[&quot;backward_step&quot;],
+
+                load_dict[&quot;grad_accum_step&quot;],
+
+                load_dict[&quot;optimizer_step&quot;],
+
+                load_dict[&quot;extras&quot;],
+
+            )
+
+
+
+        def load(
+
+            self,
+
+            model: torch.nn.Module,
+
+            optimizer: Union[torch.optim.Optimizer, OSS],
+
+            gpu: bool,
+
+            path: str,
+
+            tag: str,
+
+            scaler_dict_fn: Optional[Callable] = None,
+
+            strict: bool = True,
+
+        ):
+
+            &quot;&quot;&quot;Implementation for loading a PyTorch model checkpoint
+
+
+
+            https://pytorch.org/tutorials/beginner/saving_loading_models.html#saving-loading-model-for-inference
+
+
+
+            Parameters
+
+            ----------
+
+            model: torch.nn.Module
+
+                current model object
+
+            optimizer: Union[torch.optim.Optimizer, OSS]
+
+                current optimizer object
+
+            gpu: bool
+
+                if using gpu device or not
+
+            path: str
+
+                path to directory that the model checkpoint was saved (prefer absolute paths over relative paths)
+
+            tag: str
+
+                full tag name the model checkpoint was saved as
+
+            scaler_dict_fn: Callable, default: None
+
+                callable function to load the scaler state dict
+
+            strict: bool
+
+                ignore non-matching keys
+
+
+
+            Returns
+
+            -------
+
+            backward_step: int
+
+                current number of backward calls (for resuming training correctly)
+
+            grad_accum_step: int,
+
+                current step of gradient accumulation (for resuming training correctly)
+
+            optimizer_step: int
+
+                current number of optimizer calls (for resuming training correctly)
+
+            extras: dict
+
+                a dictionary of any extra things that were saved
+
+
+
+            &quot;&quot;&quot;
+
+            # Load the dictionary
+
+            # map to cuda:device_id or cpu no matter what (covers CPU-&gt;GPU and GPU-&gt;GPU)
+
+            # this should be functional for cuda:0 since this will catch the single GPU case only
+
+            map_loc = f&quot;cuda:{self.device_id}&quot; if gpu else self.device_id
+
+            self._print_device(f&quot;Load is mapping to {map_loc}&quot;)
+
+            # Call the private load interface
+
+            backward_step, grad_accum_step, optimizer_step, extras = self._load(
+
+                model=model,
+
+                optimizer=optimizer,
+
+                map_loc=map_loc,
+
+                path=path,
+
+                tag=tag,
+
+                scaler_dict_fn=scaler_dict_fn,
+
+                strict=strict,
+
+            )
+
+            return backward_step, grad_accum_step, optimizer_step, extras
+</code></pre></div>
+<hr />
+<h4 id="ancestors-in-mro">Ancestors (in MRO)</h4>
+<ul>
+<li>abc.ABC</li>
+</ul>
+<h4 id="descendants">Descendants</h4>
+<ul>
+<li>stoke.io.DeepspeedIO</li>
+<li>stoke.io.DDPIO</li>
+<li>stoke.io.HorovodIO</li>
+</ul>
+<h4 id="methods">Methods</h4>
+<h4 id="load">load</h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">load</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">module</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span>
+    <span class="n">optimizer</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">Optimizer</span><span class="p">,</span> <span class="n">fairscale</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">oss</span><span class="o">.</span><span class="n">OSS</span><span class="p">],</span>
+    <span class="n">gpu</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">tag</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">scaler_dict_fn</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Implementation for loading a PyTorch model checkpoint</p>
+<p>https://pytorch.org/tutorials/beginner/saving_loading_models.html#saving-loading-model-for-inference</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>model</td>
+<td>torch.nn.Module</td>
+<td>current model object</td>
+<td>None</td>
+</tr>
+<tr>
+<td>optimizer</td>
+<td>Union[torch.optim.Optimizer, OSS]</td>
+<td>current optimizer object</td>
+<td>None</td>
+</tr>
+<tr>
+<td>gpu</td>
+<td>bool</td>
+<td>if using gpu device or not</td>
+<td>None</td>
+</tr>
+<tr>
+<td>path</td>
+<td>str</td>
+<td>path to directory that the model checkpoint was saved (prefer absolute paths over relative paths)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>tag</td>
+<td>str</td>
+<td>full tag name the model checkpoint was saved as</td>
+<td>None</td>
+</tr>
+<tr>
+<td>scaler_dict_fn</td>
+<td>Callable, default: None</td>
+<td>callable function to load the scaler state dict</td>
+<td>None</td>
+</tr>
+<tr>
+<td>strict</td>
+<td>bool</td>
+<td>ignore non-matching keys</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>int</td>
+<td>current number of backward calls (for resuming training correctly)</td>
+</tr>
+</tbody>
+</table>
+<p>??? example "View Source"
+            def load(</p>
+<div class="highlight"><pre><span></span><code>            self,
+
+            model: torch.nn.Module,
+
+            optimizer: Union[torch.optim.Optimizer, OSS],
+
+            gpu: bool,
+
+            path: str,
+
+            tag: str,
+
+            scaler_dict_fn: Optional[Callable] = None,
+
+            strict: bool = True,
+
+        ):
+
+            &quot;&quot;&quot;Implementation for loading a PyTorch model checkpoint
+
+
+
+            https://pytorch.org/tutorials/beginner/saving_loading_models.html#saving-loading-model-for-inference
+
+
+
+            Parameters
+
+            ----------
+
+            model: torch.nn.Module
+
+                current model object
+
+            optimizer: Union[torch.optim.Optimizer, OSS]
+
+                current optimizer object
+
+            gpu: bool
+
+                if using gpu device or not
+
+            path: str
+
+                path to directory that the model checkpoint was saved (prefer absolute paths over relative paths)
+
+            tag: str
+
+                full tag name the model checkpoint was saved as
+
+            scaler_dict_fn: Callable, default: None
+
+                callable function to load the scaler state dict
+
+            strict: bool
+
+                ignore non-matching keys
+
+
+
+            Returns
+
+            -------
+
+            backward_step: int
+
+                current number of backward calls (for resuming training correctly)
+
+            grad_accum_step: int,
+
+                current step of gradient accumulation (for resuming training correctly)
+
+            optimizer_step: int
+
+                current number of optimizer calls (for resuming training correctly)
+
+            extras: dict
+
+                a dictionary of any extra things that were saved
+
+
+
+            &quot;&quot;&quot;
+
+            # Load the dictionary
+
+            # map to cuda:device_id or cpu no matter what (covers CPU-&gt;GPU and GPU-&gt;GPU)
+
+            # this should be functional for cuda:0 since this will catch the single GPU case only
+
+            map_loc = f&quot;cuda:{self.device_id}&quot; if gpu else self.device_id
+
+            self._print_device(f&quot;Load is mapping to {map_loc}&quot;)
+
+            # Call the private load interface
+
+            backward_step, grad_accum_step, optimizer_step, extras = self._load(
+
+                model=model,
+
+                optimizer=optimizer,
+
+                map_loc=map_loc,
+
+                path=path,
+
+                tag=tag,
+
+                scaler_dict_fn=scaler_dict_fn,
+
+                strict=strict,
+
+            )
+
+            return backward_step, grad_accum_step, optimizer_step, extras
+</code></pre></div>
+<h4 id="save">save</h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">save</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">module</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span>
+    <span class="n">optimizer</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">Optimizer</span><span class="p">,</span> <span class="n">fairscale</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">oss</span><span class="o">.</span><span class="n">OSS</span><span class="p">],</span>
+    <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">backward_step</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">grad_accum_step</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">optimizer_step</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">status</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="n">scaler_dict</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">extension</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;pt&#39;</span><span class="p">,</span>
+    <span class="n">create_directory</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">extras</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Implementation(s) for saving a PyTorch model checkpoint</p>
+<p>https://pytorch.org/tutorials/beginner/saving_loading_models.html#saving-loading-model-for-inference</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>model</td>
+<td>torch.nn.Module</td>
+<td>current model object</td>
+<td>None</td>
+</tr>
+<tr>
+<td>optimizer</td>
+<td>Union[torch.optim.Optimizer, OSS]</td>
+<td>current optimizer object</td>
+<td>None</td>
+</tr>
+<tr>
+<td>path</td>
+<td>str</td>
+<td>path to directory to save the model checkpoint (prefer absolute paths over relative paths)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>backward_step</td>
+<td>int</td>
+<td>current number of backward calls (for resuming training correctly)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>grad_accum_step</td>
+<td>int,</td>
+<td>current step of gradient accumulation (for resuming training correctly)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>optimizer_step</td>
+<td>int</td>
+<td>current number of optimizer calls (for resuming training correctly)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>name</td>
+<td>str</td>
+<td>name used to save checkpoint file</td>
+<td>None</td>
+</tr>
+<tr>
+<td>status</td>
+<td>dict</td>
+<td>current stoke status dictionary</td>
+<td>None</td>
+</tr>
+<tr>
+<td>scaler_dict</td>
+<td>dict, default: None</td>
+<td>state_dict from native PyTorch AMP, Fairscale, or APEX</td>
+<td>None</td>
+</tr>
+<tr>
+<td>extension</td>
+<td>str, default: '.pt'</td>
+<td>extension used to save PyTorch model checkpoint</td>
+<td>None</td>
+</tr>
+<tr>
+<td>create_directory</td>
+<td>bool, default: True</td>
+<td>flag to create the directory path if it doesn't exist</td>
+<td>None</td>
+</tr>
+<tr>
+<td>extras</td>
+<td>dict, default: None</td>
+<td>a dictionary of any extra things to save</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>str</td>
+<td>path to directory that the model checkpoint was saved</td>
+</tr>
+</tbody>
+</table>
+<p>??? example "View Source"
+            def save(</p>
+<div class="highlight"><pre><span></span><code>            self,
+
+            model: torch.nn.Module,
+
+            optimizer: Union[torch.optim.Optimizer, OSS],
+
+            path: str,
+
+            backward_step: int,
+
+            grad_accum_step: int,
+
+            optimizer_step: int,
+
+            name: str,
+
+            status: dict,
+
+            scaler_dict: Optional[dict] = None,
+
+            extension: str = &quot;pt&quot;,
+
+            create_directory: bool = True,
+
+            extras: Optional[dict] = None,
+
+        ):
+
+            &quot;&quot;&quot;Implementation(s) for saving a PyTorch model checkpoint
+
+
+
+            https://pytorch.org/tutorials/beginner/saving_loading_models.html#saving-loading-model-for-inference
+
+
+
+            Parameters
+
+            ----------
+
+            model: torch.nn.Module
+
+                current model object
+
+            optimizer: Union[torch.optim.Optimizer, OSS]
+
+                current optimizer object
+
+            path: str
+
+                path to directory to save the model checkpoint (prefer absolute paths over relative paths)
+
+            backward_step: int
+
+                current number of backward calls (for resuming training correctly)
+
+            grad_accum_step: int,
+
+                current step of gradient accumulation (for resuming training correctly)
+
+            optimizer_step: int
+
+                current number of optimizer calls (for resuming training correctly)
+
+            name: str
+
+                name used to save checkpoint file
+
+            status: dict
+
+                current stoke status dictionary
+
+            scaler_dict: dict, default: None
+
+                state_dict from native PyTorch AMP, Fairscale, or APEX
+
+            extension: str, default: &#39;.pt&#39;
+
+                extension used to save PyTorch model checkpoint
+
+            create_directory: bool, default: True
+
+                flag to create the directory path if it doesn&#39;t exist
+
+            extras: dict, default: None
+
+                a dictionary of any extra things to save
+
+
+
+            Returns
+
+            -------
+
+            out_path: str
+
+                path to directory that the model checkpoint was saved
+
+            tag: str
+
+                full tag name the model checkpoint was saved as
+
+
+
+            &quot;&quot;&quot;
+
+            # Call private as no logic is needed for the base save call
+
+            out_path, tag = self._save(
+
+                model_dict=model.state_dict(),
+
+                optimizer_dict=optimizer.state_dict(),
+
+                path=path,
+
+                backward_step=backward_step,
+
+                optimizer_step=optimizer_step,
+
+                name=name,
+
+                scaler_dict=scaler_dict,
+
+                extension=extension,
+
+                create_directory=create_directory,
+
+                extras=extras,
+
+                grad_accum_step=grad_accum_step,
+
+                status=status,
+
+            )
+
+            return out_path, tag
+</code></pre></div>
+<h3 id="ddpio">DDPIO</h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">DDPIO</span><span class="p">(</span>
+    <span class="n">save_rank</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">)</span>
+</code></pre></div>
+<h4 id="attributes_1">Attributes</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>_save_rank</td>
+<td>int, default: 0</td>
+<td>device to restrict calls to if necessary (e.g. horovod, ddp)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>_prefix</td>
+<td>str</td>
+<td>prefix to append to all checkpoints</td>
+<td>None</td>
+</tr>
+<tr>
+<td>_verbose</td>
+<td>bool, default: True</td>
+<td>Flag for verbosity</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p>??? example "View Source"
+        class DDPIO(BaseStokeIO):</p>
+<div class="highlight"><pre><span></span><code>        def __init__(self, save_rank: int = 0, **kwargs):
+
+            super(DDPIO, self).__init__(save_rank=save_rank, **kwargs)
+
+
+
+        def save(
+
+            self,
+
+            model: torch.nn.Module,
+
+            optimizer: Union[torch.optim.Optimizer, OSS],
+
+            path: str,
+
+            backward_step: int,
+
+            grad_accum_step: int,
+
+            optimizer_step: int,
+
+            name: str,
+
+            status: dict,
+
+            scaler_dict: Optional[dict] = None,
+
+            extension: str = &quot;pt&quot;,
+
+            create_directory: bool = True,
+
+            extras: Optional[dict] = None,
+
+        ):
+
+            # Use a barrier to make sure the save is done only when all devices are finished with prior calls
+
+            torch.distributed.barrier()
+
+            # FSDP needs different syntax for saving
+
+            if isinstance(model, FullyShardedDataParallel):
+
+                self._print_device(
+
+                    &quot;Handling consolidation of optimizer sharded states for Fairscale FSDP&quot;
+
+                )
+
+                # Need to be called on all ranks
+
+                model_state = model.state_dict()
+
+                optimizer_state = model.gather_full_optim_state_dict(optimizer)
+
+                # Use a logical barrier to only save on the 0 idx device
+
+                if self.rank == self._save_rank:
+
+                    # Dispatch to private save method if logic is met
+
+                    path, tag = self._save(
+
+                        model_dict=model_state,
+
+                        optimizer_dict=optimizer_state,
+
+                        path=path,
+
+                        backward_step=backward_step,
+
+                        optimizer_step=optimizer_step,
+
+                        name=name,
+
+                        scaler_dict=scaler_dict,
+
+                        extension=extension,
+
+                        create_directory=create_directory,
+
+                        extras=extras,
+
+                        grad_accum_step=grad_accum_step,
+
+                        status=status,
+
+                    )
+
+            else:
+
+                # If OSS then make sure it&#39;s consolidated before saving as norm PyTorch checkpoint
+
+                # This needs to be called on all ranks but can be given a recipient_rank
+
+                if isinstance(optimizer, OSS):
+
+                    self._print_device(
+
+                        f&quot;Consolidating optimizer sharded states onto device {self._save_rank}&quot;
+
+                    )
+
+                    optimizer.consolidate_state_dict(recipient_rank=self._save_rank)
+
+                # Use a logical barrier to only save on the 0 idx device
+
+                if self.rank == self._save_rank:
+
+                    # Dispatch to private save method if logic is met
+
+                    path, tag = self._save(
+
+                        model_dict=model.state_dict(),
+
+                        optimizer_dict=optimizer.state_dict(),
+
+                        path=path,
+
+                        backward_step=backward_step,
+
+                        optimizer_step=optimizer_step,
+
+                        name=name,
+
+                        scaler_dict=scaler_dict,
+
+                        extension=extension,
+
+                        create_directory=create_directory,
+
+                        extras=extras,
+
+                        grad_accum_step=grad_accum_step,
+
+                        status=status,
+
+                    )
+
+            # Use a barrier to make sure no one exits until the save is complete
+
+            torch.distributed.barrier()
+
+            return (
+
+                path,
+
+                f&quot;{self._make_tag(name=name, backward_step=backward_step)}.{extension}&quot;,
+
+            )
+
+
+
+        def load(
+
+            self,
+
+            model: torch.nn.Module,
+
+            optimizer: Union[torch.optim.Optimizer, OSS],
+
+            gpu: bool,
+
+            path: str,
+
+            tag: str,
+
+            scaler_dict_fn: Optional[Callable] = None,
+
+            strict: bool = True,
+
+        ):
+
+            # Use a barrier to make sure the load is done only when all devices are finished with prior calls
+
+            torch.distributed.barrier()
+
+            # Load the dictionary
+
+            # map to cuda:device_id (as this will prevent the save on device 0 from clashing with the current device id)
+
+            map_loc = f&quot;cuda:{self.device_id}&quot;
+
+            self._print_device(f&quot;Load is mapping to {map_loc}&quot;)
+
+            # Call the private load interface
+
+            backward_step, grad_accum_step, optimizer_step, extras = self._load(
+
+                model=model,
+
+                optimizer=optimizer,
+
+                map_loc=map_loc,
+
+                path=path,
+
+                tag=tag,
+
+                scaler_dict_fn=scaler_dict_fn,
+
+                strict=strict,
+
+            )
+
+            # Use a barrier to make sure no one exits until the load is complete across all devices
+
+            torch.distributed.barrier()
+
+            return backward_step, grad_accum_step, optimizer_step, extras
+</code></pre></div>
+<hr />
+<h4 id="ancestors-in-mro_1">Ancestors (in MRO)</h4>
+<ul>
+<li>stoke.io.BaseStokeIO</li>
+<li>abc.ABC</li>
+</ul>
+<h4 id="methods_1">Methods</h4>
+<h4 id="load_1">load</h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">load</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">module</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span>
+    <span class="n">optimizer</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">Optimizer</span><span class="p">,</span> <span class="n">fairscale</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">oss</span><span class="o">.</span><span class="n">OSS</span><span class="p">],</span>
+    <span class="n">gpu</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">tag</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">scaler_dict_fn</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Implementation for loading a PyTorch model checkpoint</p>
+<p>https://pytorch.org/tutorials/beginner/saving_loading_models.html#saving-loading-model-for-inference</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>model</td>
+<td>torch.nn.Module</td>
+<td>current model object</td>
+<td>None</td>
+</tr>
+<tr>
+<td>optimizer</td>
+<td>Union[torch.optim.Optimizer, OSS]</td>
+<td>current optimizer object</td>
+<td>None</td>
+</tr>
+<tr>
+<td>gpu</td>
+<td>bool</td>
+<td>if using gpu device or not</td>
+<td>None</td>
+</tr>
+<tr>
+<td>path</td>
+<td>str</td>
+<td>path to directory that the model checkpoint was saved (prefer absolute paths over relative paths)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>tag</td>
+<td>str</td>
+<td>full tag name the model checkpoint was saved as</td>
+<td>None</td>
+</tr>
+<tr>
+<td>scaler_dict_fn</td>
+<td>Callable, default: None</td>
+<td>callable function to load the scaler state dict</td>
+<td>None</td>
+</tr>
+<tr>
+<td>strict</td>
+<td>bool</td>
+<td>ignore non-matching keys</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>int</td>
+<td>current number of backward calls (for resuming training correctly)</td>
+</tr>
+</tbody>
+</table>
+<p>??? example "View Source"
+            def load(</p>
+<div class="highlight"><pre><span></span><code>            self,
+
+            model: torch.nn.Module,
+
+            optimizer: Union[torch.optim.Optimizer, OSS],
+
+            gpu: bool,
+
+            path: str,
+
+            tag: str,
+
+            scaler_dict_fn: Optional[Callable] = None,
+
+            strict: bool = True,
+
+        ):
+
+            # Use a barrier to make sure the load is done only when all devices are finished with prior calls
+
+            torch.distributed.barrier()
+
+            # Load the dictionary
+
+            # map to cuda:device_id (as this will prevent the save on device 0 from clashing with the current device id)
+
+            map_loc = f&quot;cuda:{self.device_id}&quot;
+
+            self._print_device(f&quot;Load is mapping to {map_loc}&quot;)
+
+            # Call the private load interface
+
+            backward_step, grad_accum_step, optimizer_step, extras = self._load(
+
+                model=model,
+
+                optimizer=optimizer,
+
+                map_loc=map_loc,
+
+                path=path,
+
+                tag=tag,
+
+                scaler_dict_fn=scaler_dict_fn,
+
+                strict=strict,
+
+            )
+
+            # Use a barrier to make sure no one exits until the load is complete across all devices
+
+            torch.distributed.barrier()
+
+            return backward_step, grad_accum_step, optimizer_step, extras
+</code></pre></div>
+<h4 id="save_1">save</h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">save</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">module</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span>
+    <span class="n">optimizer</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">Optimizer</span><span class="p">,</span> <span class="n">fairscale</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">oss</span><span class="o">.</span><span class="n">OSS</span><span class="p">],</span>
+    <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">backward_step</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">grad_accum_step</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">optimizer_step</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">status</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="n">scaler_dict</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">extension</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;pt&#39;</span><span class="p">,</span>
+    <span class="n">create_directory</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">extras</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Implementation(s) for saving a PyTorch model checkpoint</p>
+<p>https://pytorch.org/tutorials/beginner/saving_loading_models.html#saving-loading-model-for-inference</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>model</td>
+<td>torch.nn.Module</td>
+<td>current model object</td>
+<td>None</td>
+</tr>
+<tr>
+<td>optimizer</td>
+<td>Union[torch.optim.Optimizer, OSS]</td>
+<td>current optimizer object</td>
+<td>None</td>
+</tr>
+<tr>
+<td>path</td>
+<td>str</td>
+<td>path to directory to save the model checkpoint (prefer absolute paths over relative paths)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>backward_step</td>
+<td>int</td>
+<td>current number of backward calls (for resuming training correctly)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>grad_accum_step</td>
+<td>int,</td>
+<td>current step of gradient accumulation (for resuming training correctly)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>optimizer_step</td>
+<td>int</td>
+<td>current number of optimizer calls (for resuming training correctly)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>name</td>
+<td>str</td>
+<td>name used to save checkpoint file</td>
+<td>None</td>
+</tr>
+<tr>
+<td>status</td>
+<td>dict</td>
+<td>current stoke status dictionary</td>
+<td>None</td>
+</tr>
+<tr>
+<td>scaler_dict</td>
+<td>dict, default: None</td>
+<td>state_dict from native PyTorch AMP, Fairscale, or APEX</td>
+<td>None</td>
+</tr>
+<tr>
+<td>extension</td>
+<td>str, default: '.pt'</td>
+<td>extension used to save PyTorch model checkpoint</td>
+<td>None</td>
+</tr>
+<tr>
+<td>create_directory</td>
+<td>bool, default: True</td>
+<td>flag to create the directory path if it doesn't exist</td>
+<td>None</td>
+</tr>
+<tr>
+<td>extras</td>
+<td>dict, default: None</td>
+<td>a dictionary of any extra things to save</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>str</td>
+<td>path to directory that the model checkpoint was saved</td>
+</tr>
+</tbody>
+</table>
+<p>??? example "View Source"
+            def save(</p>
+<div class="highlight"><pre><span></span><code>            self,
+
+            model: torch.nn.Module,
+
+            optimizer: Union[torch.optim.Optimizer, OSS],
+
+            path: str,
+
+            backward_step: int,
+
+            grad_accum_step: int,
+
+            optimizer_step: int,
+
+            name: str,
+
+            status: dict,
+
+            scaler_dict: Optional[dict] = None,
+
+            extension: str = &quot;pt&quot;,
+
+            create_directory: bool = True,
+
+            extras: Optional[dict] = None,
+
+        ):
+
+            # Use a barrier to make sure the save is done only when all devices are finished with prior calls
+
+            torch.distributed.barrier()
+
+            # FSDP needs different syntax for saving
+
+            if isinstance(model, FullyShardedDataParallel):
+
+                self._print_device(
+
+                    &quot;Handling consolidation of optimizer sharded states for Fairscale FSDP&quot;
+
+                )
+
+                # Need to be called on all ranks
+
+                model_state = model.state_dict()
+
+                optimizer_state = model.gather_full_optim_state_dict(optimizer)
+
+                # Use a logical barrier to only save on the 0 idx device
+
+                if self.rank == self._save_rank:
+
+                    # Dispatch to private save method if logic is met
+
+                    path, tag = self._save(
+
+                        model_dict=model_state,
+
+                        optimizer_dict=optimizer_state,
+
+                        path=path,
+
+                        backward_step=backward_step,
+
+                        optimizer_step=optimizer_step,
+
+                        name=name,
+
+                        scaler_dict=scaler_dict,
+
+                        extension=extension,
+
+                        create_directory=create_directory,
+
+                        extras=extras,
+
+                        grad_accum_step=grad_accum_step,
+
+                        status=status,
+
+                    )
+
+            else:
+
+                # If OSS then make sure it&#39;s consolidated before saving as norm PyTorch checkpoint
+
+                # This needs to be called on all ranks but can be given a recipient_rank
+
+                if isinstance(optimizer, OSS):
+
+                    self._print_device(
+
+                        f&quot;Consolidating optimizer sharded states onto device {self._save_rank}&quot;
+
+                    )
+
+                    optimizer.consolidate_state_dict(recipient_rank=self._save_rank)
+
+                # Use a logical barrier to only save on the 0 idx device
+
+                if self.rank == self._save_rank:
+
+                    # Dispatch to private save method if logic is met
+
+                    path, tag = self._save(
+
+                        model_dict=model.state_dict(),
+
+                        optimizer_dict=optimizer.state_dict(),
+
+                        path=path,
+
+                        backward_step=backward_step,
+
+                        optimizer_step=optimizer_step,
+
+                        name=name,
+
+                        scaler_dict=scaler_dict,
+
+                        extension=extension,
+
+                        create_directory=create_directory,
+
+                        extras=extras,
+
+                        grad_accum_step=grad_accum_step,
+
+                        status=status,
+
+                    )
+
+            # Use a barrier to make sure no one exits until the save is complete
+
+            torch.distributed.barrier()
+
+            return (
+
+                path,
+
+                f&quot;{self._make_tag(name=name, backward_step=backward_step)}.{extension}&quot;,
+
+            )
+</code></pre></div>
+<h3 id="deepspeedio">DeepspeedIO</h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">DeepspeedIO</span><span class="p">(</span>
+    <span class="n">save_rank</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">)</span>
+</code></pre></div>
+<h4 id="attributes_2">Attributes</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>_save_rank</td>
+<td>int, default: 0</td>
+<td>device to restrict calls to if necessary (e.g. horovod, ddp)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>_prefix</td>
+<td>str</td>
+<td>prefix to append to all checkpoints</td>
+<td>None</td>
+</tr>
+<tr>
+<td>_verbose</td>
+<td>bool, default: True</td>
+<td>Flag for verbosity</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p>??? example "View Source"
+        class DeepspeedIO(BaseStokeIO):</p>
+<div class="highlight"><pre><span></span><code>        def __init__(self, save_rank: int = 0, **kwargs):
+
+            super(DeepspeedIO, self).__init__(save_rank=save_rank, **kwargs)
+
+
+
+        def save(
+
+            self,
+
+            model: torch.nn.Module,
+
+            optimizer: Union[torch.optim.Optimizer, OSS],
+
+            path: str,
+
+            backward_step: int,
+
+            grad_accum_step: int,
+
+            optimizer_step: int,
+
+            name: str,
+
+            status: dict,
+
+            scaler_dict: Optional[dict] = None,
+
+            extension: str = &quot;pt&quot;,
+
+            create_directory: bool = True,
+
+            extras: Optional[dict] = None,
+
+        ):
+
+            &quot;&quot;&quot;Deepspeed override implementation for saving a PyTorch model checkpoint
+
+
+
+            Deepspeed maintains it&#39;s own wrapper for saving so it needs to be called here. It looks like it will save
+
+            multiple pieces depending on sharding but I&#39;m not sure
+
+
+
+            https://www.deepspeed.ai/getting-started/#model-checkpointing
+
+            https://github.com/microsoft/DeepSpeed/blob/ed3de0c21b1fea330de9c1a78a23ca33f340ef20/deepspeed/runtime/engine.py#L1822
+
+
+
+            Parameters
+
+            ----------
+
+            model: torch.nn.Module
+
+                current model object
+
+            optimizer: Union[torch.optim.Optimizer, OSS]
+
+                current optimizer object
+
+            path: str
+
+                path to directory to save the model checkpoint (prefer absolute paths over relative paths)
+
+            backward_step: int
+
+                current number of backward calls (for resuming training correctly)
+
+            grad_accum_step: int,
+
+                current step of gradient accumulation
+
+            optimizer_step: int
+
+                current number of optimizer calls (for resuming training correctly)
+
+            name: str
+
+                name used to save checkpoint file
+
+            status: dict
+
+                current stoke status dictionary
+
+            scaler_dict: Callable
+
+                state_dict from native PyTorch AMP, Fairscale, or APEX
+
+            extension: str, default: &#39;.pt&#39;
+
+                extension used to save PyTorch model checkpoint (Note: Deepspeed will ignore this due to it&#39;s internal
+
+                implementation)
+
+            create_directory: bool, default: True
+
+                flag to create the directory path if it doesn&#39;t exist
+
+            extras: dict, default: None
+
+                a dictionary of any extra things to save
+
+
+
+            Returns
+
+            -------
+
+            path: str
+
+                path to directory that the model checkpoint was saved
+
+            tag: str
+
+                full tag name the model checkpoint was saved as
+
+
+
+            Notes
+
+            -----
+
+            From deepspeed save_checkpoint doc_string:
+
+            all processes must call this method and not just the process with rank 0. It is
+
+            because each process needs to save its master weights and scheduler+optimizer states. This
+
+            method will hang waiting to synchronize with other processes if it&#39;s called just for the
+
+            process with rank 0.
+
+
+
+            &quot;&quot;&quot;
+
+            # Construct the tag for deepspeed
+
+            tag = self._make_tag(name=name, backward_step=backward_step)
+
+            # Construct the path
+
+            save_path = self._make_full_save_path(
+
+                path=path, name=name, backward_step=backward_step, extension=extension
+
+            )
+
+            if self._verbose:
+
+                self._print_device(f&quot;Attempting to save model checkpoint to {save_path}&quot;)
+
+            # Use a barrier to make sure the save is done only when all devices are finished with prior calls
+
+            torch.distributed.barrier()
+
+            # Save the model with the constructed path
+
+            try:
+
+                client_sd = {
+
+                    &quot;backward_step&quot;: backward_step,
+
+                    &quot;grad_accum_step&quot;: grad_accum_step,
+
+                    &quot;optimizer_step&quot;: optimizer_step,
+
+                    &quot;stoke_status&quot;: status,
+
+                    &quot;extras&quot;: extras,
+
+                }
+
+                _ = model.save_checkpoint(
+
+                    path, tag, client_state=client_sd, save_latest=False
+
+                )
+
+            except OSError as e:
+
+                self._print_device(f&quot;Unable to save model to given path: {path}&quot;)
+
+                raise e
+
+            # Use a barrier to make sure no one exits until the save is complete
+
+            torch.distributed.barrier()
+
+            return path, tag
+
+
+
+        def load(
+
+            self,
+
+            model: torch.nn.Module,
+
+            optimizer: Union[torch.optim.Optimizer, OSS],
+
+            gpu: bool,
+
+            path: str,
+
+            tag: str,
+
+            scaler_dict_fn: Optional[Callable] = None,
+
+            strict: bool = True,
+
+        ):
+
+            &quot;&quot;&quot;Deepspeed override implementation for loading a PyTorch model checkpoint
+
+
+
+            https://www.deepspeed.ai/getting-started/#model-checkpointing
+
+
+
+            Parameters
+
+            ----------
+
+            model: torch.nn.Module
+
+                current model object
+
+            optimizer: Union[torch.optim.Optimizer, OSS]
+
+                current optimizer object
+
+            gpu: bool
+
+                if using gpu device or not
+
+            path: str
+
+                path to directory that the model checkpoint was saved (prefer absolute paths over relative paths)
+
+            tag: str
+
+                full tag name the model checkpoint was saved as
+
+            scaler_dict_fn: Callable, default: None
+
+                callable function to load the scaler state dict
+
+            strict: bool
+
+                ignore non-matching keys
+
+
+
+            Returns
+
+            -------
+
+            backward_step: int
+
+                current number of backward calls (for resuming training correctly)
+
+            grad_accum_step: int,
+
+                current step of gradient accumulation (for resuming training correctly)
+
+            optimizer_step: int
+
+                current number of optimizer calls (for resuming training correctly)
+
+            extras: dict
+
+                a dictionary of any extra things that were saved
+
+
+
+            &quot;&quot;&quot;
+
+            # Load the dictionary
+
+            # map to cuda:device_id (as this will prevent the save on device 0 from clashing with the current device id)
+
+            map_loc = f&quot;cuda:{self.device_id}&quot;
+
+            self._print_device(f&quot;Load is mapping to {map_loc}&quot;)
+
+            try:
+
+                _, client_sd = model.load_checkpoint(
+
+                    path, tag, load_module_strict=strict, load_optimizer_states=True
+
+                )
+
+            except OSError as e:
+
+                self._print_device(f&quot;Unable to load model from given path: {path}/{tag}&quot;)
+
+                raise e
+
+            return (
+
+                client_sd[&quot;backward_step&quot;],
+
+                client_sd[&quot;grad_accum_step&quot;],
+
+                client_sd[&quot;optimizer_step&quot;],
+
+                client_sd[&quot;extras&quot;],
+
+            )
+</code></pre></div>
+<hr />
+<h4 id="ancestors-in-mro_2">Ancestors (in MRO)</h4>
+<ul>
+<li>stoke.io.BaseStokeIO</li>
+<li>abc.ABC</li>
+</ul>
+<h4 id="methods_2">Methods</h4>
+<h4 id="load_2">load</h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">load</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">module</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span>
+    <span class="n">optimizer</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">Optimizer</span><span class="p">,</span> <span class="n">fairscale</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">oss</span><span class="o">.</span><span class="n">OSS</span><span class="p">],</span>
+    <span class="n">gpu</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">tag</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">scaler_dict_fn</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Deepspeed override implementation for loading a PyTorch model checkpoint</p>
+<p>https://www.deepspeed.ai/getting-started/#model-checkpointing</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>model</td>
+<td>torch.nn.Module</td>
+<td>current model object</td>
+<td>None</td>
+</tr>
+<tr>
+<td>optimizer</td>
+<td>Union[torch.optim.Optimizer, OSS]</td>
+<td>current optimizer object</td>
+<td>None</td>
+</tr>
+<tr>
+<td>gpu</td>
+<td>bool</td>
+<td>if using gpu device or not</td>
+<td>None</td>
+</tr>
+<tr>
+<td>path</td>
+<td>str</td>
+<td>path to directory that the model checkpoint was saved (prefer absolute paths over relative paths)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>tag</td>
+<td>str</td>
+<td>full tag name the model checkpoint was saved as</td>
+<td>None</td>
+</tr>
+<tr>
+<td>scaler_dict_fn</td>
+<td>Callable, default: None</td>
+<td>callable function to load the scaler state dict</td>
+<td>None</td>
+</tr>
+<tr>
+<td>strict</td>
+<td>bool</td>
+<td>ignore non-matching keys</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>int</td>
+<td>current number of backward calls (for resuming training correctly)</td>
+</tr>
+</tbody>
+</table>
+<p>??? example "View Source"
+            def load(</p>
+<div class="highlight"><pre><span></span><code>            self,
+
+            model: torch.nn.Module,
+
+            optimizer: Union[torch.optim.Optimizer, OSS],
+
+            gpu: bool,
+
+            path: str,
+
+            tag: str,
+
+            scaler_dict_fn: Optional[Callable] = None,
+
+            strict: bool = True,
+
+        ):
+
+            &quot;&quot;&quot;Deepspeed override implementation for loading a PyTorch model checkpoint
+
+
+
+            https://www.deepspeed.ai/getting-started/#model-checkpointing
+
+
+
+            Parameters
+
+            ----------
+
+            model: torch.nn.Module
+
+                current model object
+
+            optimizer: Union[torch.optim.Optimizer, OSS]
+
+                current optimizer object
+
+            gpu: bool
+
+                if using gpu device or not
+
+            path: str
+
+                path to directory that the model checkpoint was saved (prefer absolute paths over relative paths)
+
+            tag: str
+
+                full tag name the model checkpoint was saved as
+
+            scaler_dict_fn: Callable, default: None
+
+                callable function to load the scaler state dict
+
+            strict: bool
+
+                ignore non-matching keys
+
+
+
+            Returns
+
+            -------
+
+            backward_step: int
+
+                current number of backward calls (for resuming training correctly)
+
+            grad_accum_step: int,
+
+                current step of gradient accumulation (for resuming training correctly)
+
+            optimizer_step: int
+
+                current number of optimizer calls (for resuming training correctly)
+
+            extras: dict
+
+                a dictionary of any extra things that were saved
+
+
+
+            &quot;&quot;&quot;
+
+            # Load the dictionary
+
+            # map to cuda:device_id (as this will prevent the save on device 0 from clashing with the current device id)
+
+            map_loc = f&quot;cuda:{self.device_id}&quot;
+
+            self._print_device(f&quot;Load is mapping to {map_loc}&quot;)
+
+            try:
+
+                _, client_sd = model.load_checkpoint(
+
+                    path, tag, load_module_strict=strict, load_optimizer_states=True
+
+                )
+
+            except OSError as e:
+
+                self._print_device(f&quot;Unable to load model from given path: {path}/{tag}&quot;)
+
+                raise e
+
+            return (
+
+                client_sd[&quot;backward_step&quot;],
+
+                client_sd[&quot;grad_accum_step&quot;],
+
+                client_sd[&quot;optimizer_step&quot;],
+
+                client_sd[&quot;extras&quot;],
+
+            )
+</code></pre></div>
+<h4 id="save_2">save</h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">save</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">module</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span>
+    <span class="n">optimizer</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">Optimizer</span><span class="p">,</span> <span class="n">fairscale</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">oss</span><span class="o">.</span><span class="n">OSS</span><span class="p">],</span>
+    <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">backward_step</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">grad_accum_step</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">optimizer_step</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">status</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="n">scaler_dict</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">extension</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;pt&#39;</span><span class="p">,</span>
+    <span class="n">create_directory</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">extras</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Deepspeed override implementation for saving a PyTorch model checkpoint</p>
+<p>Deepspeed maintains it's own wrapper for saving so it needs to be called here. It looks like it will save
+multiple pieces depending on sharding but I'm not sure</p>
+<p>https://www.deepspeed.ai/getting-started/#model-checkpointing
+https://github.com/microsoft/DeepSpeed/blob/ed3de0c21b1fea330de9c1a78a23ca33f340ef20/deepspeed/runtime/engine.py#L1822</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>model</td>
+<td>torch.nn.Module</td>
+<td>current model object</td>
+<td>None</td>
+</tr>
+<tr>
+<td>optimizer</td>
+<td>Union[torch.optim.Optimizer, OSS]</td>
+<td>current optimizer object</td>
+<td>None</td>
+</tr>
+<tr>
+<td>path</td>
+<td>str</td>
+<td>path to directory to save the model checkpoint (prefer absolute paths over relative paths)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>backward_step</td>
+<td>int</td>
+<td>current number of backward calls (for resuming training correctly)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>grad_accum_step</td>
+<td>int,</td>
+<td>current step of gradient accumulation</td>
+<td>None</td>
+</tr>
+<tr>
+<td>optimizer_step</td>
+<td>int</td>
+<td>current number of optimizer calls (for resuming training correctly)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>name</td>
+<td>str</td>
+<td>name used to save checkpoint file</td>
+<td>None</td>
+</tr>
+<tr>
+<td>status</td>
+<td>dict</td>
+<td>current stoke status dictionary</td>
+<td>None</td>
+</tr>
+<tr>
+<td>scaler_dict</td>
+<td>Callable</td>
+<td>state_dict from native PyTorch AMP, Fairscale, or APEX</td>
+<td>None</td>
+</tr>
+<tr>
+<td>extension</td>
+<td>str, default: '.pt'</td>
+<td>extension used to save PyTorch model checkpoint (Note: Deepspeed will ignore this due to it's internal</td>
+<td></td>
+</tr>
+<tr>
+<td>implementation)</td>
+<td>None</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>create_directory</td>
+<td>bool, default: True</td>
+<td>flag to create the directory path if it doesn't exist</td>
+<td>None</td>
+</tr>
+<tr>
+<td>extras</td>
+<td>dict, default: None</td>
+<td>a dictionary of any extra things to save</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>str</td>
+<td>path to directory that the model checkpoint was saved</td>
+</tr>
+</tbody>
+</table>
+<p>??? example "View Source"
+            def save(</p>
+<div class="highlight"><pre><span></span><code>            self,
+
+            model: torch.nn.Module,
+
+            optimizer: Union[torch.optim.Optimizer, OSS],
+
+            path: str,
+
+            backward_step: int,
+
+            grad_accum_step: int,
+
+            optimizer_step: int,
+
+            name: str,
+
+            status: dict,
+
+            scaler_dict: Optional[dict] = None,
+
+            extension: str = &quot;pt&quot;,
+
+            create_directory: bool = True,
+
+            extras: Optional[dict] = None,
+
+        ):
+
+            &quot;&quot;&quot;Deepspeed override implementation for saving a PyTorch model checkpoint
+
+
+
+            Deepspeed maintains it&#39;s own wrapper for saving so it needs to be called here. It looks like it will save
+
+            multiple pieces depending on sharding but I&#39;m not sure
+
+
+
+            https://www.deepspeed.ai/getting-started/#model-checkpointing
+
+            https://github.com/microsoft/DeepSpeed/blob/ed3de0c21b1fea330de9c1a78a23ca33f340ef20/deepspeed/runtime/engine.py#L1822
+
+
+
+            Parameters
+
+            ----------
+
+            model: torch.nn.Module
+
+                current model object
+
+            optimizer: Union[torch.optim.Optimizer, OSS]
+
+                current optimizer object
+
+            path: str
+
+                path to directory to save the model checkpoint (prefer absolute paths over relative paths)
+
+            backward_step: int
+
+                current number of backward calls (for resuming training correctly)
+
+            grad_accum_step: int,
+
+                current step of gradient accumulation
+
+            optimizer_step: int
+
+                current number of optimizer calls (for resuming training correctly)
+
+            name: str
+
+                name used to save checkpoint file
+
+            status: dict
+
+                current stoke status dictionary
+
+            scaler_dict: Callable
+
+                state_dict from native PyTorch AMP, Fairscale, or APEX
+
+            extension: str, default: &#39;.pt&#39;
+
+                extension used to save PyTorch model checkpoint (Note: Deepspeed will ignore this due to it&#39;s internal
+
+                implementation)
+
+            create_directory: bool, default: True
+
+                flag to create the directory path if it doesn&#39;t exist
+
+            extras: dict, default: None
+
+                a dictionary of any extra things to save
+
+
+
+            Returns
+
+            -------
+
+            path: str
+
+                path to directory that the model checkpoint was saved
+
+            tag: str
+
+                full tag name the model checkpoint was saved as
+
+
+
+            Notes
+
+            -----
+
+            From deepspeed save_checkpoint doc_string:
+
+            all processes must call this method and not just the process with rank 0. It is
+
+            because each process needs to save its master weights and scheduler+optimizer states. This
+
+            method will hang waiting to synchronize with other processes if it&#39;s called just for the
+
+            process with rank 0.
+
+
+
+            &quot;&quot;&quot;
+
+            # Construct the tag for deepspeed
+
+            tag = self._make_tag(name=name, backward_step=backward_step)
+
+            # Construct the path
+
+            save_path = self._make_full_save_path(
+
+                path=path, name=name, backward_step=backward_step, extension=extension
+
+            )
+
+            if self._verbose:
+
+                self._print_device(f&quot;Attempting to save model checkpoint to {save_path}&quot;)
+
+            # Use a barrier to make sure the save is done only when all devices are finished with prior calls
+
+            torch.distributed.barrier()
+
+            # Save the model with the constructed path
+
+            try:
+
+                client_sd = {
+
+                    &quot;backward_step&quot;: backward_step,
+
+                    &quot;grad_accum_step&quot;: grad_accum_step,
+
+                    &quot;optimizer_step&quot;: optimizer_step,
+
+                    &quot;stoke_status&quot;: status,
+
+                    &quot;extras&quot;: extras,
+
+                }
+
+                _ = model.save_checkpoint(
+
+                    path, tag, client_state=client_sd, save_latest=False
+
+                )
+
+            except OSError as e:
+
+                self._print_device(f&quot;Unable to save model to given path: {path}&quot;)
+
+                raise e
+
+            # Use a barrier to make sure no one exits until the save is complete
+
+            torch.distributed.barrier()
+
+            return path, tag
+</code></pre></div>
+<h3 id="horovodio">HorovodIO</h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">HorovodIO</span><span class="p">(</span>
+    <span class="n">save_rank</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">)</span>
+</code></pre></div>
+<h4 id="attributes_3">Attributes</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>_save_rank</td>
+<td>int, default: 0</td>
+<td>device to restrict calls to if necessary (e.g. horovod, ddp)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>_prefix</td>
+<td>str</td>
+<td>prefix to append to all checkpoints</td>
+<td>None</td>
+</tr>
+<tr>
+<td>_verbose</td>
+<td>bool, default: True</td>
+<td>Flag for verbosity</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p>??? example "View Source"
+        class HorovodIO(BaseStokeIO):</p>
+<div class="highlight"><pre><span></span><code>        def __init__(self, save_rank: int = 0, **kwargs):
+
+            super(HorovodIO, self).__init__(save_rank=save_rank, **kwargs)
+
+
+
+        def save(
+
+            self,
+
+            model: torch.nn.Module,
+
+            optimizer: Union[torch.optim.Optimizer, OSS],
+
+            path: str,
+
+            backward_step: int,
+
+            grad_accum_step: int,
+
+            optimizer_step: int,
+
+            name: str,
+
+            status: dict,
+
+            scaler_dict: Optional[dict] = None,
+
+            extension: str = &quot;pt&quot;,
+
+            create_directory: bool = True,
+
+            extras: Optional[dict] = None,
+
+        ):
+
+            # Use a barrier to make sure the save is done only when all devices are finished with prior calls
+
+            # Horovod doesn&#39;t have a native barrier so lean on join to take care of it
+
+            # https://horovod.readthedocs.io/en/stable/api.html#horovod.torch.join
+
+            hvd.join()
+
+            # Use a logical barrier to only save on the 0 idx device
+
+            if self.rank == self._save_rank:
+
+                # Dispatch to private save method if logic is met
+
+                path, tag = self._save(
+
+                    model_dict=model.state_dict(),
+
+                    optimizer_dict=optimizer.state_dict(),
+
+                    path=path,
+
+                    backward_step=backward_step,
+
+                    optimizer_step=optimizer_step,
+
+                    name=name,
+
+                    scaler_dict=scaler_dict,
+
+                    extension=extension,
+
+                    create_directory=create_directory,
+
+                    extras=extras,
+
+                    grad_accum_step=grad_accum_step,
+
+                    status=status,
+
+                )
+
+            # Use a barrier to make sure no one exits until the save is complete
+
+            # Horovod doesn&#39;t have a native barrier so lean on join to take care of it
+
+            # https://horovod.readthedocs.io/en/stable/api.html#horovod.torch.join
+
+            hvd.join()
+
+            return (
+
+                path,
+
+                f&quot;{self._make_tag(name=name, backward_step=backward_step)}.{extension}&quot;,
+
+            )
+
+
+
+        def load(
+
+            self,
+
+            model: torch.nn.Module,
+
+            optimizer: Union[torch.optim.Optimizer, OSS],
+
+            gpu: bool,
+
+            path: str,
+
+            tag: str,
+
+            scaler_dict_fn: Optional[Callable] = None,
+
+            strict: bool = True,
+
+        ):
+
+            # Use a barrier to make sure the load is done only when all devices are finished with prior calls
+
+            # Horovod doesn&#39;t have a native barrier so lean on join to take care of it
+
+            # https://horovod.readthedocs.io/en/stable/api.html#horovod.torch.join
+
+            hvd.join()
+
+            # map to cuda:device_id -- horovod will only load on cuda:0 and then broadcast instead of loading on multiple
+
+            # devices? TODO: Check if this is necessary or could we just load like DDP and skip the broadcast?
+
+            # Terrible Horovod docs strike again -- load on dev 0 and sync -- but this doesn&#39;t deal with amp/apex
+
+            # https://github.com/horovod/horovod/blob/master/examples/pytorch/pytorch_imagenet_resnet50.py
+
+            # I think we can just ignore this and load on all devices
+
+            map_loc = f&quot;cuda:{self.device_id}&quot;
+
+            self._print_device(f&quot;Load is mapping to {map_loc}&quot;)
+
+            backward_step, grad_accum_step, optimizer_step, extras = self._load(
+
+                model=model,
+
+                optimizer=optimizer,
+
+                map_loc=map_loc,
+
+                path=path,
+
+                tag=tag,
+
+                scaler_dict_fn=scaler_dict_fn,
+
+                strict=strict,
+
+            )
+
+            # Use a barrier to make sure no one exits until the load is complete across all devices
+
+            # Horovod doesn&#39;t have a native barrier so lean on join to take care of it
+
+            # https://horovod.readthedocs.io/en/stable/api.html#horovod.torch.join
+
+            hvd.join()
+
+            return backward_step, grad_accum_step, optimizer_step, extras
+</code></pre></div>
+<hr />
+<h4 id="ancestors-in-mro_3">Ancestors (in MRO)</h4>
+<ul>
+<li>stoke.io.BaseStokeIO</li>
+<li>abc.ABC</li>
+</ul>
+<h4 id="methods_3">Methods</h4>
+<h4 id="load_3">load</h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">load</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">module</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span>
+    <span class="n">optimizer</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">Optimizer</span><span class="p">,</span> <span class="n">fairscale</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">oss</span><span class="o">.</span><span class="n">OSS</span><span class="p">],</span>
+    <span class="n">gpu</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">tag</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">scaler_dict_fn</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Implementation for loading a PyTorch model checkpoint</p>
+<p>https://pytorch.org/tutorials/beginner/saving_loading_models.html#saving-loading-model-for-inference</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>model</td>
+<td>torch.nn.Module</td>
+<td>current model object</td>
+<td>None</td>
+</tr>
+<tr>
+<td>optimizer</td>
+<td>Union[torch.optim.Optimizer, OSS]</td>
+<td>current optimizer object</td>
+<td>None</td>
+</tr>
+<tr>
+<td>gpu</td>
+<td>bool</td>
+<td>if using gpu device or not</td>
+<td>None</td>
+</tr>
+<tr>
+<td>path</td>
+<td>str</td>
+<td>path to directory that the model checkpoint was saved (prefer absolute paths over relative paths)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>tag</td>
+<td>str</td>
+<td>full tag name the model checkpoint was saved as</td>
+<td>None</td>
+</tr>
+<tr>
+<td>scaler_dict_fn</td>
+<td>Callable, default: None</td>
+<td>callable function to load the scaler state dict</td>
+<td>None</td>
+</tr>
+<tr>
+<td>strict</td>
+<td>bool</td>
+<td>ignore non-matching keys</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>int</td>
+<td>current number of backward calls (for resuming training correctly)</td>
+</tr>
+</tbody>
+</table>
+<p>??? example "View Source"
+            def load(</p>
+<div class="highlight"><pre><span></span><code>            self,
+
+            model: torch.nn.Module,
+
+            optimizer: Union[torch.optim.Optimizer, OSS],
+
+            gpu: bool,
+
+            path: str,
+
+            tag: str,
+
+            scaler_dict_fn: Optional[Callable] = None,
+
+            strict: bool = True,
+
+        ):
+
+            # Use a barrier to make sure the load is done only when all devices are finished with prior calls
+
+            # Horovod doesn&#39;t have a native barrier so lean on join to take care of it
+
+            # https://horovod.readthedocs.io/en/stable/api.html#horovod.torch.join
+
+            hvd.join()
+
+            # map to cuda:device_id -- horovod will only load on cuda:0 and then broadcast instead of loading on multiple
+
+            # devices? TODO: Check if this is necessary or could we just load like DDP and skip the broadcast?
+
+            # Terrible Horovod docs strike again -- load on dev 0 and sync -- but this doesn&#39;t deal with amp/apex
+
+            # https://github.com/horovod/horovod/blob/master/examples/pytorch/pytorch_imagenet_resnet50.py
+
+            # I think we can just ignore this and load on all devices
+
+            map_loc = f&quot;cuda:{self.device_id}&quot;
+
+            self._print_device(f&quot;Load is mapping to {map_loc}&quot;)
+
+            backward_step, grad_accum_step, optimizer_step, extras = self._load(
+
+                model=model,
+
+                optimizer=optimizer,
+
+                map_loc=map_loc,
+
+                path=path,
+
+                tag=tag,
+
+                scaler_dict_fn=scaler_dict_fn,
+
+                strict=strict,
+
+            )
+
+            # Use a barrier to make sure no one exits until the load is complete across all devices
+
+            # Horovod doesn&#39;t have a native barrier so lean on join to take care of it
+
+            # https://horovod.readthedocs.io/en/stable/api.html#horovod.torch.join
+
+            hvd.join()
+
+            return backward_step, grad_accum_step, optimizer_step, extras
+</code></pre></div>
+<h4 id="save_3">save</h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">save</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">module</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span>
+    <span class="n">optimizer</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">Optimizer</span><span class="p">,</span> <span class="n">fairscale</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">oss</span><span class="o">.</span><span class="n">OSS</span><span class="p">],</span>
+    <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">backward_step</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">grad_accum_step</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">optimizer_step</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">status</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="n">scaler_dict</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">extension</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;pt&#39;</span><span class="p">,</span>
+    <span class="n">create_directory</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">extras</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Implementation(s) for saving a PyTorch model checkpoint</p>
+<p>https://pytorch.org/tutorials/beginner/saving_loading_models.html#saving-loading-model-for-inference</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>model</td>
+<td>torch.nn.Module</td>
+<td>current model object</td>
+<td>None</td>
+</tr>
+<tr>
+<td>optimizer</td>
+<td>Union[torch.optim.Optimizer, OSS]</td>
+<td>current optimizer object</td>
+<td>None</td>
+</tr>
+<tr>
+<td>path</td>
+<td>str</td>
+<td>path to directory to save the model checkpoint (prefer absolute paths over relative paths)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>backward_step</td>
+<td>int</td>
+<td>current number of backward calls (for resuming training correctly)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>grad_accum_step</td>
+<td>int,</td>
+<td>current step of gradient accumulation (for resuming training correctly)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>optimizer_step</td>
+<td>int</td>
+<td>current number of optimizer calls (for resuming training correctly)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>name</td>
+<td>str</td>
+<td>name used to save checkpoint file</td>
+<td>None</td>
+</tr>
+<tr>
+<td>status</td>
+<td>dict</td>
+<td>current stoke status dictionary</td>
+<td>None</td>
+</tr>
+<tr>
+<td>scaler_dict</td>
+<td>dict, default: None</td>
+<td>state_dict from native PyTorch AMP, Fairscale, or APEX</td>
+<td>None</td>
+</tr>
+<tr>
+<td>extension</td>
+<td>str, default: '.pt'</td>
+<td>extension used to save PyTorch model checkpoint</td>
+<td>None</td>
+</tr>
+<tr>
+<td>create_directory</td>
+<td>bool, default: True</td>
+<td>flag to create the directory path if it doesn't exist</td>
+<td>None</td>
+</tr>
+<tr>
+<td>extras</td>
+<td>dict, default: None</td>
+<td>a dictionary of any extra things to save</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>str</td>
+<td>path to directory that the model checkpoint was saved</td>
+</tr>
+</tbody>
+</table>
+<p>??? example "View Source"
+            def save(</p>
+<div class="highlight"><pre><span></span><code>            self,
+
+            model: torch.nn.Module,
+
+            optimizer: Union[torch.optim.Optimizer, OSS],
+
+            path: str,
+
+            backward_step: int,
+
+            grad_accum_step: int,
+
+            optimizer_step: int,
+
+            name: str,
+
+            status: dict,
+
+            scaler_dict: Optional[dict] = None,
+
+            extension: str = &quot;pt&quot;,
+
+            create_directory: bool = True,
+
+            extras: Optional[dict] = None,
+
+        ):
+
+            # Use a barrier to make sure the save is done only when all devices are finished with prior calls
+
+            # Horovod doesn&#39;t have a native barrier so lean on join to take care of it
+
+            # https://horovod.readthedocs.io/en/stable/api.html#horovod.torch.join
+
+            hvd.join()
+
+            # Use a logical barrier to only save on the 0 idx device
+
+            if self.rank == self._save_rank:
+
+                # Dispatch to private save method if logic is met
+
+                path, tag = self._save(
+
+                    model_dict=model.state_dict(),
+
+                    optimizer_dict=optimizer.state_dict(),
+
+                    path=path,
+
+                    backward_step=backward_step,
+
+                    optimizer_step=optimizer_step,
+
+                    name=name,
+
+                    scaler_dict=scaler_dict,
+
+                    extension=extension,
+
+                    create_directory=create_directory,
+
+                    extras=extras,
+
+                    grad_accum_step=grad_accum_step,
+
+                    status=status,
+
+                )
+
+            # Use a barrier to make sure no one exits until the save is complete
+
+            # Horovod doesn&#39;t have a native barrier so lean on join to take care of it
+
+            # https://horovod.readthedocs.io/en/stable/api.html#horovod.torch.join
+
+            hvd.join()
+
+            return (
+
+                path,
+
+                f&quot;{self._make_tag(name=name, backward_step=backward_step)}.{extension}&quot;,
+
+            )
+</code></pre></div>
+<h3 id="runnerioenum">RunnerIOEnum</h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">RunnerIOEnum</span><span class="p">(</span>
+    <span class="o">/</span><span class="p">,</span>
+    <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>??? example "View Source"
+        class RunnerIOEnum(Enum):</p>
+<div class="highlight"><pre><span></span><code>        base = BaseStokeIO
+
+        deepspeed = DeepspeedIO
+
+        ddp = DDPIO
+
+        horovod = HorovodIO
+</code></pre></div>
+<hr />
+<h4 id="ancestors-in-mro_4">Ancestors (in MRO)</h4>
+<ul>
+<li>enum.Enum</li>
+</ul>
+<h4 id="class-variables">Class variables</h4>
+<div class="highlight"><pre><span></span><code><span class="n">base</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">ddp</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">deepspeed</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">horovod</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">name</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">value</span>
+</code></pre></div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../" title="Index" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Index
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../status/" title="Status" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Status
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Powered by
+        <a href="http://timothycrosley.github.io/portray">portray.</a>
+        You too can
+        <a href="http://timothycrosley.github.io/portray">
+          portray</a>
+        your Python project well using automatic documentation.
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://github.com/ncilfone" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://www.linkedin.com/in/ncilfone/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.top"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.f8263e09.min.js", "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.4fc53ad4.min.js"></script>
+      
+    
+  </body>
+</html>

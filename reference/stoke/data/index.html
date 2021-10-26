@@ -1,0 +1,3737 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../../resources/images/stoke_small.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.0">
+    
+    
+      
+        <title>Data - stoke</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.8b42a75e.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ffffff">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="white" data-md-color-accent="red">
+  
+    
+    <script>function __prefix(e){return new URL("../../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#module-stokedata" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="stoke" class="md-header__button md-logo" aria-label="stoke" data-md-component="logo">
+      
+  <img src="../../../resources/images/stoke_small.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            stoke
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Data
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/fidelity/stoke/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    stoke
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../docs/Home/" class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../docs/Installation/" class="md-tabs__link">
+      Installation
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../docs/Quick-Start/" class="md-tabs__link">
+      Quick Start
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../docs/Launchers/" class="md-tabs__link">
+      Launchers
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../docs/Examples/" class="md-tabs__link">
+      Examples
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../CONTRIBUTING/" class="md-tabs__link">
+      Contributing
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../configs/" class="md-tabs__link md-tabs__link--active">
+        Reference
+      </a>
+    </li>
+  
+
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="stoke" class="md-nav__button md-logo" aria-label="stoke" data-md-component="logo">
+      
+  <img src="../../../resources/images/stoke_small.png" alt="logo">
+
+    </a>
+    stoke
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/fidelity/stoke/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    stoke
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/Home/" class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/Installation/" class="md-nav__link">
+        Installation
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/Quick-Start/" class="md-nav__link">
+        Quick Start
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/Launchers/" class="md-nav__link">
+        Launchers
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/Examples/" class="md-nav__link">
+        Examples
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../CONTRIBUTING/" class="md-nav__link">
+        Contributing
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1" type="checkbox" id="__nav_7_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_1">
+          Stoke
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Stoke" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_1">
+          <span class="md-nav__icon md-icon"></span>
+          Stoke
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configs/" class="md-nav__link">
+        Configs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Data
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bucketeddistributedsampler" class="md-nav__link">
+    BucketedDistributedSampler
+  </a>
+  
+    <nav class="md-nav" aria-label="BucketedDistributedSampler">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attributes" class="md-nav__link">
+    Attributes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ancestors-in-mro" class="md-nav__link">
+    Ancestors (in MRO)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_epoch" class="md-nav__link">
+    set_epoch
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stokedataloader" class="md-nav__link">
+    StokeDataLoader
+  </a>
+  
+    <nav class="md-nav" aria-label="StokeDataLoader">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attributes_1" class="md-nav__link">
+    Attributes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ancestors-in-mro_1" class="md-nav__link">
+    Ancestors (in MRO)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instance-variables" class="md-nav__link">
+    Instance variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods_1" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check_worker_number_rationality" class="md-nav__link">
+    check_worker_number_rationality
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../distributed/" class="md-nav__link">
+        Distributed
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../extensions/" class="md-nav__link">
+        Extensions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fp16/" class="md-nav__link">
+        Fp16
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        Index
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../io/" class="md-nav__link">
+        Io
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../status/" class="md-nav__link">
+        Status
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stoke/" class="md-nav__link">
+        Stoke
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils/" class="md-nav__link">
+        Utils
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bucketeddistributedsampler" class="md-nav__link">
+    BucketedDistributedSampler
+  </a>
+  
+    <nav class="md-nav" aria-label="BucketedDistributedSampler">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attributes" class="md-nav__link">
+    Attributes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ancestors-in-mro" class="md-nav__link">
+    Ancestors (in MRO)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_epoch" class="md-nav__link">
+    set_epoch
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stokedataloader" class="md-nav__link">
+    StokeDataLoader
+  </a>
+  
+    <nav class="md-nav" aria-label="StokeDataLoader">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attributes_1" class="md-nav__link">
+    Attributes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ancestors-in-mro_1" class="md-nav__link">
+    Ancestors (in MRO)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instance-variables" class="md-nav__link">
+    Instance variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods_1" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check_worker_number_rationality" class="md-nav__link">
+    check_worker_number_rationality
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/fidelity/stoke/edit/main/reference/stoke/data.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="module-stokedata">Module stoke.data</h1>
+<p>Handles any data (e.g. loader, sampler, etc.) related classes</p>
+<p>None</p>
+<p>??? example "View Source"
+        # -<em>- coding: utf-8 -</em>-</p>
+<div class="highlight"><pre><span></span><code>    # Copyright FMR LLC &lt;opensource@fidelity.com&gt;
+
+    # SPDX-License-Identifier: Apache-2.0
+
+
+
+    &quot;&quot;&quot;Handles any data (e.g. loader, sampler, etc.) related classes&quot;&quot;&quot;
+
+
+
+    import itertools
+
+    from math import ceil
+
+    from typing import Dict, Iterator, List, Optional, Sequence, Tuple, Union
+
+
+
+    import horovod.torch as hvd
+
+    import numpy as np
+
+    import torch
+
+    import torch.distributed as dist
+
+    from torch.utils.data import DataLoader as DL
+
+    from torch.utils.data import Dataset
+
+    from torch.utils.data.distributed import Sampler
+
+
+
+    from stoke.status import DistributedOptions, FP16Options
+
+    from stoke.utils import T_co, _collate_fn_t, _worker_init_fn_t
+
+
+
+
+
+    class StokeDataLoader(DL):
+
+        &quot;&quot;&quot;Provides a shim interface to torch.utils.data.DataLoader with mapped kwargs
+
+
+
+        Attributes
+
+        ----------
+
+        _gpu: bool
+
+        _fp16: Optional[FP16Options]
+
+
+
+        See Also
+
+        --------
+
+        torch.utils.data.DataLoader: base DataLoader class that this inherits from (check for all attributes)
+
+
+
+        &quot;&quot;&quot;
+
+
+
+        def __init__(
+
+            self,
+
+            gpu: bool,
+
+            fp16: Optional[FP16Options],
+
+            dataset: Dataset[T_co],
+
+            batch_size: Optional[int] = 1,
+
+            shuffle: bool = False,
+
+            sampler: Optional[Sampler[int]] = None,
+
+            batch_sampler: Optional[Sampler[Sequence[int]]] = None,
+
+            num_workers: int = 0,
+
+            collate_fn: _collate_fn_t = None,
+
+            pin_memory: bool = False,
+
+            drop_last: bool = False,
+
+            timeout: float = 0,
+
+            worker_init_fn: _worker_init_fn_t = None,
+
+            multiprocessing_context=None,
+
+            generator=None,
+
+            *,
+
+            prefetch_factor: int = 2,
+
+            persistent_workers: bool = False,
+
+        ):
+
+            &quot;&quot;&quot;Maps to torch.utils.data.DataLoader __init__
+
+
+
+            Shim is necessary to automatically handle device placement since the gpu/fp16 flags can&#39;t be
+
+            determined until the StokeStatus object is available which is post init. This could be disconnected from
+
+            this class but it would require the user to forward on device or fp16 configs which breaks the
+
+            paradigm that the flags only need to be set and never handled
+
+
+
+            Parameters
+
+            ----------
+
+            dataset: Dataset
+
+                dataset from which to load the data.
+
+            batch_size: int, default: 1
+
+                how many samples per batch to load .
+
+            shuffle: bool, default: False
+
+                set to ``True`` to have the data reshuffled at every epoch.
+
+            sampler: Sampler or Iterable, default: None
+
+                defines the strategy to draw samples from the dataset. Can be any ``Iterable`` with ``__len__``
+
+                implemented. If specified, :attr:`shuffle` must not be specified.
+
+            batch_sampler: Sampler or Iterable, default: None:
+
+                like :attr:`sampler`, but returns a batch of indices at a time. Mutually exclusive with
+
+                :attr:`batch_size`, :attr:`shuffle`, :attr:`sampler`, and :attr:`drop_last`.
+
+            num_workers: int, default: 0
+
+                how many subprocesses to use for data loading. ``0`` means that the data will be loaded in the main process.
+
+            collate_fn: callable, optional:
+
+                merges a list of samples to form a mini-batch of Tensor(s).  Used when using batched loading from a
+
+                map-style dataset.
+
+            pin_memory: bool, default: False:
+
+                If ``True``, the data loader will copy Tensors into CUDA pinned memory before returning them. If your
+
+                data elements are a custom type, or your :attr:`collate_fn` returns a batch that is a custom type,
+
+                see the example below.
+
+            drop_last: bool, default: False
+
+                set to ``True`` to drop the last incomplete batch, if the dataset size is not divisible by the batch size.
+
+                If ``False`` and the size of dataset is not divisible by the batch size, then the last batch
+
+                will be smaller.
+
+            timeout: numeric, default: 0
+
+                if positive, the timeout value for collecting a batch from workers. Should always be non-negative.
+
+            worker_init_fn: callable, default: None
+
+                If not ``None``, this will be called on each worker subprocess with the worker id
+
+                (an int in ``[0, num_workers - 1]``) as input, after seeding and before data loading.
+
+            prefetch_factor: int, default: 2
+
+                Number of samples loaded in advance by each worker. ``2`` means there will be a total of 2 * num_workers
+
+                samples prefetched across all workers.
+
+            persistent_workers: bool, default: False
+
+                If ``True``, the data loader will not shutdown the worker processes after a dataset has been
+
+                consumed once. This allows to maintain the workers `Dataset` instances alive.
+
+
+
+            Returns
+
+            -------
+
+            StokeDataLoader
+
+                wrapped torch.utils.data.DataLoader object
+
+
+
+            &quot;&quot;&quot;
+
+            # Call super init for the actual torch DataLoader
+
+            super(StokeDataLoader, self).__init__(
+
+                dataset=dataset,
+
+                batch_size=batch_size,
+
+                shuffle=shuffle,
+
+                sampler=sampler,
+
+                batch_sampler=batch_sampler,
+
+                num_workers=num_workers,
+
+                collate_fn=collate_fn,
+
+                pin_memory=pin_memory,
+
+                drop_last=drop_last,
+
+                timeout=timeout,
+
+                worker_init_fn=worker_init_fn,
+
+                multiprocessing_context=multiprocessing_context,
+
+                generator=generator,
+
+                prefetch_factor=prefetch_factor,
+
+                persistent_workers=persistent_workers,
+
+            )
+
+            self._gpu = gpu
+
+            self._fp16 = fp16
+
+
+
+        def __iter__(self):
+
+            &quot;&quot;&quot;Underlying iter of the DataLoader that yields samples
+
+
+
+            Wrap the base __iter__ with a call to place on the device if flagged
+
+
+
+            Yields
+
+            ------
+
+            Union[torch.Tensor, List[torch.Tensor], Tuple[torch.Tensor], Dict[str, torch.Tensor]]
+
+                data placed on the correct device
+
+
+
+            &quot;&quot;&quot;
+
+            # Iterate using the base class iter but override the yield by pushing to device prior if gpu flag is true
+
+            for val in super().__iter__():
+
+                yield val if not self._gpu else self._place_data_on_gpu(val)
+
+
+
+        def _place_data_on_gpu(
+
+            self,
+
+            data: Union[
+
+                torch.Tensor,
+
+                List[torch.Tensor],
+
+                Tuple[torch.Tensor],
+
+                Dict[str, torch.Tensor],
+
+            ],
+
+        ):
+
+            &quot;&quot;&quot;Determine data structure and then place on the correct device (cast in the context of deepspeed FP16 as it
+
+            wants half dtype as input)
+
+
+
+            Parameters
+
+            ----------
+
+            data: Union[torch.Tensor, List[torch.Tensor], Tuple[torch.Tensor], Dict[str, torch.Tensor]]
+
+                current data coming from the underlying __iter__
+
+
+
+            Returns
+
+            -------
+
+            data: Union[torch.Tensor, List[torch.Tensor], Tuple[torch.Tensor], Dict[str, torch.Tensor]]
+
+                data moved to the correct device
+
+
+
+            &quot;&quot;&quot;
+
+            if isinstance(data, torch.Tensor):
+
+                # TODO: Check if one of the APEX version needs a cast too?
+
+                # Move to the correct cuda device w/ the correct type -- deepspeed FP16 requires a cast to half if fp16
+
+                if self._fp16 == &quot;deepspeed&quot;:
+
+                    return data.to(device=&quot;cuda&quot;, dtype=torch.half)
+
+                else:
+
+                    return data.to(device=&quot;cuda&quot;, dtype=data.dtype)
+
+            elif isinstance(data, (list, tuple)):
+
+                return type(data)(self._place_data_on_gpu(data=val) for val in data)
+
+            elif isinstance(data, dict):
+
+                return {k: self._place_data_on_gpu(v) for k, v in data.items()}
+
+            elif ~(hasattr(data, &quot;to&quot;)):
+
+                return data
+
+            else:
+
+                raise TypeError(
+
+                    f&quot;Stoke -- Unsupported data type passed to _place_data_on_gpu &quot;
+
+                    f&quot;(torch.Tensor, tuple, list, dict), currently {type(data)}&quot;
+
+                )
+
+
+
+
+
+    class BucketedDistributedSampler(Sampler[T_co]):
+
+        &quot;&quot;&quot;Sampler that buckets samples by sorted_idx and then randomly samples from a specific bucket to prevent excess
+
+        padding leading to wasted computation
+
+
+
+        Borrowing heavily from the base DistributedSampler
+
+        https://pytorch.org/docs/stable/_modules/torch/utils/data/distributed.html#DistributedSampler
+
+
+
+        Attributes
+
+        ----------
+
+        num_replicas: int, default: None
+
+            number of replicas
+
+        rank: int, default: None
+
+            current device rank
+
+        epoch: int
+
+            current training epoch
+
+        drop_last: bool, default: False
+
+            whether to drop last set of samples that don&#39;t fit into a batch
+
+        shuffle: bool, default: True
+
+            flag to shuffle dataset
+
+        seed: int, default: 0
+
+            seed to use for generators
+
+        buckets: int
+
+            number of buckets to break the dataset into
+
+        sorted_n_samples: list
+
+            sorted list of samples by the characteristic to bucket by (e.g. seq len)
+
+        batch_size: int
+
+            batch size that will be used (needed to make sure slices are correct)
+
+        allow_bucket_overlap: bool, default: False
+
+            allow for the residual samples (those that are not divisible by batch and num_replicas) to be assembled into
+
+            an un-bucketed batch
+
+        slice_size: int
+
+            computed from batch size and number of replicas
+
+        num_samples_per_bucket: int
+
+            computed value that represents the number of samples in a single bucket
+
+        num_slices_per_bucket: int
+
+            computed value that represents the number of slices available in a bucket
+
+        bucket_idx: list
+
+            computed value that make a contiguous list of indices in each bucket
+
+        rounded_num_samples_per_bucket: int
+
+            computed value post round for number of samples in a single bucket
+
+        rounded_num_samples_per_replica: int
+
+            computed value post round for number of slices available in a bucket
+
+
+
+        &quot;&quot;&quot;
+
+
+
+        def __init__(
+
+            self,
+
+            dataset: Dataset,
+
+            buckets: int,
+
+            batch_size: int,
+
+            sorted_idx: List,
+
+            backend: DistributedOptions,
+
+            allow_bucket_overlap: bool = False,
+
+            num_replicas: Optional[int] = None,
+
+            rank: Optional[int] = None,
+
+            shuffle: bool = True,
+
+            seed: int = 0,
+
+            drop_last: bool = False,
+
+            info_rank: int = 0,
+
+        ) -&gt; None:
+
+            &quot;&quot;&quot;Init for BucketedDistributedSampler
+
+
+
+            Parameters
+
+            ----------
+
+            dataset: Dataset
+
+                dataset from which to load the data.
+
+            buckets: int
+
+                number of buckets to break the dataset into
+
+            batch_size: int
+
+                batch size that will be used (needed to make sure slices are correct)
+
+            sorted_idx: list
+
+                sorted list of samples by the characteristic to bucket by (e.g. seq le
+
+            backend: DistributedOptions
+
+                which backend is being used (as rank, world size, etc. need to be used)
+
+            allow_bucket_overlap: bool, default: False
+
+                allow for the residual samples (those that are not divisible by batch and num_replicas) to be assembled into
+
+                an un-bucketed batch
+
+            num_replicas: int, default: None
+
+                number of replicas
+
+            rank: int, default: None
+
+                current device rank
+
+            shuffle: bool, default: True
+
+                flag to shuffle dataset
+
+            seed: int, default: 0
+
+                seed to use for generators
+
+            drop_last: bool, default: False
+
+                whether to drop last set of samples that don&#39;t fit into a
+
+            info_rank: int, default: 0
+
+                which device to print information on
+
+
+
+            &quot;&quot;&quot;
+
+            # If the backend isnt DDP there needs to be an additional import
+
+            num_replicas, rank = self._conditional_distributed(
+
+                backend=backend, num_replicas=num_replicas, rank=rank
+
+            )
+
+            self.num_replicas = num_replicas
+
+            self.rank = rank
+
+            self.epoch = 0
+
+            self.drop_last = drop_last
+
+            self.shuffle = shuffle
+
+            self.seed = seed
+
+            self.buckets = buckets
+
+            self.sorted_n_samples = sorted_idx
+
+            # Batch size is needed here so a contiguous iter of buckets can be formed
+
+            self.batch_size = batch_size
+
+            # This is a flag to batch up the dropped samples (that would be &#39;wasted&#39;) if drop_last is flagged
+
+            self.allow_bucket_overlap = allow_bucket_overlap
+
+            # Calculate the size of each slice that will be indexed across the replicas
+
+            self.slice_size = self.batch_size * self.num_replicas
+
+            # Calculate the size of the buckets (rounded or not based on drop last)
+
+            self.num_samples_per_bucket = self._get_size(
+
+                len(dataset), self.buckets, self.drop_last
+
+            )
+
+            # Calculate the number of slices per bucket
+
+            self.num_slices_per_bucket = self._get_size(
+
+                self.num_samples_per_bucket, self.slice_size, self.drop_last
+
+            )
+
+            if self.num_samples_per_bucket &lt; self.slice_size:
+
+                raise ValueError(
+
+                    f&quot;Stoke -- Resulting number of slices (batch * replicas) per bucket &quot;
+
+                    f&quot;({self.num_samples_per_bucket}) is less than the batch size &quot;
+
+                    f&quot;({self.batch_size})&quot;
+
+                )
+
+            if self.num_slices_per_bucket &lt; 2:
+
+                raise ValueError(
+
+                    f&quot;Stoke -- Number of slices per bucket {self.num_slices_per_bucket} is less than 2 &quot;
+
+                    f&quot;which is not recommended&quot;
+
+                )
+
+            if self.num_samples_per_bucket &lt; 100:
+
+                raise ValueError(
+
+                    f&quot;Stoke -- Number of samples per bucket {self.num_samples_per_bucket} is less than 100 &quot;
+
+                    f&quot;which is not recommended as this might lead to dropping of excessive data&quot;
+
+                )
+
+            # Split into buckets and turn into lists
+
+            self.bucket_idx = [
+
+                list(val) for val in np.array_split(self.sorted_n_samples, self.buckets)
+
+            ]
+
+            # Calculate the post rounded numbers
+
+            self.rounded_num_samples_per_bucket = (
+
+                self.slice_size * self.num_slices_per_bucket
+
+            )
+
+            self.rounded_num_samples_per_replica = (
+
+                self.num_slices_per_bucket * self.batch_size * self.buckets
+
+            )
+
+            # Add the bucket overlap samples
+
+            if self.allow_bucket_overlap:
+
+                self.rounded_num_samples_per_replica += (
+
+                    (len(dataset) - (self.rounded_num_samples_per_bucket * self.buckets))
+
+                    // self.slice_size
+
+                ) * self.batch_size
+
+            if self.rank == info_rank:
+
+                print(
+
+                    f&quot;Stoke -- BucketedDistributedSampler -- # Samples Per Bucket: &quot;
+
+                    f&quot;{self.rounded_num_samples_per_bucket}, # of Samples Per Replica: &quot;
+
+                    f&quot;{self.rounded_num_samples_per_replica}&quot;
+
+                )
+
+
+
+        def _conditional_distributed(
+
+            self,
+
+            backend: DistributedOptions,
+
+            num_replicas: Optional[int],
+
+            rank: Optional[int],
+
+        ):
+
+            &quot;&quot;&quot;
+
+
+
+            Parameters
+
+            ----------
+
+            backend: DistributedOptions
+
+                which backend is being used
+
+            num_replicas: int, default: None
+
+                total number of replicas
+
+            rank: int, default: None
+
+                current device rank
+
+
+
+            Returns
+
+            -------
+
+            Tuple[int, int]
+
+                num_replicas, rank
+
+            &quot;&quot;&quot;
+
+            return self._check_backend(backend, num_replicas, rank)
+
+
+
+        def _get_backend_functions(self, backend: DistributedOptions):
+
+            &quot;&quot;&quot;Gets backend functions if needed
+
+
+
+            Parameters
+
+            ----------
+
+            backend: DistributedOptions
+
+                which backend is being used
+
+
+
+            Returns
+
+            -------
+
+            Tuple[bool, int, int]
+
+                is_init, num_replicas, rank
+
+
+
+            &quot;&quot;&quot;
+
+            if backend.value == &quot;ddp&quot; or backend.value == &quot;deepspeed&quot;:
+
+                return (
+
+                    torch.distributed.is_initialized,
+
+                    torch.distributed.get_world_size,
+
+                    torch.distributed.get_rank,
+
+                )
+
+            else:
+
+                return hvd.is_initialized, hvd.size, hvd.rank
+
+
+
+        def _check_backend(
+
+            self,
+
+            backend: DistributedOptions,
+
+            num_replicas: Optional[int],
+
+            rank: Optional[int],
+
+        ):
+
+            &quot;&quot;&quot;Checks the backend for correct device info
+
+
+
+            Parameters
+
+            ----------
+
+            backend: DistributedOptions
+
+                which backend is being used
+
+            num_replicas: int, default: None
+
+                total number of replicas
+
+            rank: int, default: None
+
+                current device rank
+
+
+
+            Returns
+
+            -------
+
+            Tuple[int, int]
+
+                num_replicas, rank
+
+
+
+            &quot;&quot;&quot;
+
+            if num_replicas is None or rank is None:
+
+                is_avail, get_world_size, get_rank = self._get_backend_functions(
+
+                    backend=backend
+
+                )
+
+            if num_replicas is None:
+
+                if not is_avail():
+
+                    raise RuntimeError(
+
+                        &quot;Requires distributed package (torch.dist or hvd) to be available&quot;
+
+                    )
+
+                num_replicas = get_world_size()
+
+            if rank is None:
+
+                if not is_avail():
+
+                    raise RuntimeError(
+
+                        &quot;Requires distributed package (torch.dist or hvd) to be available&quot;
+
+                    )
+
+                rank = get_rank()
+
+            return num_replicas, rank
+
+
+
+        @staticmethod
+
+        def _get_size(data_len: int, split_var: int, drop_last: bool = False):
+
+            &quot;&quot;&quot;Gets the size of a split
+
+
+
+            Parameters
+
+            ----------
+
+            data_len: int
+
+                current dataset length
+
+            split_var: int
+
+                how many to split into
+
+            drop_last: bool, default: False
+
+                drop last hanging samples if not batch_size
+
+
+
+            Returns
+
+            -------
+
+            num_samples: int
+
+
+
+            &quot;&quot;&quot;
+
+            if drop_last:
+
+                num_samples = data_len // split_var
+
+            else:
+
+                num_samples = ceil(data_len / split_var)
+
+            return num_samples
+
+
+
+        def __iter__(self) -&gt; Iterator[T_co]:
+
+            &quot;&quot;&quot;Handles assembling the batches from a bucketed perspective
+
+
+
+            Shuffle bucket order-&gt;Pad if necessary-&gt;Slice across replicas-&gt;Possibly batch up residuals-&gt;shuffle bucketed
+
+            batches-&gt;Unroll into list-&gt;Make iter
+
+
+
+            Returns
+
+            -------
+
+            Iterator[T_co]
+
+
+
+            &quot;&quot;&quot;
+
+            # Shuffle the bucketed idx
+
+            if self.shuffle:
+
+                # deterministically shuffle based on epoch and seed
+
+                g = torch.Generator()
+
+                g.manual_seed(self.seed + self.epoch)
+
+                # Permute each bucket
+
+                indices = [
+
+                    [val[idx] for idx in torch.randperm(len(val), generator=g).tolist()]
+
+                    for val in self.bucket_idx
+
+                ]
+
+            else:
+
+                indices = self.bucket_idx
+
+            # Iterate over the buckets
+
+            for idx, val in enumerate(indices):
+
+                # If this is true we need to handle padding
+
+                if (self.num_slices_per_bucket * self.slice_size) &gt; len(val):
+
+                    split_val = self._handle_padding(val)
+
+                    indices[idx] = list(itertools.chain(*split_val))
+
+                    assert len(indices[idx]) == self.rounded_num_samples_per_bucket
+
+            # Now slice across replicas
+
+            final_indices = []
+
+            for val in indices:
+
+                for idx in range(self.num_slices_per_bucket):
+
+                    replica_slice = val[
+
+                        (idx * self.slice_size) : ((idx + 1) * self.slice_size)
+
+                    ][self.rank : self.slice_size : self.num_replicas]
+
+                    final_indices.append(replica_slice)
+
+            # If bucket overlap is allowed then we just batch up the residual indices
+
+            if self.drop_last and self.allow_bucket_overlap:
+
+                residual_idx = list(
+
+                    itertools.chain(
+
+                        *[val[self.rounded_num_samples_per_bucket :] for val in indices]
+
+                    )
+
+                )
+
+                if len(residual_idx) &gt; self.slice_size:
+
+                    # Cut by slices then by replicas
+
+                    residual_idx = [
+
+                        residual_idx[
+
+                            (idx * self.slice_size) : ((idx + 1) * self.slice_size)
+
+                        ][self.rank : self.slice_size : self.num_replicas]
+
+                        for idx in range(len(residual_idx) // self.slice_size)
+
+                    ]
+
+                    # Append to the final indices
+
+                    final_indices.extend(residual_idx)
+
+            # Shuffle the bucketed batches
+
+            if self.shuffle:
+
+                # deterministically shuffle based on epoch and seed
+
+                g = torch.Generator()
+
+                g.manual_seed(self.seed + self.epoch)
+
+                # Permute the bucket order
+
+                final_indices = [
+
+                    final_indices[val]
+
+                    for val in torch.randperm(len(final_indices), generator=g)
+
+                ]
+
+            # Unroll into a single list
+
+            final_indices = list(itertools.chain(*final_indices))
+
+            assert len(final_indices) == self.rounded_num_samples_per_replica
+
+            return iter(final_indices)
+
+
+
+        def _handle_padding(self, idx_list: List):
+
+            &quot;&quot;&quot;Handles padding out if a batch is short
+
+
+
+            Parameters
+
+            ----------
+
+            idx_list: List
+
+                list of indices
+
+
+
+            Returns
+
+            -------
+
+            split_val: List
+
+                list with correctly padded sizes
+
+
+
+            &quot;&quot;&quot;
+
+            split_val = []
+
+            for idx in range(self.num_slices_per_bucket):
+
+                if idx == (self.num_slices_per_bucket - 1):
+
+                    # Get the short batch
+
+                    short_batch = idx_list[(idx * self.slice_size) :]
+
+                    # Short batch replica slice sizes
+
+                    short_len = [
+
+                        self.batch_size - len(list(val))
+
+                        for val in np.array_split(short_batch, self.num_replicas)
+
+                    ]
+
+                    # Pop the necessary values from the entire bucket
+
+                    pad_values = [
+
+                        idx_list[s_idx : (self.num_replicas * s_len) : self.num_replicas]
+
+                        for s_idx, s_len in enumerate(short_len)
+
+                    ]
+
+                    # If not a consistent list then we need to reorder so that the step size alignment slicing
+
+                    # of the replicas works
+
+                    if len(set(short_len)) != 1:
+
+                        # here we need to find the first larger idx and reorder
+
+                        first_idx = short_len.index(max(set(short_len)))
+
+                        # Reorder
+
+                        pad_values = pad_values[first_idx:] + pad_values[0:first_idx]
+
+                    extended_batch = short_batch + [
+
+                        pad
+
+                        for pad in list(
+
+                            itertools.chain(*itertools.zip_longest(*pad_values))
+
+                        )
+
+                        if pad is not None
+
+                    ]
+
+                    split_val.append(extended_batch)
+
+                else:
+
+                    split_val.append(
+
+                        idx_list[(idx * self.slice_size) : ((idx + 1) * self.slice_size)]
+
+                    )
+
+            return split_val
+
+
+
+        def __len__(self) -&gt; int:
+
+            return self.rounded_num_samples_per_replica
+
+
+
+        def set_epoch(self, epoch: int) -&gt; None:
+
+            &quot;&quot;&quot;Sets the epoch for this sampler.
+
+
+
+            When :attr:`shuffle=True`, this ensures all replicas
+
+            use a different random ordering for each epoch. Otherwise, the next iteration of this
+
+            sampler will yield the same ordering.
+
+
+
+            Parameters
+
+            ----------
+
+            epoch: int
+
+                Epoch number
+
+
+
+            &quot;&quot;&quot;
+
+            self.epoch = epoch
+</code></pre></div>
+<h2 id="classes">Classes</h2>
+<h3 id="bucketeddistributedsampler">BucketedDistributedSampler</h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">BucketedDistributedSampler</span><span class="p">(</span>
+    <span class="n">dataset</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span>
+    <span class="n">buckets</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">sorted_idx</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span>
+    <span class="n">backend</span><span class="p">:</span> <span class="n">stoke</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">DistributedOptions</span><span class="p">,</span>
+    <span class="n">allow_bucket_overlap</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">num_replicas</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">rank</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">shuffle</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">drop_last</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">info_rank</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="p">)</span>
+</code></pre></div>
+<h4 id="attributes">Attributes</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>num_replicas</td>
+<td>int, default: None</td>
+<td>number of replicas</td>
+<td>None</td>
+</tr>
+<tr>
+<td>rank</td>
+<td>int, default: None</td>
+<td>current device rank</td>
+<td>None</td>
+</tr>
+<tr>
+<td>epoch</td>
+<td>int</td>
+<td>current training epoch</td>
+<td>None</td>
+</tr>
+<tr>
+<td>drop_last</td>
+<td>bool, default: False</td>
+<td>whether to drop last set of samples that don't fit into a batch</td>
+<td>None</td>
+</tr>
+<tr>
+<td>shuffle</td>
+<td>bool, default: True</td>
+<td>flag to shuffle dataset</td>
+<td>None</td>
+</tr>
+<tr>
+<td>seed</td>
+<td>int, default: 0</td>
+<td>seed to use for generators</td>
+<td>None</td>
+</tr>
+<tr>
+<td>buckets</td>
+<td>int</td>
+<td>number of buckets to break the dataset into</td>
+<td>None</td>
+</tr>
+<tr>
+<td>sorted_n_samples</td>
+<td>list</td>
+<td>sorted list of samples by the characteristic to bucket by (e.g. seq len)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>batch_size</td>
+<td>int</td>
+<td>batch size that will be used (needed to make sure slices are correct)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>allow_bucket_overlap</td>
+<td>bool, default: False</td>
+<td>allow for the residual samples (those that are not divisible by batch and num_replicas) to be assembled into</td>
+<td></td>
+</tr>
+<tr>
+<td>an un-bucketed batch</td>
+<td>None</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>slice_size</td>
+<td>int</td>
+<td>computed from batch size and number of replicas</td>
+<td>None</td>
+</tr>
+<tr>
+<td>num_samples_per_bucket</td>
+<td>int</td>
+<td>computed value that represents the number of samples in a single bucket</td>
+<td>None</td>
+</tr>
+<tr>
+<td>num_slices_per_bucket</td>
+<td>int</td>
+<td>computed value that represents the number of slices available in a bucket</td>
+<td>None</td>
+</tr>
+<tr>
+<td>bucket_idx</td>
+<td>list</td>
+<td>computed value that make a contiguous list of indices in each bucket</td>
+<td>None</td>
+</tr>
+<tr>
+<td>rounded_num_samples_per_bucket</td>
+<td>int</td>
+<td>computed value post round for number of samples in a single bucket</td>
+<td>None</td>
+</tr>
+<tr>
+<td>rounded_num_samples_per_replica</td>
+<td>int</td>
+<td>computed value post round for number of slices available in a bucket</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p>??? example "View Source"
+        class BucketedDistributedSampler(Sampler[T_co]):</p>
+<div class="highlight"><pre><span></span><code>        &quot;&quot;&quot;Sampler that buckets samples by sorted_idx and then randomly samples from a specific bucket to prevent excess
+
+        padding leading to wasted computation
+
+
+
+        Borrowing heavily from the base DistributedSampler
+
+        https://pytorch.org/docs/stable/_modules/torch/utils/data/distributed.html#DistributedSampler
+
+
+
+        Attributes
+
+        ----------
+
+        num_replicas: int, default: None
+
+            number of replicas
+
+        rank: int, default: None
+
+            current device rank
+
+        epoch: int
+
+            current training epoch
+
+        drop_last: bool, default: False
+
+            whether to drop last set of samples that don&#39;t fit into a batch
+
+        shuffle: bool, default: True
+
+            flag to shuffle dataset
+
+        seed: int, default: 0
+
+            seed to use for generators
+
+        buckets: int
+
+            number of buckets to break the dataset into
+
+        sorted_n_samples: list
+
+            sorted list of samples by the characteristic to bucket by (e.g. seq len)
+
+        batch_size: int
+
+            batch size that will be used (needed to make sure slices are correct)
+
+        allow_bucket_overlap: bool, default: False
+
+            allow for the residual samples (those that are not divisible by batch and num_replicas) to be assembled into
+
+            an un-bucketed batch
+
+        slice_size: int
+
+            computed from batch size and number of replicas
+
+        num_samples_per_bucket: int
+
+            computed value that represents the number of samples in a single bucket
+
+        num_slices_per_bucket: int
+
+            computed value that represents the number of slices available in a bucket
+
+        bucket_idx: list
+
+            computed value that make a contiguous list of indices in each bucket
+
+        rounded_num_samples_per_bucket: int
+
+            computed value post round for number of samples in a single bucket
+
+        rounded_num_samples_per_replica: int
+
+            computed value post round for number of slices available in a bucket
+
+
+
+        &quot;&quot;&quot;
+
+
+
+        def __init__(
+
+            self,
+
+            dataset: Dataset,
+
+            buckets: int,
+
+            batch_size: int,
+
+            sorted_idx: List,
+
+            backend: DistributedOptions,
+
+            allow_bucket_overlap: bool = False,
+
+            num_replicas: Optional[int] = None,
+
+            rank: Optional[int] = None,
+
+            shuffle: bool = True,
+
+            seed: int = 0,
+
+            drop_last: bool = False,
+
+            info_rank: int = 0,
+
+        ) -&gt; None:
+
+            &quot;&quot;&quot;Init for BucketedDistributedSampler
+
+
+
+            Parameters
+
+            ----------
+
+            dataset: Dataset
+
+                dataset from which to load the data.
+
+            buckets: int
+
+                number of buckets to break the dataset into
+
+            batch_size: int
+
+                batch size that will be used (needed to make sure slices are correct)
+
+            sorted_idx: list
+
+                sorted list of samples by the characteristic to bucket by (e.g. seq le
+
+            backend: DistributedOptions
+
+                which backend is being used (as rank, world size, etc. need to be used)
+
+            allow_bucket_overlap: bool, default: False
+
+                allow for the residual samples (those that are not divisible by batch and num_replicas) to be assembled into
+
+                an un-bucketed batch
+
+            num_replicas: int, default: None
+
+                number of replicas
+
+            rank: int, default: None
+
+                current device rank
+
+            shuffle: bool, default: True
+
+                flag to shuffle dataset
+
+            seed: int, default: 0
+
+                seed to use for generators
+
+            drop_last: bool, default: False
+
+                whether to drop last set of samples that don&#39;t fit into a
+
+            info_rank: int, default: 0
+
+                which device to print information on
+
+
+
+            &quot;&quot;&quot;
+
+            # If the backend isnt DDP there needs to be an additional import
+
+            num_replicas, rank = self._conditional_distributed(
+
+                backend=backend, num_replicas=num_replicas, rank=rank
+
+            )
+
+            self.num_replicas = num_replicas
+
+            self.rank = rank
+
+            self.epoch = 0
+
+            self.drop_last = drop_last
+
+            self.shuffle = shuffle
+
+            self.seed = seed
+
+            self.buckets = buckets
+
+            self.sorted_n_samples = sorted_idx
+
+            # Batch size is needed here so a contiguous iter of buckets can be formed
+
+            self.batch_size = batch_size
+
+            # This is a flag to batch up the dropped samples (that would be &#39;wasted&#39;) if drop_last is flagged
+
+            self.allow_bucket_overlap = allow_bucket_overlap
+
+            # Calculate the size of each slice that will be indexed across the replicas
+
+            self.slice_size = self.batch_size * self.num_replicas
+
+            # Calculate the size of the buckets (rounded or not based on drop last)
+
+            self.num_samples_per_bucket = self._get_size(
+
+                len(dataset), self.buckets, self.drop_last
+
+            )
+
+            # Calculate the number of slices per bucket
+
+            self.num_slices_per_bucket = self._get_size(
+
+                self.num_samples_per_bucket, self.slice_size, self.drop_last
+
+            )
+
+            if self.num_samples_per_bucket &lt; self.slice_size:
+
+                raise ValueError(
+
+                    f&quot;Stoke -- Resulting number of slices (batch * replicas) per bucket &quot;
+
+                    f&quot;({self.num_samples_per_bucket}) is less than the batch size &quot;
+
+                    f&quot;({self.batch_size})&quot;
+
+                )
+
+            if self.num_slices_per_bucket &lt; 2:
+
+                raise ValueError(
+
+                    f&quot;Stoke -- Number of slices per bucket {self.num_slices_per_bucket} is less than 2 &quot;
+
+                    f&quot;which is not recommended&quot;
+
+                )
+
+            if self.num_samples_per_bucket &lt; 100:
+
+                raise ValueError(
+
+                    f&quot;Stoke -- Number of samples per bucket {self.num_samples_per_bucket} is less than 100 &quot;
+
+                    f&quot;which is not recommended as this might lead to dropping of excessive data&quot;
+
+                )
+
+            # Split into buckets and turn into lists
+
+            self.bucket_idx = [
+
+                list(val) for val in np.array_split(self.sorted_n_samples, self.buckets)
+
+            ]
+
+            # Calculate the post rounded numbers
+
+            self.rounded_num_samples_per_bucket = (
+
+                self.slice_size * self.num_slices_per_bucket
+
+            )
+
+            self.rounded_num_samples_per_replica = (
+
+                self.num_slices_per_bucket * self.batch_size * self.buckets
+
+            )
+
+            # Add the bucket overlap samples
+
+            if self.allow_bucket_overlap:
+
+                self.rounded_num_samples_per_replica += (
+
+                    (len(dataset) - (self.rounded_num_samples_per_bucket * self.buckets))
+
+                    // self.slice_size
+
+                ) * self.batch_size
+
+            if self.rank == info_rank:
+
+                print(
+
+                    f&quot;Stoke -- BucketedDistributedSampler -- # Samples Per Bucket: &quot;
+
+                    f&quot;{self.rounded_num_samples_per_bucket}, # of Samples Per Replica: &quot;
+
+                    f&quot;{self.rounded_num_samples_per_replica}&quot;
+
+                )
+
+
+
+        def _conditional_distributed(
+
+            self,
+
+            backend: DistributedOptions,
+
+            num_replicas: Optional[int],
+
+            rank: Optional[int],
+
+        ):
+
+            &quot;&quot;&quot;
+
+
+
+            Parameters
+
+            ----------
+
+            backend: DistributedOptions
+
+                which backend is being used
+
+            num_replicas: int, default: None
+
+                total number of replicas
+
+            rank: int, default: None
+
+                current device rank
+
+
+
+            Returns
+
+            -------
+
+            Tuple[int, int]
+
+                num_replicas, rank
+
+            &quot;&quot;&quot;
+
+            return self._check_backend(backend, num_replicas, rank)
+
+
+
+        def _get_backend_functions(self, backend: DistributedOptions):
+
+            &quot;&quot;&quot;Gets backend functions if needed
+
+
+
+            Parameters
+
+            ----------
+
+            backend: DistributedOptions
+
+                which backend is being used
+
+
+
+            Returns
+
+            -------
+
+            Tuple[bool, int, int]
+
+                is_init, num_replicas, rank
+
+
+
+            &quot;&quot;&quot;
+
+            if backend.value == &quot;ddp&quot; or backend.value == &quot;deepspeed&quot;:
+
+                return (
+
+                    torch.distributed.is_initialized,
+
+                    torch.distributed.get_world_size,
+
+                    torch.distributed.get_rank,
+
+                )
+
+            else:
+
+                return hvd.is_initialized, hvd.size, hvd.rank
+
+
+
+        def _check_backend(
+
+            self,
+
+            backend: DistributedOptions,
+
+            num_replicas: Optional[int],
+
+            rank: Optional[int],
+
+        ):
+
+            &quot;&quot;&quot;Checks the backend for correct device info
+
+
+
+            Parameters
+
+            ----------
+
+            backend: DistributedOptions
+
+                which backend is being used
+
+            num_replicas: int, default: None
+
+                total number of replicas
+
+            rank: int, default: None
+
+                current device rank
+
+
+
+            Returns
+
+            -------
+
+            Tuple[int, int]
+
+                num_replicas, rank
+
+
+
+            &quot;&quot;&quot;
+
+            if num_replicas is None or rank is None:
+
+                is_avail, get_world_size, get_rank = self._get_backend_functions(
+
+                    backend=backend
+
+                )
+
+            if num_replicas is None:
+
+                if not is_avail():
+
+                    raise RuntimeError(
+
+                        &quot;Requires distributed package (torch.dist or hvd) to be available&quot;
+
+                    )
+
+                num_replicas = get_world_size()
+
+            if rank is None:
+
+                if not is_avail():
+
+                    raise RuntimeError(
+
+                        &quot;Requires distributed package (torch.dist or hvd) to be available&quot;
+
+                    )
+
+                rank = get_rank()
+
+            return num_replicas, rank
+
+
+
+        @staticmethod
+
+        def _get_size(data_len: int, split_var: int, drop_last: bool = False):
+
+            &quot;&quot;&quot;Gets the size of a split
+
+
+
+            Parameters
+
+            ----------
+
+            data_len: int
+
+                current dataset length
+
+            split_var: int
+
+                how many to split into
+
+            drop_last: bool, default: False
+
+                drop last hanging samples if not batch_size
+
+
+
+            Returns
+
+            -------
+
+            num_samples: int
+
+
+
+            &quot;&quot;&quot;
+
+            if drop_last:
+
+                num_samples = data_len // split_var
+
+            else:
+
+                num_samples = ceil(data_len / split_var)
+
+            return num_samples
+
+
+
+        def __iter__(self) -&gt; Iterator[T_co]:
+
+            &quot;&quot;&quot;Handles assembling the batches from a bucketed perspective
+
+
+
+            Shuffle bucket order-&gt;Pad if necessary-&gt;Slice across replicas-&gt;Possibly batch up residuals-&gt;shuffle bucketed
+
+            batches-&gt;Unroll into list-&gt;Make iter
+
+
+
+            Returns
+
+            -------
+
+            Iterator[T_co]
+
+
+
+            &quot;&quot;&quot;
+
+            # Shuffle the bucketed idx
+
+            if self.shuffle:
+
+                # deterministically shuffle based on epoch and seed
+
+                g = torch.Generator()
+
+                g.manual_seed(self.seed + self.epoch)
+
+                # Permute each bucket
+
+                indices = [
+
+                    [val[idx] for idx in torch.randperm(len(val), generator=g).tolist()]
+
+                    for val in self.bucket_idx
+
+                ]
+
+            else:
+
+                indices = self.bucket_idx
+
+            # Iterate over the buckets
+
+            for idx, val in enumerate(indices):
+
+                # If this is true we need to handle padding
+
+                if (self.num_slices_per_bucket * self.slice_size) &gt; len(val):
+
+                    split_val = self._handle_padding(val)
+
+                    indices[idx] = list(itertools.chain(*split_val))
+
+                    assert len(indices[idx]) == self.rounded_num_samples_per_bucket
+
+            # Now slice across replicas
+
+            final_indices = []
+
+            for val in indices:
+
+                for idx in range(self.num_slices_per_bucket):
+
+                    replica_slice = val[
+
+                        (idx * self.slice_size) : ((idx + 1) * self.slice_size)
+
+                    ][self.rank : self.slice_size : self.num_replicas]
+
+                    final_indices.append(replica_slice)
+
+            # If bucket overlap is allowed then we just batch up the residual indices
+
+            if self.drop_last and self.allow_bucket_overlap:
+
+                residual_idx = list(
+
+                    itertools.chain(
+
+                        *[val[self.rounded_num_samples_per_bucket :] for val in indices]
+
+                    )
+
+                )
+
+                if len(residual_idx) &gt; self.slice_size:
+
+                    # Cut by slices then by replicas
+
+                    residual_idx = [
+
+                        residual_idx[
+
+                            (idx * self.slice_size) : ((idx + 1) * self.slice_size)
+
+                        ][self.rank : self.slice_size : self.num_replicas]
+
+                        for idx in range(len(residual_idx) // self.slice_size)
+
+                    ]
+
+                    # Append to the final indices
+
+                    final_indices.extend(residual_idx)
+
+            # Shuffle the bucketed batches
+
+            if self.shuffle:
+
+                # deterministically shuffle based on epoch and seed
+
+                g = torch.Generator()
+
+                g.manual_seed(self.seed + self.epoch)
+
+                # Permute the bucket order
+
+                final_indices = [
+
+                    final_indices[val]
+
+                    for val in torch.randperm(len(final_indices), generator=g)
+
+                ]
+
+            # Unroll into a single list
+
+            final_indices = list(itertools.chain(*final_indices))
+
+            assert len(final_indices) == self.rounded_num_samples_per_replica
+
+            return iter(final_indices)
+
+
+
+        def _handle_padding(self, idx_list: List):
+
+            &quot;&quot;&quot;Handles padding out if a batch is short
+
+
+
+            Parameters
+
+            ----------
+
+            idx_list: List
+
+                list of indices
+
+
+
+            Returns
+
+            -------
+
+            split_val: List
+
+                list with correctly padded sizes
+
+
+
+            &quot;&quot;&quot;
+
+            split_val = []
+
+            for idx in range(self.num_slices_per_bucket):
+
+                if idx == (self.num_slices_per_bucket - 1):
+
+                    # Get the short batch
+
+                    short_batch = idx_list[(idx * self.slice_size) :]
+
+                    # Short batch replica slice sizes
+
+                    short_len = [
+
+                        self.batch_size - len(list(val))
+
+                        for val in np.array_split(short_batch, self.num_replicas)
+
+                    ]
+
+                    # Pop the necessary values from the entire bucket
+
+                    pad_values = [
+
+                        idx_list[s_idx : (self.num_replicas * s_len) : self.num_replicas]
+
+                        for s_idx, s_len in enumerate(short_len)
+
+                    ]
+
+                    # If not a consistent list then we need to reorder so that the step size alignment slicing
+
+                    # of the replicas works
+
+                    if len(set(short_len)) != 1:
+
+                        # here we need to find the first larger idx and reorder
+
+                        first_idx = short_len.index(max(set(short_len)))
+
+                        # Reorder
+
+                        pad_values = pad_values[first_idx:] + pad_values[0:first_idx]
+
+                    extended_batch = short_batch + [
+
+                        pad
+
+                        for pad in list(
+
+                            itertools.chain(*itertools.zip_longest(*pad_values))
+
+                        )
+
+                        if pad is not None
+
+                    ]
+
+                    split_val.append(extended_batch)
+
+                else:
+
+                    split_val.append(
+
+                        idx_list[(idx * self.slice_size) : ((idx + 1) * self.slice_size)]
+
+                    )
+
+            return split_val
+
+
+
+        def __len__(self) -&gt; int:
+
+            return self.rounded_num_samples_per_replica
+
+
+
+        def set_epoch(self, epoch: int) -&gt; None:
+
+            &quot;&quot;&quot;Sets the epoch for this sampler.
+
+
+
+            When :attr:`shuffle=True`, this ensures all replicas
+
+            use a different random ordering for each epoch. Otherwise, the next iteration of this
+
+            sampler will yield the same ordering.
+
+
+
+            Parameters
+
+            ----------
+
+            epoch: int
+
+                Epoch number
+
+
+
+            &quot;&quot;&quot;
+
+            self.epoch = epoch
+</code></pre></div>
+<hr />
+<h4 id="ancestors-in-mro">Ancestors (in MRO)</h4>
+<ul>
+<li>torch.utils.data.sampler.Sampler</li>
+<li>typing.Generic</li>
+</ul>
+<h4 id="methods">Methods</h4>
+<h4 id="set_epoch">set_epoch</h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">set_epoch</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">epoch</span><span class="p">:</span> <span class="nb">int</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Sets the epoch for this sampler.</p>
+<p>When :attr:<code>shuffle=True</code>, this ensures all replicas
+use a different random ordering for each epoch. Otherwise, the next iteration of this
+sampler will yield the same ordering.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>epoch</td>
+<td>int</td>
+<td>Epoch number</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p>??? example "View Source"
+            def set_epoch(self, epoch: int) -&gt; None:</p>
+<div class="highlight"><pre><span></span><code>            &quot;&quot;&quot;Sets the epoch for this sampler.
+
+
+
+            When :attr:`shuffle=True`, this ensures all replicas
+
+            use a different random ordering for each epoch. Otherwise, the next iteration of this
+
+            sampler will yield the same ordering.
+
+
+
+            Parameters
+
+            ----------
+
+            epoch: int
+
+                Epoch number
+
+
+
+            &quot;&quot;&quot;
+
+            self.epoch = epoch
+</code></pre></div>
+<h3 id="stokedataloader">StokeDataLoader</h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">StokeDataLoader</span><span class="p">(</span>
+    <span class="n">gpu</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">fp16</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">stoke</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">FP16Options</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">Dataset</span><span class="p">[</span><span class="o">+</span><span class="n">T_co</span><span class="p">],</span>
+    <span class="n">batch_size</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">shuffle</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">sampler</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">Sampler</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">batch_sampler</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">Sampler</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">num_workers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">collate_fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">List</span><span class="p">[</span><span class="o">~</span><span class="n">T</span><span class="p">]],</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">pin_memory</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">drop_last</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">timeout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">worker_init_fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">multiprocessing_context</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">generator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">prefetch_factor</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="n">persistent_workers</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span>
+</code></pre></div>
+<h4 id="attributes_1">Attributes</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>_gpu</td>
+<td>bool</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr>
+<td>_fp16</td>
+<td>Optional[FP16Options]</td>
+<td>None</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p>??? example "View Source"
+        class StokeDataLoader(DL):</p>
+<div class="highlight"><pre><span></span><code>        &quot;&quot;&quot;Provides a shim interface to torch.utils.data.DataLoader with mapped kwargs
+
+
+
+        Attributes
+
+        ----------
+
+        _gpu: bool
+
+        _fp16: Optional[FP16Options]
+
+
+
+        See Also
+
+        --------
+
+        torch.utils.data.DataLoader: base DataLoader class that this inherits from (check for all attributes)
+
+
+
+        &quot;&quot;&quot;
+
+
+
+        def __init__(
+
+            self,
+
+            gpu: bool,
+
+            fp16: Optional[FP16Options],
+
+            dataset: Dataset[T_co],
+
+            batch_size: Optional[int] = 1,
+
+            shuffle: bool = False,
+
+            sampler: Optional[Sampler[int]] = None,
+
+            batch_sampler: Optional[Sampler[Sequence[int]]] = None,
+
+            num_workers: int = 0,
+
+            collate_fn: _collate_fn_t = None,
+
+            pin_memory: bool = False,
+
+            drop_last: bool = False,
+
+            timeout: float = 0,
+
+            worker_init_fn: _worker_init_fn_t = None,
+
+            multiprocessing_context=None,
+
+            generator=None,
+
+            *,
+
+            prefetch_factor: int = 2,
+
+            persistent_workers: bool = False,
+
+        ):
+
+            &quot;&quot;&quot;Maps to torch.utils.data.DataLoader __init__
+
+
+
+            Shim is necessary to automatically handle device placement since the gpu/fp16 flags can&#39;t be
+
+            determined until the StokeStatus object is available which is post init. This could be disconnected from
+
+            this class but it would require the user to forward on device or fp16 configs which breaks the
+
+            paradigm that the flags only need to be set and never handled
+
+
+
+            Parameters
+
+            ----------
+
+            dataset: Dataset
+
+                dataset from which to load the data.
+
+            batch_size: int, default: 1
+
+                how many samples per batch to load .
+
+            shuffle: bool, default: False
+
+                set to ``True`` to have the data reshuffled at every epoch.
+
+            sampler: Sampler or Iterable, default: None
+
+                defines the strategy to draw samples from the dataset. Can be any ``Iterable`` with ``__len__``
+
+                implemented. If specified, :attr:`shuffle` must not be specified.
+
+            batch_sampler: Sampler or Iterable, default: None:
+
+                like :attr:`sampler`, but returns a batch of indices at a time. Mutually exclusive with
+
+                :attr:`batch_size`, :attr:`shuffle`, :attr:`sampler`, and :attr:`drop_last`.
+
+            num_workers: int, default: 0
+
+                how many subprocesses to use for data loading. ``0`` means that the data will be loaded in the main process.
+
+            collate_fn: callable, optional:
+
+                merges a list of samples to form a mini-batch of Tensor(s).  Used when using batched loading from a
+
+                map-style dataset.
+
+            pin_memory: bool, default: False:
+
+                If ``True``, the data loader will copy Tensors into CUDA pinned memory before returning them. If your
+
+                data elements are a custom type, or your :attr:`collate_fn` returns a batch that is a custom type,
+
+                see the example below.
+
+            drop_last: bool, default: False
+
+                set to ``True`` to drop the last incomplete batch, if the dataset size is not divisible by the batch size.
+
+                If ``False`` and the size of dataset is not divisible by the batch size, then the last batch
+
+                will be smaller.
+
+            timeout: numeric, default: 0
+
+                if positive, the timeout value for collecting a batch from workers. Should always be non-negative.
+
+            worker_init_fn: callable, default: None
+
+                If not ``None``, this will be called on each worker subprocess with the worker id
+
+                (an int in ``[0, num_workers - 1]``) as input, after seeding and before data loading.
+
+            prefetch_factor: int, default: 2
+
+                Number of samples loaded in advance by each worker. ``2`` means there will be a total of 2 * num_workers
+
+                samples prefetched across all workers.
+
+            persistent_workers: bool, default: False
+
+                If ``True``, the data loader will not shutdown the worker processes after a dataset has been
+
+                consumed once. This allows to maintain the workers `Dataset` instances alive.
+
+
+
+            Returns
+
+            -------
+
+            StokeDataLoader
+
+                wrapped torch.utils.data.DataLoader object
+
+
+
+            &quot;&quot;&quot;
+
+            # Call super init for the actual torch DataLoader
+
+            super(StokeDataLoader, self).__init__(
+
+                dataset=dataset,
+
+                batch_size=batch_size,
+
+                shuffle=shuffle,
+
+                sampler=sampler,
+
+                batch_sampler=batch_sampler,
+
+                num_workers=num_workers,
+
+                collate_fn=collate_fn,
+
+                pin_memory=pin_memory,
+
+                drop_last=drop_last,
+
+                timeout=timeout,
+
+                worker_init_fn=worker_init_fn,
+
+                multiprocessing_context=multiprocessing_context,
+
+                generator=generator,
+
+                prefetch_factor=prefetch_factor,
+
+                persistent_workers=persistent_workers,
+
+            )
+
+            self._gpu = gpu
+
+            self._fp16 = fp16
+
+
+
+        def __iter__(self):
+
+            &quot;&quot;&quot;Underlying iter of the DataLoader that yields samples
+
+
+
+            Wrap the base __iter__ with a call to place on the device if flagged
+
+
+
+            Yields
+
+            ------
+
+            Union[torch.Tensor, List[torch.Tensor], Tuple[torch.Tensor], Dict[str, torch.Tensor]]
+
+                data placed on the correct device
+
+
+
+            &quot;&quot;&quot;
+
+            # Iterate using the base class iter but override the yield by pushing to device prior if gpu flag is true
+
+            for val in super().__iter__():
+
+                yield val if not self._gpu else self._place_data_on_gpu(val)
+
+
+
+        def _place_data_on_gpu(
+
+            self,
+
+            data: Union[
+
+                torch.Tensor,
+
+                List[torch.Tensor],
+
+                Tuple[torch.Tensor],
+
+                Dict[str, torch.Tensor],
+
+            ],
+
+        ):
+
+            &quot;&quot;&quot;Determine data structure and then place on the correct device (cast in the context of deepspeed FP16 as it
+
+            wants half dtype as input)
+
+
+
+            Parameters
+
+            ----------
+
+            data: Union[torch.Tensor, List[torch.Tensor], Tuple[torch.Tensor], Dict[str, torch.Tensor]]
+
+                current data coming from the underlying __iter__
+
+
+
+            Returns
+
+            -------
+
+            data: Union[torch.Tensor, List[torch.Tensor], Tuple[torch.Tensor], Dict[str, torch.Tensor]]
+
+                data moved to the correct device
+
+
+
+            &quot;&quot;&quot;
+
+            if isinstance(data, torch.Tensor):
+
+                # TODO: Check if one of the APEX version needs a cast too?
+
+                # Move to the correct cuda device w/ the correct type -- deepspeed FP16 requires a cast to half if fp16
+
+                if self._fp16 == &quot;deepspeed&quot;:
+
+                    return data.to(device=&quot;cuda&quot;, dtype=torch.half)
+
+                else:
+
+                    return data.to(device=&quot;cuda&quot;, dtype=data.dtype)
+
+            elif isinstance(data, (list, tuple)):
+
+                return type(data)(self._place_data_on_gpu(data=val) for val in data)
+
+            elif isinstance(data, dict):
+
+                return {k: self._place_data_on_gpu(v) for k, v in data.items()}
+
+            elif ~(hasattr(data, &quot;to&quot;)):
+
+                return data
+
+            else:
+
+                raise TypeError(
+
+                    f&quot;Stoke -- Unsupported data type passed to _place_data_on_gpu &quot;
+
+                    f&quot;(torch.Tensor, tuple, list, dict), currently {type(data)}&quot;
+
+                )
+</code></pre></div>
+<hr />
+<h4 id="ancestors-in-mro_1">Ancestors (in MRO)</h4>
+<ul>
+<li>torch.utils.data.dataloader.DataLoader</li>
+<li>typing.Generic</li>
+</ul>
+<h4 id="instance-variables">Instance variables</h4>
+<div class="highlight"><pre><span></span><code><span class="n">multiprocessing_context</span>
+</code></pre></div>
+<h4 id="methods_1">Methods</h4>
+<h4 id="check_worker_number_rationality">check_worker_number_rationality</h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">check_worker_number_rationality</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>??? example "View Source"
+            def check_worker_number_rationality(self):</p>
+<div class="highlight"><pre><span></span><code>            # This function check whether the dataloader&#39;s worker number is rational based on
+
+            # current system&#39;s resource. Current rule is that if the number of workers this
+
+            # Dataloader will create is bigger than the number of logical cpus that is allowed to
+
+            # use, than we will pop up a warning to let user pay attention.
+
+            #
+
+            # eg. If current system has 2 physical CPUs with 16 cores each. And each core support 2
+
+            #     threads, then the total logical cpus here is 2 * 16 * 2 = 64. Let&#39;s say current
+
+            #     DataLoader process can use half of them which is 32, then the rational max number of
+
+            #     worker that initiated from this process is 32.
+
+            #     Now, let&#39;s say the created DataLoader has num_works = 40, which is bigger than 32.
+
+            #     So the warning message is triggered to notify the user to lower the worker number if
+
+            #     necessary.
+
+            #
+
+            #
+
+            # [Note] Please note that this function repects `cpuset` only when os.sched_getaffinity is
+
+            #        available (available in most of Linux system, but not OSX and Windows).
+
+            #        When os.sched_getaffinity is not available, os.cpu_count() is called instead, but
+
+            #        it doesn&#39;t repect cpuset.
+
+            #        We don&#39;t take threading into account since each worker process is single threaded
+
+            #        at this time.
+
+            #
+
+            #        We don&#39;t set any threading flags (eg. OMP_NUM_THREADS, MKL_NUM_THREADS, etc)
+
+            #        other than `torch.set_num_threads` to 1 in the worker process, if the passing
+
+            #        in functions use 3rd party modules that rely on those threading flags to determine
+
+            #        how many thread to create (eg. numpy, etc), then it is caller&#39;s responsibility to
+
+            #        set those flags correctly.
+
+            def _create_warning_msg(num_worker_suggest, num_worker_created, cpuset_checked):
+
+
+
+                suggested_max_worker_msg = ((
+
+                    &quot;Our suggested max number of worker in current system is {}{}, which is smaller &quot;
+
+                    &quot;than what this DataLoader is going to create.&quot;).format(
+
+                        num_worker_suggest,
+
+                        (&quot;&quot; if cpuset_checked else &quot; (`cpuset` is not taken into account)&quot;))
+
+                ) if num_worker_suggest is not None else (
+
+                    &quot;DataLoader is not able to compute a suggested max number of worker in current system.&quot;)
+
+
+
+                warn_msg = (
+
+                    &quot;This DataLoader will create {} worker processes in total. {} &quot;
+
+                    &quot;Please be aware that excessive worker creation might get DataLoader running slow or even freeze, &quot;
+
+                    &quot;lower the worker number to avoid potential slowness/freeze if necessary.&quot;).format(
+
+                        num_worker_created,
+
+                        suggested_max_worker_msg)
+
+                return warn_msg
+
+
+
+            if not self.num_workers or self.num_workers == 0:
+
+                return
+
+
+
+            # try to compute a suggested max number of worker based on system&#39;s resource
+
+            max_num_worker_suggest = None
+
+            cpuset_checked = False
+
+            if hasattr(os, &#39;sched_getaffinity&#39;):
+
+                try:
+
+                    max_num_worker_suggest = len(os.sched_getaffinity(0))
+
+                    cpuset_checked = True
+
+                except Exception:
+
+                    pass
+
+            if max_num_worker_suggest is None:
+
+                # os.cpu_count() could return Optional[int]
+
+                # get cpu count first and check None in order to satify mypy check
+
+                cpu_count = os.cpu_count()
+
+                if cpu_count is not None:
+
+                    max_num_worker_suggest = cpu_count
+
+
+
+            if max_num_worker_suggest is None:
+
+                warnings.warn(_create_warning_msg(
+
+                    max_num_worker_suggest,
+
+                    self.num_workers,
+
+                    cpuset_checked))
+
+                return
+
+
+
+            if self.num_workers &gt; max_num_worker_suggest:
+
+                warnings.warn(_create_warning_msg(
+
+                    max_num_worker_suggest,
+
+                    self.num_workers,
+
+                    cpuset_checked))
+</code></pre></div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../configs/" title="Configs" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Configs
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../distributed/" title="Distributed" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Distributed
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Powered by
+        <a href="http://timothycrosley.github.io/portray">portray.</a>
+        You too can
+        <a href="http://timothycrosley.github.io/portray">
+          portray</a>
+        your Python project well using automatic documentation.
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://github.com/ncilfone" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://www.linkedin.com/in/ncilfone/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.top"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.f8263e09.min.js", "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.4fc53ad4.min.js"></script>
+      
+    
+  </body>
+</html>
