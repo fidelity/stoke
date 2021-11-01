@@ -16,6 +16,7 @@ from torch.nn.parallel import DataParallel as DP
 from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.utils.data import Dataset
 from torch.utils.data.distributed import Sampler
+from torch.utils.data.distributed import DistributedSampler
 
 from stoke.configs import (
     AMPConfig,
@@ -812,6 +813,9 @@ class Stoke:
         ):
             multiprocessing_context = "forkserver"
 
+        if self.distributed is not None and isinstance(sampler, DistributedSampler):
+            raise TypeError(f'Stoke -- Using a distributed backend requires passing an instance of a '
+                            f'DistributedSampler to the sampler argument')
         if self._verbose and self.gpu:
             print(f"Automatically handling moving model input data to GPU(s)...")
         # Forward the already known options from the Stoke status
