@@ -11,10 +11,13 @@
 ## About
 
 `stoke` is a lightweight wrapper for PyTorch that provides a simple declarative API for context switching between 
-devices (e.g. CPU, GPU), distributed modes, mixed-precision, and PyTorch extensions. This allows you to switch from 
-local full-precision CPU to mixed-precision distributed multi-GPU with extensions (like optimizer state sharding) 
-by simply changing a few declarative flags. Additionally, `stoke` exposes configuration settings for every 
-underlying backend for those that want configurability and raw access to the underlying libraries.
+devices (e.g. CPU, GPU), distributed modes, mixed-precision, and PyTorch extensions. It places no restrictions on code 
+structure for model architecture, training/inference loops, loss functions, optimizer algorithm, etc. Stoke simply 
+'wraps' your existing  PyTorch code to automatically handle the necessary underlying wiring for all of the 
+supported backends.This allows you to switch from local full-precision CPU to mixed-precision distributed multi-GPU 
+with extensions (like optimizer state sharding) by simply changing a few declarative flags. Additionally, `stoke` 
+exposes configuration settings for every underlying backend for those that want configurability and raw access to 
+the underlying libraries.
 
 In short, `stoke` is the best of 
 [PyTorch Lightning Accelerators](https://pytorch-lightning.readthedocs.io/en/latest/extensions/accelerators.html) 
@@ -31,7 +34,7 @@ context switching to `stoke`.
 ## Benefits/Capabilities
 
 - Declarative style API -- allows you to declare or specify the desired state and let `stoke` handle the rest
-- Mirrors base PyTorch style `model`, `loss`, `backward`, and `step` calls
+- Wrapped API Mirrors base PyTorch style `model`, `loss`, `backward`, and `step` calls
 - Automatic device placement of model(s) and data
 - Universal interface for saving and loading regardless of backend(s) or device
 - Automatic handling of gradient accumulation and clipping

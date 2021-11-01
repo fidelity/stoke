@@ -124,7 +124,7 @@ class StokeDataLoader(DL):
             multiprocessing_context=multiprocessing_context,
             generator=generator,
             prefetch_factor=prefetch_factor,
-            persistent_workers=persistent_workers,
+            persistent_workers=persistent_workers
         )
         self._gpu = gpu
         self._fp16 = fp16
