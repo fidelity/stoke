@@ -36,7 +36,7 @@ from stoke.data import stoke_iter, stoke_place_data_on_gpu
 from stoke.distributed import RunnerDistEnum
 from stoke.extensions import RunnerOptimizerEnum
 from stoke.fp16 import RunnerFP16Enum
-from stoke.io import RunnerIOEnum
+from stoke.io_ops import RunnerIOEnum
 from stoke.status import DistributedOptions, FP16Options, StokeStatus
 from stoke.utils import (
     ParamNormalize,
