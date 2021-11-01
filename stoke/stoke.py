@@ -810,12 +810,10 @@ class Stoke:
         # Check if forkserver is available for horovod and use
         if (
             num_workers > 0
-            and hasattr(torch.multiprocessing, "_supports_context")
-            and torch.multiprocessing._supports_context
             and "forkserver" in torch.multiprocessing.get_all_start_methods()
-            and self.is_horovod
+            and self.is_horovod and self.horovod_config.use_fork_server
         ):
-            multiprocessing_context = "forkserver"
+            torch.multiprocessing.set_start_method("forkserver")
             if self._verbose:
                 print(f"Stoke -- Attempting to use forkserver as multiprocessing_context")
 
@@ -838,7 +836,6 @@ class Stoke:
             drop_last=drop_last,
             timeout=timeout,
             worker_init_fn=worker_init_fn,
-            multiprocessing_context=multiprocessing_context,
             generator=generator,
             prefetch_factor=prefetch_factor,
             persistent_workers=persistent_workers

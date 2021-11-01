@@ -709,6 +709,8 @@ class HorovodConfig:
         by 1.0 / gradient_predivide_factor before the sum and gradient_predivide_factor / size after the sum.
     op: HorovodOps, default: 'Average'
         The reduction operation to use when combining gradients across different ranks.
+    use_fork_server: bool, default: False
+        Try and use forkserver as multiprocessing_context
 
     """
 
@@ -716,6 +718,7 @@ class HorovodConfig:
     convert_to_sync_batch_norm: bool = False
     gradient_predivide_factor: float = 1.0
     op: HorovodOps = "Average"
+    use_fork_server: bool = False
 
 
 class StokeOptimizer(TypedDict):
