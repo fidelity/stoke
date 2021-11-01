@@ -17,6 +17,7 @@ from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.utils.data import Dataset
 from torch.utils.data.distributed import Sampler
 from torch.utils.data.distributed import DistributedSampler
+from torch.utils.data import DataLoader as DL
 
 from stoke.configs import (
     AMPConfig,
@@ -31,7 +32,7 @@ from stoke.configs import (
     HorovodConfig,
     StokeOptimizer,
 )
-from stoke.data import StokeDataLoader
+from stoke.data import stoke_iter, stoke_place_data_on_gpu
 from stoke.distributed import RunnerDistEnum
 from stoke.extensions import RunnerOptimizerEnum
 from stoke.fp16 import RunnerFP16Enum
@@ -790,6 +791,9 @@ class Stoke:
         worker_init_fn: callable, default: None
             If not ``None``, this will be called on each worker subprocess with the worker id
             (an int in ``[0, num_workers - 1]``) as input, after seeding and before data loading.
+        generator torch.Generator: None
+            If not ``None``, this RNG will be used by RandomSampler to generate random indexes and multiprocessing
+            to generate `base_seed` for workers.
         prefetch_factor: int, default: 2
             Number of samples loaded in advance by each worker. ``2`` means there will be a total of 2 * num_workers
             samples prefetched across all workers.
@@ -812,18 +816,19 @@ class Stoke:
             and self.is_horovod
         ):
             multiprocessing_context = "forkserver"
+            if self._verbose:
+                print(f"Stoke -- Attempting to use forkserver as multiprocessing_context")
 
-        if self.distributed is not None and isinstance(sampler, DistributedSampler):
+        if self.distributed is not None and not isinstance(sampler, DistributedSampler):
             raise TypeError(f'Stoke -- Using a distributed backend requires passing an instance of a '
                             f'DistributedSampler to the sampler argument')
         if self._verbose and self.gpu:
-            print(f"Automatically handling moving model input data to GPU(s)...")
-        # Forward the already known options from the Stoke status
-        return StokeDataLoader(
-            gpu=self.gpu,
-            fp16=self.fp16,
-            batch_size=self.batch_size,
+            self.print(f"Stoke -- Automatically handling moving model input data to GPU(s)...")
+        if self._verbose:
+            self.print("Creating the base PyTorch DataLoader...")
+        data_loader = DL(
             dataset=dataset,
+            batch_size=self.batch_size,
             shuffle=shuffle,
             sampler=sampler,
             batch_sampler=batch_sampler,
@@ -836,8 +841,20 @@ class Stoke:
             multiprocessing_context=multiprocessing_context,
             generator=generator,
             prefetch_factor=prefetch_factor,
-            persistent_workers=persistent_workers,
+            persistent_workers=persistent_workers
         )
+        if self._verbose:
+            self.print("Shimming the Stoke gpu and fp16 flags into the DataLoader")
+        # Shim in the Stoke variables and functions for handling device placement
+        data_loader._gpu = self.gpu
+        data_loader._fp16 = self.fp16
+        if self._verbose:
+            self.print("Shimming the Stoke __iter__ function into the DataLoader")
+        data_loader.__iter__ = stoke_iter
+        if self._verbose:
+            self.print("Shimming the Stoke _place_data_on_gpu function into the DataLoader")
+        data_loader._place_data_on_gpu = stoke_place_data_on_gpu
+        return data_loader
 
     def model(self, *args, **kwargs):
         """Wrapped model forward call

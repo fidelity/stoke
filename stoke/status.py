@@ -161,6 +161,8 @@ class StokeStatus:
         ]
         # Set the configs first which allows for checking of some config vars later
         self._configs = self._set_configs(configs=configs)
+        if (grad_clip is not None) and not isinstance(grad_clip, (ClipGradConfig, ClipGradNormConfig)):
+            raise TypeError(f'Stoke -- grad_clip argument must be of type ClipGradConfig or ClipGradNormConfig')
         # Set simple state vars -- post combo check so validity is fine to set
         self._status = {
             "cuda": torch.cuda.is_available(),

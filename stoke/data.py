@@ -7,184 +7,76 @@
 
 import itertools
 from math import ceil
-from typing import Dict, Iterator, List, Optional, Sequence, Tuple, Union
+from typing import Dict, Iterator, List, Optional, Tuple, Union
 
 import horovod.torch as hvd
 import numpy as np
 import torch
 import torch.distributed as dist
-from torch.utils.data import DataLoader as DL
 from torch.utils.data import Dataset
 from torch.utils.data.distributed import Sampler
 
-from stoke.status import DistributedOptions, FP16Options
-from stoke.utils import T_co, _collate_fn_t, _worker_init_fn_t
+from stoke.status import DistributedOptions
+from stoke.utils import T_co
 
 
-class StokeDataLoader(DL):
-    """Provides a shim interface to torch.utils.data.DataLoader with mapped kwargs
+def stoke_iter(self):
+    """Underlying iter of the DataLoader that yields samples
 
-    Attributes
-    ----------
-    _gpu: bool
-    _fp16: Optional[FP16Options]
+    Wrap the base __iter__ with a call to place on the device if flagged
 
-    See Also
-    --------
-    torch.utils.data.DataLoader: base DataLoader class that this inherits from (check for all attributes)
+    Yields
+    ------
+    Union[torch.Tensor, List[torch.Tensor], Tuple[torch.Tensor], Dict[str, torch.Tensor]]
+        data placed on the correct device
 
     """
+    # Iterate using the base class iter but override the yield by pushing to device prior if gpu flag is true
+    for val in super().__iter__():
+        yield val if not self._gpu else self._place_data_on_gpu(val)
 
-    def __init__(
-        self,
-        gpu: bool,
-        fp16: Optional[FP16Options],
-        dataset: Dataset[T_co],
-        batch_size: Optional[int] = 1,
-        shuffle: bool = False,
-        sampler: Optional[Sampler[int]] = None,
-        batch_sampler: Optional[Sampler[Sequence[int]]] = None,
-        num_workers: int = 0,
-        collate_fn: _collate_fn_t = None,
-        pin_memory: bool = False,
-        drop_last: bool = False,
-        timeout: float = 0,
-        worker_init_fn: _worker_init_fn_t = None,
-        multiprocessing_context=None,
-        generator=None,
-        *,
-        prefetch_factor: int = 2,
-        persistent_workers: bool = False,
-    ):
-        """Maps to torch.utils.data.DataLoader __init__
 
-        Shim is necessary to automatically handle device placement since the gpu/fp16 flags can't be
-        determined until the StokeStatus object is available which is post init. This could be disconnected from
-        this class but it would require the user to forward on device or fp16 configs which breaks the
-        paradigm that the flags only need to be set and never handled
+def stoke_place_data_on_gpu(
+    self,
+    data: Union[
+        torch.Tensor,
+        List[torch.Tensor],
+        Tuple[torch.Tensor],
+        Dict[str, torch.Tensor],
+    ],
+):
+    """Determine data structure and then place on the correct device (cast in the context of deepspeed FP16 as it
+    wants half dtype as input)
 
-        Parameters
-        ----------
-        dataset: Dataset
-            dataset from which to load the data.
-        batch_size: int, default: 1
-            how many samples per batch to load .
-        shuffle: bool, default: False
-            set to ``True`` to have the data reshuffled at every epoch.
-        sampler: Sampler or Iterable, default: None
-            defines the strategy to draw samples from the dataset. Can be any ``Iterable`` with ``__len__``
-            implemented. If specified, :attr:`shuffle` must not be specified.
-        batch_sampler: Sampler or Iterable, default: None:
-            like :attr:`sampler`, but returns a batch of indices at a time. Mutually exclusive with
-            :attr:`batch_size`, :attr:`shuffle`, :attr:`sampler`, and :attr:`drop_last`.
-        num_workers: int, default: 0
-            how many subprocesses to use for data loading. ``0`` means that the data will be loaded in the main process.
-        collate_fn: callable, optional:
-            merges a list of samples to form a mini-batch of Tensor(s).  Used when using batched loading from a
-            map-style dataset.
-        pin_memory: bool, default: False:
-            If ``True``, the data loader will copy Tensors into CUDA pinned memory before returning them. If your
-            data elements are a custom type, or your :attr:`collate_fn` returns a batch that is a custom type,
-            see the example below.
-        drop_last: bool, default: False
-            set to ``True`` to drop the last incomplete batch, if the dataset size is not divisible by the batch size.
-            If ``False`` and the size of dataset is not divisible by the batch size, then the last batch
-            will be smaller.
-        timeout: numeric, default: 0
-            if positive, the timeout value for collecting a batch from workers. Should always be non-negative.
-        worker_init_fn: callable, default: None
-            If not ``None``, this will be called on each worker subprocess with the worker id
-            (an int in ``[0, num_workers - 1]``) as input, after seeding and before data loading.
-        prefetch_factor: int, default: 2
-            Number of samples loaded in advance by each worker. ``2`` means there will be a total of 2 * num_workers
-            samples prefetched across all workers.
-        persistent_workers: bool, default: False
-            If ``True``, the data loader will not shutdown the worker processes after a dataset has been
-            consumed once. This allows to maintain the workers `Dataset` instances alive.
+    Parameters
+    ----------
+    data: Union[torch.Tensor, List[torch.Tensor], Tuple[torch.Tensor], Dict[str, torch.Tensor]]
+        current data coming from the underlying __iter__
 
-        Returns
-        -------
-        StokeDataLoader
-            wrapped torch.utils.data.DataLoader object
+    Returns
+    -------
+    data: Union[torch.Tensor, List[torch.Tensor], Tuple[torch.Tensor], Dict[str, torch.Tensor]]
+        data moved to the correct device
 
-        """
-        # Call super init for the actual torch DataLoader
-        super(StokeDataLoader, self).__init__(
-            dataset=dataset,
-            batch_size=batch_size,
-            shuffle=shuffle,
-            sampler=sampler,
-            batch_sampler=batch_sampler,
-            num_workers=num_workers,
-            collate_fn=collate_fn,
-            pin_memory=pin_memory,
-            drop_last=drop_last,
-            timeout=timeout,
-            worker_init_fn=worker_init_fn,
-            multiprocessing_context=multiprocessing_context,
-            generator=generator,
-            prefetch_factor=prefetch_factor,
-            persistent_workers=persistent_workers
-        )
-        self._gpu = gpu
-        self._fp16 = fp16
-
-    def __iter__(self):
-        """Underlying iter of the DataLoader that yields samples
-
-        Wrap the base __iter__ with a call to place on the device if flagged
-
-        Yields
-        ------
-        Union[torch.Tensor, List[torch.Tensor], Tuple[torch.Tensor], Dict[str, torch.Tensor]]
-            data placed on the correct device
-
-        """
-        # Iterate using the base class iter but override the yield by pushing to device prior if gpu flag is true
-        for val in super().__iter__():
-            yield val if not self._gpu else self._place_data_on_gpu(val)
-
-    def _place_data_on_gpu(
-        self,
-        data: Union[
-            torch.Tensor,
-            List[torch.Tensor],
-            Tuple[torch.Tensor],
-            Dict[str, torch.Tensor],
-        ],
-    ):
-        """Determine data structure and then place on the correct device (cast in the context of deepspeed FP16 as it
-        wants half dtype as input)
-
-        Parameters
-        ----------
-        data: Union[torch.Tensor, List[torch.Tensor], Tuple[torch.Tensor], Dict[str, torch.Tensor]]
-            current data coming from the underlying __iter__
-
-        Returns
-        -------
-        data: Union[torch.Tensor, List[torch.Tensor], Tuple[torch.Tensor], Dict[str, torch.Tensor]]
-            data moved to the correct device
-
-        """
-        if isinstance(data, torch.Tensor):
-            # TODO: Check if one of the APEX version needs a cast too?
-            # Move to the correct cuda device w/ the correct type -- deepspeed FP16 requires a cast to half if fp16
-            if self._fp16 == "deepspeed":
-                return data.to(device="cuda", dtype=torch.half)
-            else:
-                return data.to(device="cuda", dtype=data.dtype)
-        elif isinstance(data, (list, tuple)):
-            return type(data)(self._place_data_on_gpu(data=val) for val in data)
-        elif isinstance(data, dict):
-            return {k: self._place_data_on_gpu(v) for k, v in data.items()}
-        elif ~(hasattr(data, "to")):
-            return data
+    """
+    if isinstance(data, torch.Tensor):
+        # TODO: Check if one of the APEX version needs a cast too?
+        # Move to the correct cuda device w/ the correct type -- deepspeed FP16 requires a cast to half if fp16
+        if self._fp16 == "deepspeed":
+            return data.to(device="cuda", dtype=torch.half)
         else:
-            raise TypeError(
-                f"Stoke -- Unsupported data type passed to _place_data_on_gpu "
-                f"(torch.Tensor, tuple, list, dict), currently {type(data)}"
-            )
+            return data.to(device="cuda", dtype=data.dtype)
+    elif isinstance(data, (list, tuple)):
+        return type(data)(self._place_data_on_gpu(data=val) for val in data)
+    elif isinstance(data, dict):
+        return {k: self._place_data_on_gpu(v) for k, v in data.items()}
+    elif ~(hasattr(data, "to")):
+        return data
+    else:
+        raise TypeError(
+            f"Stoke -- Unsupported data type passed to _place_data_on_gpu "
+            f"(torch.Tensor, tuple, list, dict), currently {type(data)}"
+        )
 
 
 class BucketedDistributedSampler(Sampler[T_co]):
