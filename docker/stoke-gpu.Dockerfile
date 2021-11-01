@@ -99,7 +99,7 @@ RUN pip install torch==1.8.1+cu111 torchvision==0.9.1+cu111 -f https://download.
 # HOROVOD -- GPU
 ################
 RUN ldconfig /usr/local/cuda/targets/x86_64-linux/lib/stubs
-RUN HOROVOD_GPU_OPERATIONS=NCCL HOROVOD_WITH_PYTORCH=1 pip install --no-cache-dir horovod && ldconfig
+RUN HOROVOD_GPU_OPERATIONS=NCCL HOROVOD_WITH_PYTORCH=1 pip install --no-cache-dir horovod[pytorch] && ldconfig
 
 #############
 # NVIDIA APEX

@@ -14,10 +14,9 @@ from fairscale.nn.data_parallel import FullyShardedDataParallel as FSDP
 from fairscale.nn.data_parallel import ShardedDataParallel as SDDP
 from torch.nn.parallel import DataParallel as DP
 from torch.nn.parallel import DistributedDataParallel as DDP
-from torch.utils.data import Dataset
-from torch.utils.data.distributed import Sampler
-from torch.utils.data.distributed import DistributedSampler
 from torch.utils.data import DataLoader as DL
+from torch.utils.data import Dataset
+from torch.utils.data.distributed import DistributedSampler, Sampler
 
 from stoke.configs import (
     AMPConfig,
@@ -32,7 +31,7 @@ from stoke.configs import (
     HorovodConfig,
     StokeOptimizer,
 )
-from stoke.data import stoke_iter, stoke_place_data_on_gpu
+from stoke.data import StokeDataLoader
 from stoke.distributed import RunnerDistEnum
 from stoke.extensions import RunnerOptimizerEnum
 from stoke.fp16 import RunnerFP16Enum
@@ -747,7 +746,6 @@ class Stoke:
         drop_last: bool = False,
         timeout: float = 0,
         worker_init_fn: _worker_init_fn_t = None,
-        multiprocessing_context=None,
         generator=None,
         *,
         prefetch_factor: int = 2,
@@ -811,22 +809,30 @@ class Stoke:
         if (
             num_workers > 0
             and "forkserver" in torch.multiprocessing.get_all_start_methods()
-            and self.is_horovod and self.horovod_config.use_fork_server
+            and self.is_horovod
+            and self.horovod_config.use_fork_server
         ):
             torch.multiprocessing.set_start_method("forkserver")
             if self._verbose:
-                print(f"Stoke -- Attempting to use forkserver as multiprocessing_context")
+                print(
+                    f"Stoke -- Attempting to use forkserver as multiprocessing_context"
+                )
 
         if self.distributed is not None and not isinstance(sampler, DistributedSampler):
-            raise TypeError(f'Stoke -- Using a distributed backend requires passing an instance of a '
-                            f'DistributedSampler to the sampler argument')
+            raise TypeError(
+                f"Stoke -- Using a distributed backend requires passing an instance of a "
+                f"DistributedSampler to the sampler argument"
+            )
         if self._verbose and self.gpu:
-            self.print(f"Stoke -- Automatically handling moving model input data to GPU(s)...")
-        if self._verbose:
-            self.print("Creating the base PyTorch DataLoader...")
-        data_loader = DL(
-            dataset=dataset,
+            self.print(
+                f"Stoke -- Automatically handling moving model input data to GPU(s)..."
+            )
+        # Forward the already known options from the Stoke status
+        return StokeDataLoader(
+            gpu=self.gpu,
+            fp16=self.fp16,
             batch_size=self.batch_size,
+            dataset=dataset,
             shuffle=shuffle,
             sampler=sampler,
             batch_sampler=batch_sampler,
@@ -838,20 +844,8 @@ class Stoke:
             worker_init_fn=worker_init_fn,
             generator=generator,
             prefetch_factor=prefetch_factor,
-            persistent_workers=persistent_workers
+            persistent_workers=persistent_workers,
         )
-        if self._verbose:
-            self.print("Shimming the Stoke gpu and fp16 flags into the DataLoader")
-        # Shim in the Stoke variables and functions for handling device placement
-        data_loader._gpu = self.gpu
-        data_loader._fp16 = self.fp16
-        if self._verbose:
-            self.print("Shimming the Stoke __iter__ function into the DataLoader")
-        data_loader.__iter__ = stoke_iter
-        if self._verbose:
-            self.print("Shimming the Stoke _place_data_on_gpu function into the DataLoader")
-        data_loader._place_data_on_gpu = stoke_place_data_on_gpu
-        return data_loader
 
     def model(self, *args, **kwargs):
         """Wrapped model forward call
