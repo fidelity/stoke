@@ -20,6 +20,20 @@ from torch.utils.data.distributed import Sampler
 from stoke.status import DistributedOptions, FP16Options
 from stoke.utils import T_co, _collate_fn_t, _worker_init_fn_t
 
+# batch_size: Optional[int] = 1,
+# shuffle: bool = False,
+# sampler: Optional[Sampler[int]] = None,
+# batch_sampler: Optional[Sampler[Sequence[int]]] = None,
+# num_workers: int = 0,
+# collate_fn: Optional[_collate_fn_t] = None,
+# pin_memory: bool = False,
+# drop_last: bool = False,
+# timeout: float = 0,
+# worker_init_fn: Optional[_worker_init_fn_t] = None,
+# generator = None,
+# prefetch_factor: int = 2,
+# persistent_workers: bool = False,
+
 
 class StokeDataLoader(DL):
     """Provides a shim interface to torch.utils.data.DataLoader with mapped kwargs
@@ -37,23 +51,10 @@ class StokeDataLoader(DL):
 
     def __init__(
         self,
+        dataset: Dataset[T_co],
         gpu: bool,
         fp16: Optional[FP16Options],
-        dataset: Dataset[T_co],
-        batch_size: Optional[int] = 1,
-        shuffle: bool = False,
-        sampler: Optional[Sampler[int]] = None,
-        batch_sampler: Optional[Sampler[Sequence[int]]] = None,
-        num_workers: int = 0,
-        collate_fn: _collate_fn_t = None,
-        pin_memory: bool = False,
-        drop_last: bool = False,
-        timeout: float = 0,
-        worker_init_fn: _worker_init_fn_t = None,
-        generator=None,
-        *,
-        prefetch_factor: int = 2,
-        persistent_workers: bool = False,
+        **kwargs
     ):
         """Maps to torch.utils.data.DataLoader __init__
 
@@ -107,22 +108,29 @@ class StokeDataLoader(DL):
             wrapped torch.utils.data.DataLoader object
 
         """
-        # Call super init for the actual torch DataLoader
+        # Assemble a kwargs dict as the super call with direct named args can cause un-traceable behavior (#23)
+        # Insight from PyTorch Lightning that has to handle their DataLoader shims with all kwargs
+        # https://github.com/PyTorchLightning/pytorch-lightning/blob/6609b2e46f5eb2cde6c42aedf5b843d050a4bb8d/pytorch_lightning/trainer/data_loading.py#L215
+        kwargs = {
+            'batch_size': kwargs['batch_size'],
+            'shuffle': kwargs['shuffle'],
+            'sampler': kwargs['sampler'],
+            'batch_sampler': kwargs['batch_sampler'],
+            'num_workers': kwargs['num_workers'],
+            'collate_fn': kwargs['collate_fn'],
+            'pin_memory': kwargs['pin_memory'],
+            'drop_last': kwargs['drop_last'],
+            'timeout': kwargs['timeout'],
+            'worker_init_fn': kwargs['worker_init_fn'],
+            'multiprocessing_context': kwargs['multiprocessing_context'],
+            'generator': kwargs['generator'],
+            'prefetch_factor': kwargs['prefetch_factor'],
+            'persistent_workers': kwargs['persistent_workers']
+        }
+        # Call super init for the actual torch DataLoader - using **kwargs
         super(StokeDataLoader, self).__init__(
-            dataset=dataset,
-            batch_size=batch_size,
-            shuffle=shuffle,
-            sampler=sampler,
-            batch_sampler=batch_sampler,
-            num_workers=num_workers,
-            collate_fn=collate_fn,
-            pin_memory=pin_memory,
-            drop_last=drop_last,
-            timeout=timeout,
-            worker_init_fn=worker_init_fn,
-            generator=generator,
-            prefetch_factor=prefetch_factor,
-            persistent_workers=persistent_workers,
+            dataset,
+            **kwargs
         )
         self._gpu = gpu
         self._fp16 = fp16
@@ -166,7 +174,6 @@ class StokeDataLoader(DL):
 
         """
         if isinstance(data, torch.Tensor):
-            # TODO: Check if one of the APEX version needs a cast too?
             # Move to the correct cuda device w/ the correct type -- deepspeed FP16 requires a cast to half if fp16
             if self._fp16 == "deepspeed":
                 return data.to(device="cuda", dtype=torch.half)

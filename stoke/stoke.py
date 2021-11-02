@@ -745,7 +745,8 @@ class Stoke:
         pin_memory: bool = False,
         drop_last: bool = False,
         timeout: float = 0,
-        worker_init_fn: _worker_init_fn_t = None,
+        worker_init_fn: Optional[_worker_init_fn_t] = None,
+        multiprocessing_context=None,
         generator=None,
         *,
         prefetch_factor: int = 2,
@@ -789,7 +790,7 @@ class Stoke:
         worker_init_fn: callable, default: None
             If not ``None``, this will be called on each worker subprocess with the worker id
             (an int in ``[0, num_workers - 1]``) as input, after seeding and before data loading.
-        generator torch.Generator: None
+        generator: torch.Generator: None
             If not ``None``, this RNG will be used by RandomSampler to generate random indexes and multiprocessing
             to generate `base_seed` for workers.
         prefetch_factor: int, default: 2
@@ -827,24 +828,29 @@ class Stoke:
             self.print(
                 f"Stoke -- Automatically handling moving model input data to GPU(s)..."
             )
+        # Assemble a kwargs dict as the super call with direct named args can cause un-traceable behavior (#23)
+        kwargs = {
+            'batch_size': self.batch_size,
+            'shuffle': shuffle,
+            'sampler': sampler,
+            'batch_sampler': batch_sampler,
+            'num_workers': num_workers,
+            'collate_fn': collate_fn,
+            'pin_memory': pin_memory,
+            'drop_last': drop_last,
+            'timeout': timeout,
+            'worker_init_fn': worker_init_fn,
+            'multiprocessing_context': multiprocessing_context,
+            'generator': generator,
+            'prefetch_factor': prefetch_factor,
+            'persistent_workers': persistent_workers
+        }
         # Forward the already known options from the Stoke status
         return StokeDataLoader(
+            dataset,
             gpu=self.gpu,
             fp16=self.fp16,
-            batch_size=self.batch_size,
-            dataset=dataset,
-            shuffle=shuffle,
-            sampler=sampler,
-            batch_sampler=batch_sampler,
-            num_workers=num_workers,
-            collate_fn=collate_fn,
-            pin_memory=pin_memory,
-            drop_last=drop_last,
-            timeout=timeout,
-            worker_init_fn=worker_init_fn,
-            generator=generator,
-            prefetch_factor=prefetch_factor,
-            persistent_workers=persistent_workers,
+            **kwargs
         )
 
     def model(self, *args, **kwargs):
