@@ -3,12 +3,23 @@
 Stoke supports the following launchers...
 
 ### PyTorch DDP
+
+#### PyTorch >= v1.10.0
+
+PyTorch greatly simplified the launcher with the addition of `torchrun`:
+
+```shell
+torchrun train.py
+```
+
+#### PyTorch <= v1.10.0
+
 Prefer the `torch.distributed.launch` utility described 
 [here](https://pytorch.org/docs/stable/distributed.html#launch-utility) (Note: the local_rank requirement
 propagates through to `stoke`)
 
 ```shell
-python -m torch.distributed.launch,'--nproc_per_node=NUM_GPUS_YOU_HAVE, --use_env
+python -m torch.distributed.launch --nproc_per_node=NUM_GPUS_YOU_HAVE --use_env train.py
 ```
 
 ### Horovod

@@ -14,8 +14,9 @@ from fairscale.nn.data_parallel import FullyShardedDataParallel as FSDP
 from fairscale.nn.data_parallel import ShardedDataParallel as SDDP
 from torch.nn.parallel import DataParallel as DP
 from torch.nn.parallel import DistributedDataParallel as DDP
+from torch.utils.data import DataLoader as DL
 from torch.utils.data import Dataset
-from torch.utils.data.distributed import Sampler
+from torch.utils.data.distributed import DistributedSampler, Sampler
 
 from stoke.configs import (
     AMPConfig,
@@ -34,7 +35,7 @@ from stoke.data import StokeDataLoader
 from stoke.distributed import RunnerDistEnum
 from stoke.extensions import RunnerOptimizerEnum
 from stoke.fp16 import RunnerFP16Enum
-from stoke.io import RunnerIOEnum
+from stoke.io_ops import RunnerIOEnum
 from stoke.status import DistributedOptions, FP16Options, StokeStatus
 from stoke.utils import (
     ParamNormalize,
@@ -744,7 +745,7 @@ class Stoke:
         pin_memory: bool = False,
         drop_last: bool = False,
         timeout: float = 0,
-        worker_init_fn: _worker_init_fn_t = None,
+        worker_init_fn: Optional[_worker_init_fn_t] = None,
         multiprocessing_context=None,
         generator=None,
         *,
@@ -789,6 +790,9 @@ class Stoke:
         worker_init_fn: callable, default: None
             If not ``None``, this will be called on each worker subprocess with the worker id
             (an int in ``[0, num_workers - 1]``) as input, after seeding and before data loading.
+        generator: torch.Generator: None
+            If not ``None``, this RNG will be used by RandomSampler to generate random indexes and multiprocessing
+            to generate `base_seed` for workers.
         prefetch_factor: int, default: 2
             Number of samples loaded in advance by each worker. ``2`` means there will be a total of 2 * num_workers
             samples prefetched across all workers.
@@ -805,35 +809,44 @@ class Stoke:
         # Check if forkserver is available for horovod and use
         if (
             num_workers > 0
-            and hasattr(torch.multiprocessing, "_supports_context")
-            and torch.multiprocessing._supports_context
             and "forkserver" in torch.multiprocessing.get_all_start_methods()
             and self.is_horovod
+            and self.horovod_config.use_fork_server
         ):
-            multiprocessing_context = "forkserver"
+            torch.multiprocessing.set_start_method("forkserver")
+            if self._verbose:
+                print(
+                    f"Stoke -- Attempting to use forkserver as multiprocessing_context"
+                )
 
+        if self.distributed is not None and not isinstance(sampler, DistributedSampler):
+            raise TypeError(
+                f"Stoke -- Using a distributed backend requires passing an instance of a "
+                f"DistributedSampler to the sampler argument"
+            )
         if self._verbose and self.gpu:
-            print(f"Automatically handling moving model input data to GPU(s)...")
+            self.print(
+                f"Stoke -- Automatically handling moving model input data to GPU(s)..."
+            )
+        # Assemble a kwargs dict as the super call with direct named args can cause un-traceable behavior (#23)
+        kwargs = {
+            "batch_size": self.batch_size,
+            "shuffle": shuffle,
+            "sampler": sampler,
+            "batch_sampler": batch_sampler,
+            "num_workers": num_workers,
+            "collate_fn": collate_fn,
+            "pin_memory": pin_memory,
+            "drop_last": drop_last,
+            "timeout": timeout,
+            "worker_init_fn": worker_init_fn,
+            "multiprocessing_context": multiprocessing_context,
+            "generator": generator,
+            "prefetch_factor": prefetch_factor,
+            "persistent_workers": persistent_workers,
+        }
         # Forward the already known options from the Stoke status
-        return StokeDataLoader(
-            gpu=self.gpu,
-            fp16=self.fp16,
-            batch_size=self.batch_size,
-            dataset=dataset,
-            shuffle=shuffle,
-            sampler=sampler,
-            batch_sampler=batch_sampler,
-            num_workers=num_workers,
-            collate_fn=collate_fn,
-            pin_memory=pin_memory,
-            drop_last=drop_last,
-            timeout=timeout,
-            worker_init_fn=worker_init_fn,
-            multiprocessing_context=multiprocessing_context,
-            generator=generator,
-            prefetch_factor=prefetch_factor,
-            persistent_workers=persistent_workers,
-        )
+        return StokeDataLoader(dataset, gpu=self.gpu, fp16=self.fp16, **kwargs)
 
     def model(self, *args, **kwargs):
         """Wrapped model forward call
