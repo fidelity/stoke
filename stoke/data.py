@@ -50,11 +50,7 @@ class StokeDataLoader(DL):
     """
 
     def __init__(
-        self,
-        dataset: Dataset[T_co],
-        gpu: bool,
-        fp16: Optional[FP16Options],
-        **kwargs
+        self, dataset: Dataset[T_co], gpu: bool, fp16: Optional[FP16Options], **kwargs
     ):
         """Maps to torch.utils.data.DataLoader __init__
 
@@ -112,26 +108,23 @@ class StokeDataLoader(DL):
         # Insight from PyTorch Lightning that has to handle their DataLoader shims with all kwargs
         # https://github.com/PyTorchLightning/pytorch-lightning/blob/6609b2e46f5eb2cde6c42aedf5b843d050a4bb8d/pytorch_lightning/trainer/data_loading.py#L215
         kwargs = {
-            'batch_size': kwargs['batch_size'],
-            'shuffle': kwargs['shuffle'],
-            'sampler': kwargs['sampler'],
-            'batch_sampler': kwargs['batch_sampler'],
-            'num_workers': kwargs['num_workers'],
-            'collate_fn': kwargs['collate_fn'],
-            'pin_memory': kwargs['pin_memory'],
-            'drop_last': kwargs['drop_last'],
-            'timeout': kwargs['timeout'],
-            'worker_init_fn': kwargs['worker_init_fn'],
-            'multiprocessing_context': kwargs['multiprocessing_context'],
-            'generator': kwargs['generator'],
-            'prefetch_factor': kwargs['prefetch_factor'],
-            'persistent_workers': kwargs['persistent_workers']
+            "batch_size": kwargs["batch_size"],
+            "shuffle": kwargs["shuffle"],
+            "sampler": kwargs["sampler"],
+            "batch_sampler": kwargs["batch_sampler"],
+            "num_workers": kwargs["num_workers"],
+            "collate_fn": kwargs["collate_fn"],
+            "pin_memory": kwargs["pin_memory"],
+            "drop_last": kwargs["drop_last"],
+            "timeout": kwargs["timeout"],
+            "worker_init_fn": kwargs["worker_init_fn"],
+            "multiprocessing_context": kwargs["multiprocessing_context"],
+            "generator": kwargs["generator"],
+            "prefetch_factor": kwargs["prefetch_factor"],
+            "persistent_workers": kwargs["persistent_workers"],
         }
         # Call super init for the actual torch DataLoader - using **kwargs
-        super(StokeDataLoader, self).__init__(
-            dataset,
-            **kwargs
-        )
+        super(StokeDataLoader, self).__init__(dataset, **kwargs)
         self._gpu = gpu
         self._fp16 = fp16
 

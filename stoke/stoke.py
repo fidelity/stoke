@@ -830,28 +830,23 @@ class Stoke:
             )
         # Assemble a kwargs dict as the super call with direct named args can cause un-traceable behavior (#23)
         kwargs = {
-            'batch_size': self.batch_size,
-            'shuffle': shuffle,
-            'sampler': sampler,
-            'batch_sampler': batch_sampler,
-            'num_workers': num_workers,
-            'collate_fn': collate_fn,
-            'pin_memory': pin_memory,
-            'drop_last': drop_last,
-            'timeout': timeout,
-            'worker_init_fn': worker_init_fn,
-            'multiprocessing_context': multiprocessing_context,
-            'generator': generator,
-            'prefetch_factor': prefetch_factor,
-            'persistent_workers': persistent_workers
+            "batch_size": self.batch_size,
+            "shuffle": shuffle,
+            "sampler": sampler,
+            "batch_sampler": batch_sampler,
+            "num_workers": num_workers,
+            "collate_fn": collate_fn,
+            "pin_memory": pin_memory,
+            "drop_last": drop_last,
+            "timeout": timeout,
+            "worker_init_fn": worker_init_fn,
+            "multiprocessing_context": multiprocessing_context,
+            "generator": generator,
+            "prefetch_factor": prefetch_factor,
+            "persistent_workers": persistent_workers,
         }
         # Forward the already known options from the Stoke status
-        return StokeDataLoader(
-            dataset,
-            gpu=self.gpu,
-            fp16=self.fp16,
-            **kwargs
-        )
+        return StokeDataLoader(dataset, gpu=self.gpu, fp16=self.fp16, **kwargs)
 
     def model(self, *args, **kwargs):
         """Wrapped model forward call
