@@ -20,20 +20,6 @@ from torch.utils.data.distributed import Sampler
 from stoke.status import DistributedOptions, FP16Options
 from stoke.utils import T_co, _collate_fn_t, _worker_init_fn_t
 
-# batch_size: Optional[int] = 1,
-# shuffle: bool = False,
-# sampler: Optional[Sampler[int]] = None,
-# batch_sampler: Optional[Sampler[Sequence[int]]] = None,
-# num_workers: int = 0,
-# collate_fn: Optional[_collate_fn_t] = None,
-# pin_memory: bool = False,
-# drop_last: bool = False,
-# timeout: float = 0,
-# worker_init_fn: Optional[_worker_init_fn_t] = None,
-# generator = None,
-# prefetch_factor: int = 2,
-# persistent_workers: bool = False,
-
 
 class StokeDataLoader(DL):
     """Provides a shim interface to torch.utils.data.DataLoader with mapped kwargs
@@ -62,41 +48,12 @@ class StokeDataLoader(DL):
         Parameters
         ----------
         dataset: Dataset
-            dataset from which to load the data.
-        batch_size: int, default: 1
-            how many samples per batch to load .
-        shuffle: bool, default: False
-            set to ``True`` to have the data reshuffled at every epoch.
-        sampler: Sampler or Iterable, default: None
-            defines the strategy to draw samples from the dataset. Can be any ``Iterable`` with ``__len__``
-            implemented. If specified, :attr:`shuffle` must not be specified.
-        batch_sampler: Sampler or Iterable, default: None:
-            like :attr:`sampler`, but returns a batch of indices at a time. Mutually exclusive with
-            :attr:`batch_size`, :attr:`shuffle`, :attr:`sampler`, and :attr:`drop_last`.
-        num_workers: int, default: 0
-            how many subprocesses to use for data loading. ``0`` means that the data will be loaded in the main process.
-        collate_fn: callable, optional:
-            merges a list of samples to form a mini-batch of Tensor(s).  Used when using batched loading from a
-            map-style dataset.
-        pin_memory: bool, default: False:
-            If ``True``, the data loader will copy Tensors into CUDA pinned memory before returning them. If your
-            data elements are a custom type, or your :attr:`collate_fn` returns a batch that is a custom type,
-            see the example below.
-        drop_last: bool, default: False
-            set to ``True`` to drop the last incomplete batch, if the dataset size is not divisible by the batch size.
-            If ``False`` and the size of dataset is not divisible by the batch size, then the last batch
-            will be smaller.
-        timeout: numeric, default: 0
-            if positive, the timeout value for collecting a batch from workers. Should always be non-negative.
-        worker_init_fn: callable, default: None
-            If not ``None``, this will be called on each worker subprocess with the worker id
-            (an int in ``[0, num_workers - 1]``) as input, after seeding and before data loading.
-        prefetch_factor: int, default: 2
-            Number of samples loaded in advance by each worker. ``2`` means there will be a total of 2 * num_workers
-            samples prefetched across all workers.
-        persistent_workers: bool, default: False
-            If ``True``, the data loader will not shutdown the worker processes after a dataset has been
-            consumed once. This allows to maintain the workers `Dataset` instances alive.
+            dataset from which to load the data
+        gpu: bool
+            flag to signify the device should be gpu
+        fp16: Optional[FP16Options], default: None
+            Choice of mixed-precision backend
+        **kwargs
 
         Returns
         -------
@@ -104,25 +61,6 @@ class StokeDataLoader(DL):
             wrapped torch.utils.data.DataLoader object
 
         """
-        # Assemble a kwargs dict as the super call with direct named args can cause un-traceable behavior (#23)
-        # Insight from PyTorch Lightning that has to handle their DataLoader shims with all kwargs
-        # https://github.com/PyTorchLightning/pytorch-lightning/blob/6609b2e46f5eb2cde6c42aedf5b843d050a4bb8d/pytorch_lightning/trainer/data_loading.py#L215
-        kwargs = {
-            "batch_size": kwargs["batch_size"],
-            "shuffle": kwargs["shuffle"],
-            "sampler": kwargs["sampler"],
-            "batch_sampler": kwargs["batch_sampler"],
-            "num_workers": kwargs["num_workers"],
-            "collate_fn": kwargs["collate_fn"],
-            "pin_memory": kwargs["pin_memory"],
-            "drop_last": kwargs["drop_last"],
-            "timeout": kwargs["timeout"],
-            "worker_init_fn": kwargs["worker_init_fn"],
-            "multiprocessing_context": kwargs["multiprocessing_context"],
-            "generator": kwargs["generator"],
-            "prefetch_factor": kwargs["prefetch_factor"],
-            "persistent_workers": kwargs["persistent_workers"],
-        }
         # Call super init for the actual torch DataLoader - using **kwargs
         super(StokeDataLoader, self).__init__(dataset, **kwargs)
         self._gpu = gpu
