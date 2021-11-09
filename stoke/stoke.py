@@ -829,6 +829,8 @@ class Stoke:
                 f"Stoke -- Automatically handling moving model input data to GPU(s)..."
             )
         # Assemble a kwargs dict as the super call with direct named args can cause un-traceable behavior (#23)
+        # Insight from PyTorch Lightning that has to handle their DataLoader shims with all kwargs
+        # https://github.com/PyTorchLightning/pytorch-lightning/blob/6609b2e46f5eb2cde6c42aedf5b843d050a4bb8d/pytorch_lightning/trainer/data_loading.py#L215
         kwargs = {
             "batch_size": self.batch_size,
             "shuffle": shuffle,

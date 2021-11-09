@@ -110,8 +110,8 @@ stoke_obj = Stoke(
     loss=loss,
     batch_size_per_device=32,
     gpu=True,
-    fp16=FP16Options.amp,
-    distributed=DistributedOptions.ddp,
+    fp16=FP16Options.amp.value,
+    distributed=DistributedOptions.ddp.value,
     fairscale_oss=True,
     grad_accum_steps=4,
     grad_clip=grad_clip,
@@ -143,7 +143,7 @@ sampler = DistributedSampler(
 # The DataLoader object already known the batch size from the Stoke object creation
 data_loader = stoke_obj.DataLoader(
     dataset=dataset,
-    collate_fn=lambda batch: dataset.collate_fn(batch),
+    collate_fn=lambda batch: dataset.collate_fn(batch), # note: this is optional depending on your dataset
     sampler=sampler,
     num_workers=4
 )

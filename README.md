@@ -224,9 +224,29 @@ sampler = DistributedSampler(
 # The DataLoader object already known the batch size from the Stoke object creation
 data_loader = stoke_obj.DataLoader(
     dataset=dataset,
-    collate_fn=lambda batch: dataset.collate_fn(batch),
+    collate_fn=lambda batch: dataset.collate_fn(batch), # note: this is optional depending on your dataset
     sampler=sampler,
     num_workers=4
+)
+```
+
+#### Add a LR Scheduler
+
+Stoke provides access to each of the underlying PyTorch instances/objects/classes it's managing. Any created `Stoke`
+object has multiple `@property` methods that return the underlying attribute(s) such as `.optimzer`, `.loss_access`,
+`.model_access`, `.step_loss`, etc. Therefore, to use a PyTorch LR Scheduler it's as simple as getting the underlying
+optimizer and passing it to the LR Scheduler constructor:
+
+```python
+from torch.optim.lr_scheduler import OneCycleLR
+
+
+scheduler = OneCycleLR(
+  stoke_obj.optimizer, 
+  max_lr=0.001, 
+  pct_start = 0.9, 
+  epochs=100, 
+  steps_per_epoch=len(data_loader)
 )
 ```
 
@@ -257,8 +277,11 @@ while epoch < 100:
         # Backward
         stoke_obj.backward(loss)
         # stoke_obj.dump_model_grads()
-        # Step
+        # Optimizer Step
         stoke_obj.step()
+        # Scheduler Step -> Note this is the order for PyTorch 1.10, for < 1.10 the scheduler step is before the
+        # optimizer step
+        scheduler.step()
     epoch += 1
 ```
 
