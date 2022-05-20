@@ -1,5 +1,5 @@
 black~=22.3
-coverals==3.2.0
+coveralls==3.2.0
 coverage==5.5
 isort==5.9.3
 portray==1.7.0
