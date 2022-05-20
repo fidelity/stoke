@@ -47,7 +47,7 @@ def predict(test_dataloader, cifar_stoke: Stoke):
     with torch.no_grad():
         for x, y in test_dataloader:
             outputs = cifar_stoke.model(x)
-            _, preds = torch.max(outputs, dim=1)
+            _, preds = torch.max(outputs.detach(), dim=1)
             total_y += y.size(0)
             total_correct += torch.sum(preds == y).item()
     cifar_stoke.print_on_devices(
