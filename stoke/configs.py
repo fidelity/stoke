@@ -62,7 +62,7 @@ class AMPConfig:
     backoff_factor: float = 0.5
     growth_factor: float = 2.0
     growth_interval: int = 2000
-    init_scale: float = 2.0 ** 16
+    init_scale: float = 2.0**16
 
 
 @attr.s(auto_attribs=True)
@@ -90,7 +90,7 @@ class ApexConfig:
 
     cast_model_outputs: Optional[torch.dtype] = None
     convert_to_sync_batch_norm: bool = False
-    max_loss_scale: float = 2.0 ** 24
+    max_loss_scale: float = 2.0**24
     min_loss_scale: Optional[float] = None
     scaler_per_loss: bool = False
     verbosity: int = 0
@@ -624,7 +624,7 @@ class FairscaleSDDPConfig:
 
     auto_refresh_trainable: bool = True
     broadcast_buffers: bool = True
-    reduce_buffer_size: int = 2 ** 23
+    reduce_buffer_size: int = 2**23
     reduce_fp16: bool = False
     sync_models_at_startup: bool = True
     warn_on_trainable_params_changed: bool = True
