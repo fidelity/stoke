@@ -1,4 +1,4 @@
-attrs==20.3.0
+attrs>=20.3.0
 deepspeed>=0.6.4
 # Deepspeed PR still pending -- use the maintained fork for now -- this breaks twine so rolling back and allowing fail
 #git+https://github.com/ncilfone/DeepSpeed.git@master#egg=deepspeed
