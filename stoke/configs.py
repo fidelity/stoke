@@ -167,6 +167,11 @@ class DDPConfig:
         for any DDP based method (including SDDP and FSDP wrappers -- if activated gradients will be accumulated on
         module variables, which will later be synchronized in the first forward-backward pass after exiting the
         context. no sync might lead to higher memory usage but lower communication overhead
+    static_graph: bool, default: False
+        When set to True, DDP knows the trained graph is static. Static graph means 1) The set of used and unused
+        parameters will not change during the whole training loop; in this case, it does not matter whether users
+        set find_unused_parameters = True or not. 2) How the graph is trained will not change during the whole
+        training loop (meaning there is no control flow depending on iterations)
 
     """
 
@@ -180,6 +185,7 @@ class DDPConfig:
     gradient_as_bucket_view: bool = False
     init_method: str = "env://"
     no_sync: bool = True
+    static_graph: bool = False
 
 
 @attr.s(auto_attribs=True)
@@ -192,7 +198,7 @@ class DeepspeedAIOConfig:
         I/O block size in bytes
     ignore_unused_parameters: bool, default: True
         Unused parameters in modules may be unexpected in static networks, but could be normal in dynamic networks.
-        This controls whether or not training should terminate with an error message when unused parameters are
+        This controls if training should terminate with an error message when unused parameters are
         detected.
     overlap_events: bool, default: True
         Submit requests to storage device in an overlapped fashion without waiting for completion of earlier requests.
@@ -413,6 +419,9 @@ class DeepspeedZeROConfig:
     contiguous_gradients: bool, default: False
         Copies the gradients to a contiguous buffer as they are produced. Avoids memory fragmentation during backward
         pass. Only useful when running very large models.
+    grad_hook: bool, default: True
+        For use with ZeRO stage 1, enable backward hooks to reduce gradients during the backward pass or wait until
+        the end of the backward pass (this is similar to no_sync in DDP)
     ignore_unused_parameters: bool, default: True
         Now just used in stage2 complete_grad_norm_calculation_for_cpu_offload
         Enable this option to avoid -- https://github.com/microsoft/DeepSpeed/issues/707
@@ -431,6 +440,10 @@ class DeepspeedZeROConfig:
         model sizes
     reduce_scatter: bool, default: True
         Uses reduce or reduce scatter instead of allreduce to average gradients
+    round_robin_gradients: bool, default: False
+        Stage 2 optimization for CPU offloading that parallelizes gradient copying to CPU memory among ranks by
+        fine-grained gradient partitioning. Performance benefit grows with gradient accumulation steps (more copying
+        between optimizer steps) or GPU count (increased parallelism).
     stage: int, default: 0
         Chooses different stages of ZeRO Optimizer. Stage 0, 1, 2, and 3 refer to disabled, optimizer state
         partitioning, and optimizer+gradient state partitioning, and optimizer+gradient+parameter partitioning,
@@ -460,6 +473,7 @@ class DeepspeedZeROConfig:
     allgather_bucket_size: int = int(5e8)
     allgather_partitions: bool = True
     contiguous_gradients: bool = False
+    grad_hook: bool = True
     ignore_unused_parameters: bool = True
     legacy_stage1: bool = False
     offload_optimizer: Optional[DeepspeedOffloadOptimizerConfig] = None
@@ -467,6 +481,7 @@ class DeepspeedZeROConfig:
     overlap_comm: bool = False
     reduce_bucket_size: int = int(5e8)
     reduce_scatter: bool = True
+    round_robin_gradients: bool = False
     stage: int = 0
     stage3_max_live_parameters: int = int(1e9)
     stage3_max_reuse_distance: int = int(1e9)
@@ -567,10 +582,15 @@ class FairscaleOSSConfig:
     broadcast_fp16: bool, default: False
         Compress the model shards in fp16 before sharing them in between ranks. This is safe to use when PyTorch AMP
         is activated. Without torch AMP this will lead to a slight degradation in terms of accuracy.
+    force_broadcast_object: bool, default: False
+        f True, ‘_broadcast_object’ will be used for rebuilding the sharded optimizer. If False, whether to use
+        ‘_broadcast_object’ or ‘dist.broadcast_object_list’ will be determined by GPU capabilities. This feature is
+        needed since some newer GPUs still get some memory issues when applying dist.broadcast_object_list.
 
     """
 
     broadcast_fp16: bool = False
+    force_broadcast_object: bool = False
 
 
 @attr.s(auto_attribs=True)
@@ -597,6 +617,8 @@ class FairscaleSDDPConfig:
     sync_models_at_startup: bool, default: True
         Synchronize the models in between the ranks when starting up. Not needed if each rank has the same seed, or
         the training restarts from a saved state
+    warn_on_trainable_params_changed: bool, default: False
+        When set to False no warning will be logged whenever a parameter trainability change has been detected.
 
     """
 
@@ -605,6 +627,7 @@ class FairscaleSDDPConfig:
     reduce_buffer_size: int = 2 ** 23
     reduce_fp16: bool = False
     sync_models_at_startup: bool = True
+    warn_on_trainable_params_changed: bool = True
 
 
 @attr.s(auto_attribs=True)
@@ -639,6 +662,12 @@ class FairscaleFSDPConfig:
     compute_dtype: Optional[torch.dtype], default: None
         dtype for full parameters for computation. This defaults to torch.float32 unless FP 16 AMP is set,
         in which case it defaults to torch.float16.
+    disable_reshard_on_root: bool, default: True
+        For some cases, we do not reshard the full parameters of an FSDP root module since those parameters are needed
+        immediately for the backward pass. If False, the performance will be lower, but it is needed because it helps
+        to save memory. Consider a case that an FSDP root module is a submodule of a model. Backward pass may not
+        start immediate after the FSDP root module finishes its forward. So, reshard the parameters for the FSDP
+        root modules can help to save memory in this case
     flatten_parameters: bool, default: True
         flatten parameters into a single contiguous tensor, which improves training speed
     force_input_to_fp32: bool, default: False:
@@ -680,6 +709,7 @@ class FairscaleFSDPConfig:
     buffer_dtype: Optional[torch.dtype] = None
     clear_autocast_cache: bool = False
     compute_dtype: Optional[torch.dtype] = None
+    disable_reshard_on_root: bool = True
     flatten_parameters: bool = True
     force_input_to_fp32: bool = False
     fp32_reduce_scatter: bool = False
