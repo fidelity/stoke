@@ -7,10 +7,12 @@
 
 import os
 from enum import Enum
-from typing import Any, Callable, List, Tuple, TypeVar, Union
+from typing import Any, Callable, Dict, List, Optional, Tuple, TypeVar, Union
 
 import torch
 from fairscale.optim.oss import OSS
+
+from stoke.status import FP16Options
 
 # Taken from torch/utils/data/dataloader
 T_co = TypeVar("T_co", covariant=True)
@@ -32,6 +34,50 @@ class ParamNormalize(Enum):
     MILLION = 1e6
     BILLION = 1e9
     TRILLION = 1e12
+
+
+def place_data_on_gpu(
+    data: Union[
+        torch.Tensor,
+        List[torch.Tensor],
+        Tuple[torch.Tensor],
+        Dict[str, torch.Tensor],
+    ],
+    fp16: Optional[FP16Options],
+):
+    """Determine data structure and then place on the correct device (cast in the context of deepspeed FP16 as it
+    wants half dtype as input)
+
+    Parameters
+    ----------
+    data: Union[torch.Tensor, List[torch.Tensor], Tuple[torch.Tensor], Dict[str, torch.Tensor]]
+        current data coming from the underlying __iter__
+    fp16: Optional[FP16Options], default: None
+        Choice of mixed-precision backend
+
+    Returns
+    -------
+    data: Union[torch.Tensor, List[torch.Tensor], Tuple[torch.Tensor], Dict[str, torch.Tensor]]
+        data moved to the correct device
+
+    """
+    if isinstance(data, torch.Tensor):
+        # Move to the correct cuda device w/ the correct type -- deepspeed FP16 requires a cast to half if fp16
+        if fp16 == "deepspeed":
+            return data.to(device="cuda", dtype=torch.half)
+        else:
+            return data.to(device="cuda", dtype=data.dtype)
+    elif isinstance(data, (list, tuple)):
+        return type(data)(place_data_on_gpu(data=val, fp16=fp16) for val in data)
+    elif isinstance(data, dict):
+        return {k: place_data_on_gpu(v, fp16) for k, v in data.items()}
+    elif ~(hasattr(data, "to")):
+        return data
+    else:
+        raise TypeError(
+            f"Stoke -- Unsupported data type passed to _place_data_on_gpu "
+            f"(torch.Tensor, tuple, list, dict), currently {type(data)}"
+        )
 
 
 def zero_optimizer_grads(

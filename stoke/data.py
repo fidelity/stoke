@@ -18,7 +18,7 @@ from torch.utils.data import Dataset
 from torch.utils.data.distributed import Sampler
 
 from stoke.status import DistributedOptions, FP16Options
-from stoke.utils import T_co, _collate_fn_t, _worker_init_fn_t
+from stoke.utils import T_co, _collate_fn_t, _worker_init_fn_t, place_data_on_gpu
 
 
 class StokeDataLoader(DL):
@@ -104,23 +104,8 @@ class StokeDataLoader(DL):
             data moved to the correct device
 
         """
-        if isinstance(data, torch.Tensor):
-            # Move to the correct cuda device w/ the correct type -- deepspeed FP16 requires a cast to half if fp16
-            if self._fp16 == "deepspeed":
-                return data.to(device="cuda", dtype=torch.half)
-            else:
-                return data.to(device="cuda", dtype=data.dtype)
-        elif isinstance(data, (list, tuple)):
-            return type(data)(self._place_data_on_gpu(data=val) for val in data)
-        elif isinstance(data, dict):
-            return {k: self._place_data_on_gpu(v) for k, v in data.items()}
-        elif ~(hasattr(data, "to")):
-            return data
-        else:
-            raise TypeError(
-                f"Stoke -- Unsupported data type passed to _place_data_on_gpu "
-                f"(torch.Tensor, tuple, list, dict), currently {type(data)}"
-            )
+        # Call to the public function in utils
+        place_data_on_gpu(data, self._fp16)
 
 
 class BucketedDistributedSampler(Sampler[T_co]):
