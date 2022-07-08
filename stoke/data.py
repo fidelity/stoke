@@ -105,7 +105,7 @@ class StokeDataLoader(DL):
 
         """
         # Call to the public function in utils
-        place_data_on_gpu(data, self._fp16)
+        return place_data_on_gpu(data, self._fp16)
 
 
 class BucketedDistributedSampler(Sampler[T_co]):
